@@ -11,7 +11,7 @@
                     <key>kind</key>
                     <string>configuration</string>
                     <key>url</key>
-                    <string>https://viecertp12.github.io/pageipa/dns/DNS.Anti-Revoke.ioscert.mobileconfig</string>
+                    <string>https://github.com/VieCertP12/pageipa/releases/download/dns/DNS.Anti-Revoke.ioscert.mobileconfig</string>
                 </dict>
             </array>
             <key>metadata</key>

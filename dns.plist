@@ -11,15 +11,15 @@
                     <key>kind</key>
                     <string>configuration</string>
                     <key>url</key>
-                    <string>https://viecertp12.github.io/pageipa/DNS.Anti-Revoke.ioscert.mobileconfig</string>
+                    <string>https://viecertp12.github.io/pageipa/dns/DNS.Anti-Revoke.ioscert.mobileconfig</string>
                 </dict>
             </array>
             <key>metadata</key>
             <dict>
                 <key>displayName</key>
-                <string>DNS Anti-Revoke Profile</string>
+                <string>DNS Anti-Revoke</string>
                 <key>description</key>
-                <string>Cấu hình DNS để tránh bị thu hồi chứng chỉ</string>
+                <string>Cài đặt cấu hình DNS Anti-Revoke</string>
                 <key>version</key>
                 <string>1.0</string>
                 <key>identifier</key>

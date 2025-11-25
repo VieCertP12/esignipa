@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ESign Premium Store - iOS Certificates & Mods</title>
+    <title>Esign iPa Miễn Phí</title>
     <link rel="icon" href="https://i.imgur.com/BIbDCrO.png" type="image/x-icon">
     
     <!-- Fonts -->
@@ -13,40 +13,23 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
-    <!-- Particles -->
-    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
     <script>
         tailwind.config = {
-            darkMode: 'class',
             theme: {
                 extend: {
                     fontFamily: {
                         sans: ['"Outfit"', 'sans-serif'],
                     },
                     colors: {
-                        dark: {
-                            bg: '#0a0a0a',
-                            card: '#121212',
-                            border: '#2a2a2a'
-                        },
                         brand: {
                             primary: '#6366f1', // Indigo
                             secondary: '#a855f7', // Purple
-                            accent: '#06b6d4' // Cyan
                         }
                     },
                     animation: {
-                        'blob': 'blob 7s infinite',
                         'fade-in': 'fadeIn 0.5s ease-out forwards',
                     },
                     keyframes: {
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
                         fadeIn: {
                             '0%': { opacity: '0', transform: 'translateY(10px)' },
                             '100%': { opacity: '1', transform: 'translateY(0)' },
@@ -59,61 +42,81 @@
 
     <style>
         body {
-            background-color: #050505;
-            color: #ffffff;
+            background-color: #ffffff;
+            color: #1e293b; /* Slate 800 */
             -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            position: relative;
+            
+            /* The Requested Grid Background Converted to CSS */
+            background-image: 
+                linear-gradient(to right, #f0f0f0 1px, transparent 1px),
+                linear-gradient(to bottom, #f0f0f0 1px, transparent 1px),
+                radial-gradient(circle 600px at 0% 0%, #d5c5ff, transparent),
+                radial-gradient(circle 600px at 100% 0%, #d5c5ff, transparent);
+            background-size: 20px 20px, 20px 20px, 100% 100%, 100% 100%;
+            background-attachment: fixed;
+            background-position: center top;
         }
 
-        /* Premium Glass Effect */
-        .glass {
-            background: rgba(20, 20, 20, 0.6);
+        /* Glass Effect for Light Mode */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(16px);
             -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .glass-card {
-            background: linear-gradient(145deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0.01) 100%);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .glass-card:hover {
+            background: rgba(255, 255, 255, 0.9);
             border-color: rgba(99, 102, 241, 0.3);
-            background: linear-gradient(145deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.02) 100%);
             transform: translateY(-4px);
-            box-shadow: 0 10px 40px -10px rgba(99, 102, 241, 0.2);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
         /* Text Gradient */
         .text-gradient {
-            background: linear-gradient(to right, #6366f1, #a855f7, #06b6d4);
+            background: linear-gradient(to right, #4f46e5, #9333ea, #0891b2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
+        /* Tab Styles */
+        .tab-btn.active {
+            background-color: #ffffff;
+            color: #4f46e5;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        
+        .tab-btn:not(.active) {
+            color: #64748b;
+        }
+        .tab-btn:not(.active):hover {
+            color: #1e293b;
+        }
+
         /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 6px; }
-        ::-webkit-scrollbar-track { background: #0a0a0a; }
-        ::-webkit-scrollbar-thumb { background: #333; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #555; }
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         
         .hidden { display: none; }
     </style>
 </head>
-<body class="min-h-screen relative overflow-x-hidden selection:bg-indigo-500/30">
-
-    <!-- Background Ambience -->
-    <div id="particles-js" class="fixed inset-0 z-0 opacity-40"></div>
-    <div class="fixed inset-0 z-0 overflow-hidden pointer-events-none">
-        <div class="absolute top-0 left-1/4 w-96 h-96 bg-indigo-600/20 rounded-full blur-[100px] animate-blob"></div>
-        <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-600/20 rounded-full blur-[100px] animate-blob animation-delay-2000"></div>
-    </div>
+<body class="selection:bg-indigo-500/30 selection:text-indigo-900">
 
     <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 glass border-b border-white/5 transition-all duration-300" id="navbar">
+    <nav class="fixed top-0 w-full z-50 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
                 <!-- Logo -->
@@ -121,17 +124,17 @@
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
                         <i class="fa-brands fa-apple text-white"></i>
                     </div>
-                    <span class="font-bold text-lg tracking-tight">ViệtNam<span class="text-indigo-400">Cert</span></span>
+                    <span class="font-bold text-lg tracking-tight text-slate-800">ThaiSon<span class="text-indigo-600">Cert</span></span>
                 </div>
 
                 <!-- Controls -->
                 <div class="flex items-center gap-3">
-                    <div class="hidden md:flex bg-white/5 rounded-full p-1 border border-white/10">
-                        <button class="lang-btn px-3 py-1 text-xs font-medium rounded-full transition-all text-white/60 hover:text-white active" data-lang="vi">VI</button>
-                        <button class="lang-btn px-3 py-1 text-xs font-medium rounded-full transition-all text-white/60 hover:text-white" data-lang="en">EN</button>
+                    <div class="hidden md:flex bg-slate-100/80 rounded-full p-1 border border-slate-200">
+                        <button class="lang-btn px-3 py-1 text-xs font-bold rounded-full transition-all text-slate-500 hover:text-slate-900 active" data-lang="vi" style="transition:0.3s;">VI</button>
+                        <button class="lang-btn px-3 py-1 text-xs font-bold rounded-full transition-all text-slate-500 hover:text-slate-900" data-lang="en" style="transition:0.3s;">EN</button>
                     </div>
-                    <a href="https://t.me/vietnamcert" target="_blank" class="w-8 h-8 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors border border-white/10">
-                        <i class="fa-brands fa-telegram text-indigo-400"></i>
+                    <a href="https://t.me/ias_xxx" target="_blank" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-white flex items-center justify-center transition-all border border-slate-200 shadow-sm text-indigo-500 hover:text-indigo-600">
+                        <i class="fa-brands fa-telegram"></i>
                     </a>
                 </div>
             </div>
@@ -139,62 +142,62 @@
     </nav>
 
     <!-- Main Content -->
-    <main class="relative z-10 pt-28 pb-12 px-4 sm:px-6 max-w-5xl mx-auto">
+    <main class="relative z-10 pt-32 pb-12 px-4 sm:px-6 max-w-5xl mx-auto">
         
         <!-- Hero Section -->
-        <div class="text-center mb-12 animate-fade-in">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/20 text-indigo-300 text-xs font-semibold mb-4 backdrop-blur-md">
+        <div class="text-center mb-16 animate-fade-in">
+            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-600 text-xs font-semibold mb-6 backdrop-blur-md shadow-sm">
                 <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                 Anti-Revoke Protected
             </div>
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
-                <span class="text-gradient" data-i18n="title">APPLE CERTIFICATE.</span>
+            <h1 class="text-4xl md:text-7xl font-extrabold mb-6 tracking-tight text-slate-900">
+                <span class="text-gradient" data-i18n="title">SHARE CERTIFICATE </span>
             </h1>
-            <p class="text-slate-400 max-w-xl mx-auto text-sm md:text-base leading-relaxed mb-8" data-i18n="subtitle">
+            <p class="text-slate-500 max-w-xl mx-auto text-sm md:text-lg leading-relaxed mb-10 font-medium" data-i18n="subtitle">
                 Chia sẻ chứng chỉ ESign iPhone/iPad và các file iPAs mod. Tải xuống tốc độ cao, cập nhật liên tục.
             </p>
 
             <!-- Quick Links -->
-            <div class="flex flex-wrap justify-center gap-3">
-                <a href="https://t.me/m/8QBiXPz3Yzg1" target="_blank" class="group relative px-6 py-2.5 bg-white text-black rounded-full font-bold text-sm overflow-hidden transition-all hover:scale-105">
-                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-400 to-purple-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="http://zalo.me/0869775239" target="_blank" class="group relative px-6 py-3 bg-slate-900 text-white rounded-full font-bold text-sm overflow-hidden transition-all hover:scale-105 shadow-lg shadow-slate-900/20">
+                    <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                     <span class="relative flex items-center gap-2 group-hover:text-white transition-colors" data-i18n="support">
                         <i class="fas fa-headset"></i> Hỗ Trợ 24/7
                     </span>
                 </a>
-                <a href="https://chungchip12.com" target="_blank" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm font-semibold flex items-center gap-2" data-i18n="website">
-                    <i class="fas fa-shopping-cart text-indigo-400"></i> Mua Cert VIP
+                <a href="https://muachungchi.com" target="_blank" class="px-6 py-3 rounded-full bg-white border border-slate-200 hover:border-indigo-300 shadow-sm hover:shadow-md transition-all text-sm font-bold text-slate-700 flex items-center gap-2 group" data-i18n="website">
+                    <i class="fas fa-shopping-cart text-indigo-500 group-hover:scale-110 transition-transform"></i> Mua Cert Giá Rẻ
                 </a>
-                <a href="https://download1588.mediafire.com/r75t6sxs2gxg9MbJlCSaTR8_OO0hZA4O0GFUiYvYKKHudakSWBfzp96wgu_7icBr8CiOiNr9G_botiNJhH-jvohRGnTWLqEWJ46_IbIAJOObUz9Xv-BSwtbJVMfAl8Q-BeglNq7W8MHS9zTxnBg_mKijA1EOebiNN1UFEL-G794/rfwgpy8u8rxfkms/DNS+Anti-Revoke%28ioscert%29.mobileconfig" target="_blank" class="px-6 py-2.5 rounded-full bg-white/5 border border-white/10 hover:bg-white/10 transition-all text-sm font-semibold flex items-center gap-2" data-i18n="dns">
-                    <i class="fas fa-shield-alt text-green-400"></i> DNS Anti-Revoke
+                <a href="https://download1588.mediafire.com/r75t6sxs2gxg9MbJlCSaTR8_OO0hZA4O0GFUiYvYKKHudakSWBfzp96wgu_7icBr8CiOiNr9G_botiNJhH-jvohRGnTWLqEWJ46_IbIAJOObUz9Xv-BSwtbJVMfAl8Q-BeglNq7W8MHS9zTxnBg_mKijA1EOebiNN1UFEL-G794/rfwgpy8u8rxfkms/DNS+Anti-Revoke%28ioscert%29.mobileconfig" target="_blank" class="px-6 py-3 rounded-full bg-white border border-slate-200 hover:border-green-300 shadow-sm hover:shadow-md transition-all text-sm font-bold text-slate-700 flex items-center gap-2 group" data-i18n="dns">
+                    <i class="fas fa-shield-alt text-green-500 group-hover:scale-110 transition-transform"></i> DNS Anti-Revoke
                 </a>
             </div>
         </div>
 
         <!-- Tab Navigation -->
         <div class="flex justify-center mb-10">
-            <div class="p-1.5 bg-white/5 border border-white/10 rounded-2xl backdrop-blur-xl inline-flex relative">
-                <div id="tab-indicator" class="absolute h-[calc(100%-12px)] top-1.5 rounded-xl bg-indigo-600 transition-all duration-300 ease-out shadow-lg shadow-indigo-600/20" style="width: 33%; left: 6px;"></div>
+            <div class="p-1.5 bg-slate-100/80 border border-slate-200 rounded-2xl backdrop-blur-xl inline-flex relative shadow-inner">
+                <div id="tab-indicator" class="absolute h-[calc(100%-12px)] top-1.5 rounded-xl bg-white shadow-md transition-all duration-300 ease-out z-0" style="width: 33%; left: 6px;"></div>
                 
-                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-semibold rounded-xl transition-colors text-white w-28 md:w-32 active" data-tab="esign">
+                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32 active" data-tab="esign">
                     ESign
                 </button>
-                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-semibold rounded-xl transition-colors text-slate-400 hover:text-white w-28 md:w-32" data-tab="cert">
+                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32" data-tab="cert">
                     Cert
                 </button>
-                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-semibold rounded-xl transition-colors text-slate-400 hover:text-white w-28 md:w-32" data-tab="mods">
+                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32" data-tab="mods">
                     Mods
                 </button>
             </div>
         </div>
 
         <!-- Search Bar (Hidden by default, shown for Mods) -->
-        <div id="search-container" class="hidden mb-8 max-w-md mx-auto animate-fade-in">
+        <div id="search-container" class="hidden mb-10 max-w-md mx-auto animate-fade-in">
             <div class="relative group">
-                <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl opacity-30 group-hover:opacity-70 transition duration-500 blur"></div>
-                <div class="relative flex items-center bg-[#0F0F0F] rounded-xl border border-white/10">
-                    <i class="fas fa-search absolute left-4 text-slate-500 group-focus-within:text-indigo-400 transition-colors"></i>
-                    <input type="text" id="mods-search" class="w-full bg-transparent py-3.5 pl-11 pr-4 text-sm text-white placeholder-slate-500 focus:outline-none" placeholder="Tìm kiếm ứng dụng...">
+                <div class="absolute -inset-0.5 bg-gradient-to-r from-indigo-500 to-purple-600 rounded-2xl opacity-20 group-hover:opacity-40 transition duration-500 blur-sm"></div>
+                <div class="relative flex items-center bg-white rounded-xl border border-slate-200 shadow-sm">
+                    <i class="fas fa-search absolute left-4 text-slate-400 group-focus-within:text-indigo-500 transition-colors"></i>
+                    <input type="text" id="mods-search" class="w-full bg-transparent py-3.5 pl-11 pr-4 text-sm text-slate-800 placeholder-slate-400 focus:outline-none font-medium" placeholder="Tìm kiếm ứng dụng...">
                 </div>
             </div>
         </div>
@@ -204,276 +207,257 @@
             
             <!-- ESIGN LIST -->
             <div id="esign-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in">
-                <!-- Helper function to generate cards -->
-                <script>
-                    const esigns = [
-                        { id: 'Etisalat', name: 'Etisalat - Emirates', sub: 'Emirates Telecommunications', icon: 'fas fa-signature' },
-                        { id: 'ola', name: 'OLA CITY', sub: 'OLA CITY GLOBAL LIMITED', icon: 'fas fa-signature' },
-                        { id: 'global', name: 'GLOBAL TAKEOFF', sub: 'GLOBAL TAKEOFF, INC', icon: 'fas fa-signature' },
-                        { id: 'zheshang', name: 'Zheshang Bank', sub: 'China Zheshang Bank Co.', icon: 'fas fa-signature' },
-                        { id: 'bmw', name: 'BMW', sub: 'BMW Brilliance Automotive', icon: 'fas fa-signature' },
-                        { id: 'beijing', name: 'Beijing', sub: 'Beijing Corp.', icon: 'fas fa-signature' },
-                        { id: 'railway', name: 'China Railway', sub: 'China Railway', icon: 'fas fa-signature' },
-                        { id: 'dtt', name: 'Dtt Technology', sub: 'Dtt Technology Co.', icon: 'fas fa-signature' },
-                        { id: 'tcl', name: 'TCL Household', sub: 'TCL Household', icon: 'fas fa-signature' },
-                        { id: 'wuling', name: 'Wuling Power', sub: 'Wuling Power', icon: 'fas fa-signature' },
-                        { id: 'vietnamcert', name: 'VietNamCert.01', sub: 'VietNamCert.01', icon: 'fas fa-signature' },
-                        { id: 'nsl', name: 'Science Library', sub: 'National Science Library', icon: 'fas fa-signature' },
-                    ];
-                </script>
-                
-                <!-- Generating HTML for Esigns -->
-                <!-- Note: In a real environment I'd map this, but for this file I'll write out the items to ensure the user gets exactly what asked -->
+                <!-- Helper function for rendering items via JS would be better, but keeping inline for file integrity -->
                 
                 <!-- Etisalat -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
-                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow-lg">HOT</span>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
+                        <span class="absolute -top-2 -right-2 bg-red-500 text-white text-[9px] font-bold px-1.5 py-0.5 rounded shadow-md shadow-red-500/30">GOOD</span>
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
+                            <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
                             <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
                         </div>
-                        <p class="text-xs text-slate-400 mt-1 truncate">Etisalat - Emirates Telecom</p>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Etisalat - Emirates Telecom</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                            <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-Etisalat">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-Etisalat" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-Etisalat" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- OLA CITY -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
+                            <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
                             <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
                         </div>
-                        <p class="text-xs text-slate-400 mt-1 truncate">OLA CITY GLOBAL LIMITED</p>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">OLA CITY GLOBAL LIMITED</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-ola">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-ola" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-ola" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- GLOBAL TAKEOFF -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
+                            <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
                             <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
                         </div>
-                        <p class="text-xs text-slate-400 mt-1 truncate">GLOBAL TAKEOFF, INC</p>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">GLOBAL TAKEOFF, INC</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-global">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-global" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-global" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- Zheshang Bank -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex justify-between items-start">
-                            <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
+                            <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
                             <span class="w-2 h-2 rounded-full bg-green-500 shadow-[0_0_8px_rgba(34,197,94,0.6)]"></span>
                         </div>
-                        <p class="text-xs text-slate-400 mt-1 truncate">China Zheshang Bank Co.</p>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">China Zheshang Bank Co.</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-zheshang">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-zheshang" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-zheshang" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- BMW -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">BMW Brilliance Automotive</p>
+                        <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">BMW Brilliance Automotive</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-bmw">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-bmw" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-bmw" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- Beijing -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">Beijing</p>
+                        <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Beijing</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-beijing">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-beijing" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-beijing" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- China Railway -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">China Railway</p>
+                        <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">China Railway</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-railway">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-railway" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-railway" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- Dtt Technology -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">Dtt Technology</p>
+                        <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Dtt Technology</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-dtt">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-dtt" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-dtt" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- TCL Household -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">TCL Household</p>
+                        <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">TCL Household</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-tcl">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-tcl" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-tcl" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- Wuling Power -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">Wuling Power</p>
+                        <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Wuling Power</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-wuling">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-wuling" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-wuling" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- VietNamCert.01 -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">VietNamCert.01</p>
+                        <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">VietNamCert.01</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-vietnamcert">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-vietnamcert" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-vietnamcert" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
 
                 <!-- National Science Library -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-gray-800 to-gray-900 flex items-center justify-center border border-white/10 group-hover:border-indigo-500/50 transition-colors">
-                        <i class="fas fa-signature text-2xl text-slate-300 group-hover:text-indigo-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-slate-50 flex items-center justify-center border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <i class="fas fa-signature text-2xl text-slate-400 group-hover:text-indigo-500 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate pr-2 text-slate-100">ESign 5.0.2</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">National Science Library</p>
+                        <h3 class="font-bold text-base truncate pr-2 text-slate-800 group-hover:text-indigo-600 transition-colors">ESign</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">National Science Library</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-download text-indigo-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-download text-indigo-500"></i>
                                 <span id="counter-esign-nsl">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-esign-nsl" href="#" class="w-10 h-10 rounded-full bg-white/5 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-white/10 hover:border-indigo-500 hover:scale-110">
+                    <a id="download-esign-nsl" href="#" class="w-10 h-10 rounded-full bg-indigo-50 text-indigo-600 hover:bg-indigo-600 hover:text-white flex items-center justify-center transition-all border border-indigo-100 hover:shadow-lg hover:shadow-indigo-500/30 hover:scale-110">
                         <i class="fas fa-arrow-down"></i>
                     </a>
                 </div>
@@ -483,424 +467,424 @@
             <div id="cert-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden animate-fade-in">
                 <!-- Cert: Etisalat -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">Etisalat - Emirates Telecom</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Etisalat - Emirates Telecom</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-Etisalat">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-Etisalat" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-Etisalat" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
-                <!-- Cert: OLA CITY (using HTML structure but placeholder link) -->
+                <!-- Cert: OLA CITY -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">OLA CITY GLOBAL</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">OLA CITY GLOBAL</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-ola">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-ola" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-ola" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: Global Takeoff -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">GLOBAL TAKEOFF, INC</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">GLOBAL TAKEOFF, INC</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-global">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-global" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-global" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: Zheshang -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">China Zheshang Bank</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">China Zheshang Bank</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-zheshang">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-zheshang" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-zheshang" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: BMW -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">BMW Brilliance Automotive</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">BMW Brilliance Automotive</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-bmw">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-bmw" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-bmw" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: Beijing -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">Beijing</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Beijing</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-beijing">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-beijing" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-beijing" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: Railway -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">China Railway</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">China Railway</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-railway">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-railway" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-railway" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: Dtt -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">Dtt Technology</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Dtt Technology</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-dtt">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-dtt" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-dtt" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: TCL -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">TCL Household</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">TCL Household</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-tcl">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-tcl" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-tcl" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: Wuling -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">Wuling Power</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Wuling Power</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-wuling">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-wuling" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-wuling" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                  <!-- Cert: VietnamCert -->
                  <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">VietNamCert.01</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">VietNamCert.01</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-vietnamcert">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-vietnamcert" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-vietnamcert" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
 
                 <!-- Cert: NSL -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl bg-gradient-to-br from-indigo-900/40 to-purple-900/40 flex items-center justify-center border border-white/10 group-hover:border-purple-500/50 transition-colors">
-                        <i class="fas fa-certificate text-2xl text-purple-300 group-hover:text-purple-400 transition-colors"></i>
+                    <div class="relative w-16 h-16 rounded-xl bg-purple-50 flex items-center justify-center border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm">
+                        <i class="fas fa-certificate text-2xl text-purple-400 group-hover:text-purple-600 transition-colors"></i>
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100">Certificate P12</h3>
-                        <p class="text-xs text-slate-400 mt-1 truncate">National Science Library</p>
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">National Science Library</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
-                                <i class="fas fa-cloud-download-alt text-purple-400"></i>
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
                                 <span id="counter-cert-nsl">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-cert-nsl" href="#" class="px-4 py-2 rounded-lg bg-purple-600/20 hover:bg-purple-600 text-purple-300 hover:text-white text-xs font-bold transition-all border border-purple-500/30">Tải Về</a>
+                    <a id="download-cert-nsl" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
                 </div>
             </div>
 
             <!-- MODS LIST -->
             <div id="mods-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden animate-fade-in">
-                <div id="no-results" class="hidden col-span-full py-12 text-center text-slate-500">
+                <div id="no-results" class="hidden col-span-full py-12 text-center text-slate-400">
                     <i class="fas fa-search mb-2 text-2xl opacity-50"></i>
                     <p data-i18n="no-results">Không tìm thấy ứng dụng</p>
                 </div>
 
                 <!-- Mod: Coin Master V2 -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/0b/3e/4d/0b3e4dc205f9e93a5eac272be03397d5.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Coin Master V2</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">MOD SPEED | UPDATE 26/08/2025</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Coin Master V2</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">MOD SPEED | UPDATE 26/08/2025</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-coin2">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-coin2" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-coin2" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
                 
                 <!-- Mod: Capcut -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/15/0b/c5/150bc572c5034b73ad7fe7cdecf6f05d.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Capcut PRO</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">Premium Unlocked</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Capcut PRO</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">Premium Unlocked</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-capcutpro">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-capcutpro" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-capcutpro" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
 
                 <!-- Mod: Locket -->
                  <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/af/8a/df/af8adf619e7c9c6c3537a75350d17ab3.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Locket Gold</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">Gold Features 2.9.0</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Locket Gold</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">Gold Features 2.9.0</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-locket">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-locket" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-locket" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
 
                 <!-- Mod: Coin Master MOD -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/0b/3e/4d/0b3e4dc205f9e93a5eac272be03397d5.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Coin Master MOD</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">MOD UPDATE 1/8/2025</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Coin Master MOD</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">MOD UPDATE 1/8/2025</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-coin">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-coin" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-coin" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
 
                 <!-- Mod: Lien Quan V2 -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/98/c0/13/98c013e3c3e4fbce344108fb7b960d76.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Liên Quân Mobile V2</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">MOD MENU V2 | 28/07/2025</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Liên Quân Mobile V2</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">MOD MENU V2 | 28/07/2025</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-lqm-v2">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-lqm-v2" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-lqm-v2" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
 
                  <!-- Mod: Lien Quan V1 -->
                  <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/98/c0/13/98c013e3c3e4fbce344108fb7b960d76.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Liên Quân Mobile V1</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">MOD MENU V1 | BẢN KÍN</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Liên Quân Mobile V1</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">MOD MENU V1 | BẢN KÍN</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-lqm-v1">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-lqm-v1" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-lqm-v1" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
 
                 <!-- Mod: Key Hack -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.imgur.com/HNOoX8W.png" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Key đăng nhập mods</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">Get Key for 2 Versions</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Key đăng nhập mods</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">Get Key for 2 Versions</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-key">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-key" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-key" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-key text-xs"></i>
                     </a>
                 </div>
 
                 <!-- Mod: Facebook+ -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/db/19/33/db19332a23a44f772c5a1855a8aabf70.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Facebook+</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">Clone & VIP Features</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Facebook+</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">Clone & VIP Features</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-fb">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-fb" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-fb" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
 
                 <!-- Mod: Messenger+ -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/19/a0/30/19a030cd67399a41174e216759897229.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Messenger+</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">Clone & VIP Features</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Messenger+</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">Clone & VIP Features</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-mess">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-mess" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-mess" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
 
                 <!-- Mod: Youtube Plus -->
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-white/10 group-hover:border-indigo-500/50 transition-colors">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
                         <img src="https://i.pinimg.com/736x/11/5c/d1/115cd1cae24e0d8ecfbfbef96a59e886.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
                     </div>
                     <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-100 app-title">Youtube Plus</h3>
-                        <p class="text-xs text-indigo-400 mt-1 truncate">Unlock Premium</p>
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Youtube Plus</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">Unlock Premium</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-[10px] text-slate-500 flex items-center gap-1">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
                                 <i class="fas fa-fire text-orange-500"></i>
                                 <span id="counter-mods-yt">Loading...</span>
                             </span>
                         </div>
                     </div>
-                    <a id="download-mods-yt" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-600 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
+                    <a id="download-mods-yt" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
                         <i class="fas fa-download text-xs"></i>
                     </a>
                 </div>
@@ -908,8 +892,8 @@
 
         </div>
 
-        <footer class="mt-16 pt-8 border-t border-white/5 text-center">
-            <p class="text-slate-500 text-xs" data-i18n="copyright">Copyright © 2025 VIETNAMCERT. All rights reserved.</p>
+        <footer class="mt-16 pt-8 border-t border-slate-200 text-center">
+            <p class="text-slate-400 text-xs font-medium" data-i18n="copyright">Copyright © 2025 VIETNAMCERT. All rights reserved.</p>
         </footer>
     </main>
 
@@ -934,15 +918,15 @@
         // Translations Logic
         const translations = {
             vi: {
-                title: "APPLE CERTIFICATE.",
+                title: "SHARE CERTIFICATE",
                 subtitle: "Chia sẻ chứng chỉ ESign iPhone/iPad và các file iPAs mod. Tải xuống tốc độ cao, cập nhật liên tục.",
                 support: "Hỗ Trợ 24/7",
-                website: "Mua Cert VIP",
+                website: "Mua Cert Giá Rẻ",
                 no_results: "Không tìm thấy ứng dụng",
-                copyright: "Bản quyền © 2025 VIETNAMCERT. Bảo lưu mọi quyền."
+                copyright: "Bản quyền © 2025 THAISONCERT. Bảo lưu mọi quyền."
             },
             en: {
-                title: "APPLE CERTIFICATE.",
+                title: "SHARE CERTIFICATE",
                 subtitle: "Share ESign Certificates for iPhone/iPad and Modded iPAs. High-speed download, constantly updated.",
                 support: "Support 24/7",
                 website: "Buy VIP Cert",
@@ -958,7 +942,7 @@
                 if (key === 'support') {
                     el.innerHTML = `<i class="fas fa-headset"></i> ${translations[lang][key]}`;
                 } else if (key === 'website') {
-                    el.innerHTML = `<i class="fas fa-shopping-cart text-indigo-400"></i> ${translations[lang][key]}`;
+                    el.innerHTML = `<i class="fas fa-shopping-cart text-indigo-500 group-hover:scale-110 transition-transform"></i> ${translations[lang][key]}`;
                 } else if(translations[lang][key]) {
                     el.innerText = translations[lang][key];
                 }
@@ -966,11 +950,11 @@
 
             document.querySelectorAll('.lang-btn').forEach(btn => {
                 if(btn.dataset.lang === lang) {
-                    btn.classList.add('active', 'text-white');
-                    btn.classList.remove('text-white/60');
+                    btn.classList.add('text-slate-900');
+                    btn.classList.remove('text-slate-500');
                 } else {
-                    btn.classList.remove('active', 'text-white');
-                    btn.classList.add('text-white/60');
+                    btn.classList.remove('text-slate-900');
+                    btn.classList.add('text-slate-500');
                 }
             });
             localStorage.setItem('language', lang);
@@ -1029,7 +1013,7 @@
             
             const certButtons = [
                 { btnId: 'download-cert-Etisalat', linkId: 'cert-Etisalat', url: 'https://link4m.com/92x5t' },
-                { btnId: 'download-cert-ola', linkId: 'cert-ola', url: '#' }, // Missing in original JS, added placeholder
+                { btnId: 'download-cert-ola', linkId: 'cert-ola', url: '#' }, 
                 { btnId: 'download-cert-global', linkId: 'cert-global', url: 'https://link4m.com/4bQLgsj' },
                 { btnId: 'download-cert-zheshang', linkId: 'cert-zheshang', url: 'https://link4m.com/epZLK' },
                 { btnId: 'download-cert-bmw', linkId: 'cert-bmw', url: 'https://www.mediafire.com/file/bleytnn30nu8pby/China+Zheshang+Bank+Co.,+Ltd.zip/file' },
@@ -1071,14 +1055,14 @@
                     b.classList.remove('active', 'text-white');
                     b.classList.add('text-slate-400');
                 });
-                btn.classList.add('active', 'text-white');
+                btn.classList.add('active');
                 btn.classList.remove('text-slate-400');
                 
                 if(window.innerWidth >= 768) {
-                     tabIndicator.style.left = `${(index * 132) + 6}px`;
+                      tabIndicator.style.left = `${(index * 132) + 6}px`;
                 } else {
-                     tabIndicator.style.left = `${(index * 33.33)}%`;
-                     if(index===0) tabIndicator.style.left = '6px'; 
+                      tabIndicator.style.left = `${(index * 33.33)}%`;
+                      if(index===0) tabIndicator.style.left = '6px'; 
                 }
                 
                 const tab = btn.dataset.tab;
@@ -1119,26 +1103,6 @@
             else noRes.classList.add('hidden');
         });
 
-    </script>
-    
-    <script>
-        particlesJS("particles-js", {
-            "particles": {
-                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                "color": { "value": "#6366f1" },
-                "shape": { "type": "circle" },
-                "opacity": { "value": 0.3, "random": true },
-                "size": { "value": 3, "random": true },
-                "line_linked": { "enable": true, "distance": 150, "color": "#6366f1", "opacity": 0.2, "width": 1 },
-                "move": { "enable": true, "speed": 2, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
-            },
-            "interactivity": {
-                "detect_on": "canvas",
-                "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true },
-                "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 } }
-            },
-            "retina_detect": true
-        });
     </script>
 </body>
 </html>

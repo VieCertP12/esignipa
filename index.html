@@ -15,6 +15,7 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     
+    <!-- CONFIG TAILWIND -->
     <script>
         tailwind.config = {
             theme: {
@@ -24,9 +25,9 @@
                     },
                     colors: {
                         brand: {
-                            primary: '#6366f1', // Indigo
-                            secondary: '#a855f7', // Purple
-                            gold: '#f59e0b', // Amber 500
+                            primary: '#6366f1',
+                            secondary: '#a855f7',
+                            gold: '#f59e0b',
                         }
                     },
                     animation: {
@@ -49,15 +50,14 @@
         }
     </script>
 
+    <!-- CSS STYLES -->
     <style>
         body {
             background-color: #ffffff;
-            color: #1e293b; /* Slate 800 */
+            color: #1e293b;
             -webkit-font-smoothing: antialiased;
             min-height: 100vh;
             position: relative;
-            
-            /* Background Grid */
             background-image: 
                 linear-gradient(to right, #f0f0f0 1px, transparent 1px),
                 linear-gradient(to bottom, #f0f0f0 1px, transparent 1px),
@@ -68,7 +68,6 @@
             background-position: center top;
         }
 
-        /* Glass Effect */
         .glass-nav {
             background: rgba(255, 255, 255, 0.7);
             backdrop-filter: blur(16px);
@@ -91,30 +90,18 @@
             box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
         }
 
-        /* Tab Styles */
         .tab-btn.active {
             background-color: #ffffff;
             color: #4f46e5;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
         
-        .tab-btn:not(.active) {
-            color: #64748b;
-        }
-        .tab-btn:not(.active):hover {
-            color: #1e293b;
-        }
+        .tab-btn:not(.active) { color: #64748b; }
+        .tab-btn:not(.active):hover { color: #1e293b; }
 
-        /* Scrollbar Hide Utility */
-        .scrollbar-hide::-webkit-scrollbar {
-            display: none;
-        }
-        .scrollbar-hide {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+        .scrollbar-hide { -ms-overflow-style: none; scrollbar-width: none; }
 
-        /* Custom Scrollbar for Page */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #f1f5f9; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
@@ -129,15 +116,12 @@
     <nav class="fixed top-0 w-full z-40 glass-nav transition-all duration-300" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
                 <div class="flex items-center gap-3">
                     <div class="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center shadow-lg shadow-indigo-500/20">
                         <i class="fa-brands fa-apple text-white"></i>
                     </div>
                     <span class="font-bold text-lg tracking-tight text-slate-800">ThaiSon<span class="text-indigo-600">Cert</span></span>
                 </div>
-
-                <!-- Controls -->
                 <div class="flex items-center gap-3">
                     <div class="hidden md:flex bg-slate-100/80 rounded-full p-1 border border-slate-200">
                         <button class="lang-btn px-3 py-1 text-xs font-bold rounded-full transition-all text-slate-500 hover:text-slate-900 active" data-lang="vi" style="transition:0.3s;">VI</button>
@@ -153,11 +137,9 @@
 
     <!-- Main Content -->
     <main class="relative z-10 pt-32 pb-12 px-4 sm:px-6 max-w-5xl mx-auto">
-        
         <!-- Hero Section -->
         <div class="text-center mb-16 animate-fade-in relative">
             <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-indigo-500/10 rounded-full blur-[100px] -z-10"></div>
-
             <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-indigo-100 text-indigo-600 text-xs font-bold mb-8 shadow-sm hover:shadow-md transition-all cursor-default select-none">
                 <span class="relative flex h-2.5 w-2.5">
                   <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
@@ -165,16 +147,12 @@
                 </span>
                 Anti-Revoke Protected
             </div>
-            
             <h1 class="text-5xl md:text-8xl font-black mb-6 tracking-tighter text-slate-900 leading-[1.1]">
                 <span class="text-indigo-600" data-i18n="title">SHARE CERTIFICATE</span>
             </h1>
-            
             <p class="text-slate-500 max-w-2xl mx-auto text-base md:text-lg leading-relaxed mb-10 font-medium" data-i18n="subtitle">
                 Kho tàng chứng chỉ ESign & IPA Mods miễn phí tốt nhất Việt Nam. <br class="hidden md:block" /> Cập nhật liên tục, tốc độ cao, hỗ trợ 24/7.
             </p>
-
-            <!-- Quick Links -->
             <div class="flex flex-wrap justify-center gap-4">
                 <a href="http://zalo.me/0869775239" target="_blank" class="group relative px-6 py-3 bg-slate-900 text-white rounded-full font-bold text-sm overflow-hidden transition-all hover:scale-105 shadow-lg shadow-slate-900/20">
                     <div class="absolute inset-0 bg-gradient-to-r from-indigo-500 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
@@ -195,16 +173,9 @@
         <div class="flex justify-center mb-10">
             <div class="p-1.5 bg-slate-100/80 border border-slate-200 rounded-2xl backdrop-blur-xl inline-flex relative shadow-inner">
                 <div id="tab-indicator" class="absolute h-[calc(100%-12px)] top-1.5 rounded-xl bg-white shadow-md transition-all duration-300 ease-out z-0" style="width: 33%; left: 6px;"></div>
-                
-                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32 active" data-tab="esign">
-                    ESign
-                </button>
-                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32" data-tab="cert">
-                    Cert
-                </button>
-                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32" data-tab="mods">
-                    Mods
-                </button>
+                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32 active" data-tab="esign">ESign</button>
+                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32" data-tab="cert">Cert</button>
+                <button class="tab-btn relative z-10 px-6 py-2.5 text-sm font-bold rounded-xl transition-all w-28 md:w-32" data-tab="mods">Mods</button>
             </div>
         </div>
 
@@ -221,109 +192,12 @@
 
         <!-- Content Lists -->
         <div class="min-h-[400px]">
-            <!-- ESIGN LIST (Generated by JS) -->
             <div id="esign-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 animate-fade-in"></div>
-
-            <!-- CERT LIST -->
-            <div id="cert-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden animate-fade-in">
-                 <!-- Cert: Etisalat -->
-                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm bg-white">
-                        <img src="https://i.imgur.com/nOPmMnk.png" alt="Cert Logo" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
-                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">Etisalat - Emirates Telecom</p>
-                        <div class="flex items-center gap-3 mt-3">
-                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
-                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
-                                <span id="counter-cert-Etisalat">Loading...</span>
-                            </span>
-                        </div>
-                    </div>
-                    <a id="download-cert-Etisalat" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
-                </div>
-                 <!-- Cert: Zheshang -->
-                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
-                    <div class="relative w-16 h-16 rounded-xl border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm bg-white">
-                        <img src="https://i.imgur.com/nOPmMnk.png" alt="Cert Logo" class="w-full h-full object-cover rounded-xl">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
-                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">China Zheshang Bank</p>
-                        <div class="flex items-center gap-3 mt-3">
-                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
-                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
-                                <span id="counter-cert-zheshang">Loading...</span>
-                            </span>
-                        </div>
-                    </div>
-                    <a id="download-cert-zheshang" href="#" class="px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200">Tải Về</a>
-                </div>
-            </div>
-
-            <!-- MODS LIST -->
+            <div id="cert-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden animate-fade-in"></div>
             <div id="mods-list" class="grid grid-cols-1 md:grid-cols-2 gap-4 hidden animate-fade-in">
                 <div id="no-results" class="hidden col-span-full py-12 text-center text-slate-400">
                     <i class="fas fa-search mb-2 text-2xl opacity-50"></i>
                     <p data-i18n="no-results">Không tìm thấy ứng dụng</p>
-                </div>
-                 <!-- Mod: Coin Master V2 -->
-                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
-                        <img src="https://i.pinimg.com/736x/0b/3e/4d/0b3e4dc205f9e93a5eac272be03397d5.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Coin Master V2</h3>
-                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">MOD SPEED | UPDATE 26/08/2025</p>
-                        <div class="flex items-center gap-3 mt-3">
-                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
-                                <i class="fas fa-fire text-orange-500"></i>
-                                <span id="counter-mods-coin2">Loading...</span>
-                            </span>
-                        </div>
-                    </div>
-                    <a id="download-mods-coin2" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
-                        <i class="fas fa-download text-xs"></i>
-                    </a>
-                </div>
-                 <!-- Mod: Locket -->
-                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
-                        <img src="https://i.pinimg.com/736x/af/8a/df/af8adf619e7c9c6c3537a75350d17ab3.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Locket Gold</h3>
-                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">Gold Features 2.9.0</p>
-                        <div class="flex items-center gap-3 mt-3">
-                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
-                                <i class="fas fa-fire text-orange-500"></i>
-                                <span id="counter-mods-locket">Loading...</span>
-                            </span>
-                        </div>
-                    </div>
-                    <a id="download-mods-locket" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
-                        <i class="fas fa-download text-xs"></i>
-                    </a>
-                </div>
-                 <!-- Mod: Lien Quan -->
-                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
-                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
-                        <img src="https://i.pinimg.com/736x/98/c0/13/98c013e3c3e4fbce344108fb7b960d76.jpg" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <h3 class="font-bold text-base truncate text-slate-800 app-title">Liên Quân Mobile V2</h3>
-                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">MOD MENU V2 | 28/07/2025</p>
-                        <div class="flex items-center gap-3 mt-3">
-                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
-                                <i class="fas fa-fire text-orange-500"></i>
-                                <span id="counter-mods-lqm-v2">Loading...</span>
-                            </span>
-                        </div>
-                    </div>
-                    <a id="download-mods-lqm-v2" href="#" class="w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all">
-                        <i class="fas fa-download text-xs"></i>
-                    </a>
                 </div>
             </div>
         </div>
@@ -333,13 +207,10 @@
         </footer>
     </main>
 
-    <!-- POPUP KHI TẢI ESIGN (App Store Style VIP) -->
+    <!-- POPUP KHI TẢI ESIGN -->
     <div id="esign-popup" class="fixed inset-0 z-[9999] hidden">
         <div class="flex items-center justify-center min-h-screen px-4">
-            <!-- Backdrop -->
             <div class="fixed inset-0 bg-black/50 backdrop-blur-sm transition-opacity" id="popup-overlay"></div>
-            
-            <!-- Modal Card -->
             <div class="relative bg-white rounded-[2rem] p-6 max-w-[380px] w-full animate-fade-in scale-95 shadow-2xl overflow-hidden">
                 
                 <!-- Nút đóng -->
@@ -347,21 +218,16 @@
                     <i class="fas fa-times text-sm"></i>
                 </button>
 
-                <!-- Header: Icon + Title + Get Button (App Store) -->
+                <!-- Header -->
                 <div class="flex gap-4 mb-5">
-                    <!-- App Icon -->
                     <div class="w-[5.5rem] h-[5.5rem] flex-shrink-0 rounded-[1.25rem] border border-slate-100 shadow-sm overflow-hidden">
                         <img src="https://i.imgur.com/hPj8ui8.png" alt="ESign" class="w-full h-full object-cover">
                     </div>
-                    
-                    <!-- Info -->
                     <div class="flex flex-col justify-between py-1 min-w-0">
                         <div>
                             <h3 class="font-bold text-xl text-slate-900 leading-tight truncate" id="popup-cert-name">ESign</h3>
                             <p class="text-xs text-slate-500 mt-1 line-clamp-2">Công cụ ký & quản lý IPA tốt nhất cho iOS</p>
                         </div>
-                        
-                        <!-- Nút Tải -->
                         <div class="flex items-center gap-2 mt-auto">
                             <a id="popup-install-btn" href="#" target="_blank" class="px-6 py-1.5 rounded-full bg-blue-500 hover:bg-blue-600 text-white text-sm font-bold uppercase tracking-wide transition-all active:scale-95 shadow-blue-500/30 shadow-lg">
                                 NHẬN
@@ -371,25 +237,20 @@
                     </div>
                 </div>
 
-                <!-- Stats Row -->
+                <!-- Stats -->
                 <div class="flex justify-between items-center py-4 border-t border-slate-100 mb-4">
-                    <!-- Rating -->
                     <div class="flex flex-col items-center w-1/3 border-r border-slate-100">
                         <span class="text-slate-400 text-[10px] font-bold uppercase mb-1">XẾP HẠNG</span>
                         <div class="text-xl font-bold text-slate-600">4.8</div>
                         <div class="text-[10px] text-slate-400">
-                            <i class="fas fa-star text-slate-400"></i><i class="fas fa-star text-slate-400"></i><i class="fas fa-star text-slate-400"></i><i class="fas fa-star text-slate-400"></i><i class="fas fa-star-half-alt text-slate-400"></i>
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
                         </div>
                     </div>
-                    
-                    <!-- Age -->
                     <div class="flex flex-col items-center w-1/3 border-r border-slate-100">
                         <span class="text-slate-400 text-[10px] font-bold uppercase mb-1">TUỔI</span>
                         <div class="text-xl font-bold text-slate-600">17+</div>
                         <span class="text-[10px] text-slate-400">Tuổi</span>
                     </div>
-
-                    <!-- Chart -->
                     <div class="flex flex-col items-center w-1/3">
                         <span class="text-slate-400 text-[10px] font-bold uppercase mb-1">BXH</span>
                         <div class="text-xl font-bold text-slate-600">#2</div>
@@ -397,7 +258,7 @@
                     </div>
                 </div>
 
-                <!-- Feature List (Compact) -->
+                <!-- Feature List -->
                 <div class="flex flex-col gap-3 mb-5 max-h-[120px] overflow-y-auto scrollbar-hide px-1">
                     <!-- Block 1: Chính hãng -->
                     <div class="flex gap-3 items-start">
@@ -431,20 +292,23 @@
                     </div>
                 </div>
 
-                <!-- VIP Upsell Section (Recommended - Like Image) -->
-                <div class="bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 rounded-xl p-4 text-center">
-                    <p class="text-slate-700 text-xs font-medium leading-snug mb-3">
-                        <i class="fas fa-exclamation-triangle text-orange-500 mr-1"></i> Cài lỗi hoặc bị thu hồi? Khuyên dùng <strong>Chứng chỉ cá nhân Lấy Ngay Unban</strong> chỉ <strong>150.000vnđ/năm</strong>:
+                <!-- VIP Upsell Section (New Design) -->
+                <div class="mt-5 p-6 rounded-3xl bg-gradient-to-r from-blue-50 to-purple-50 border border-white shadow-inner text-center">
+                    <p class="text-sm font-bold text-slate-700 mb-4 leading-relaxed">
+                        <i class="fas fa-exclamation-triangle text-orange-500 mr-1.5"></i> 
+                        Cài lỗi hoặc bị thu hồi? Khuyên dùng <span class="text-indigo-700">Chứng chỉ cá nhân</span> <br>
+                        <span class="text-indigo-700">Lấy Ngay Unban</span> chỉ <span class="text-indigo-700">150.000vnđ/năm</span>:
                     </p>
-                    <a href="https://muachungchi.com" target="_blank" class="inline-flex items-center gap-2 bg-white text-indigo-600 font-bold text-sm px-6 py-2 rounded-full shadow-sm hover:shadow-md transition-all hover:scale-105">
-                        <i class="fas fa-crown text-yellow-400"></i> MuaChungChi.com
+                    <a href="https://muachungchi.com" target="_blank" class="inline-flex items-center justify-center gap-2 bg-white text-indigo-600 font-extrabold text-base px-8 py-3 rounded-full shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300">
+                        <i class="fas fa-crown text-yellow-400 text-xl"></i>
+                        <span>MuaChungChi.com</span>
                     </a>
                 </div>
 
                 <!-- Countdown -->
-                <div class="mt-3 text-center">
+                <div class="mt-4 text-center">
                     <p class="text-[9px] text-slate-400 font-medium">
-                        Tự động đóng sau <span id="countdown" class="font-bold text-slate-500">26</span>s
+                        Tự động đóng sau <span id="countdown" class="font-bold text-slate-500">30</span>s
                     </p>
                 </div>
 
@@ -470,26 +334,41 @@
         const app = initializeApp(firebaseConfig);
         const db = getFirestore(app);
 
-        // --- DATA & CONFIG ---
-        const esignData = [
-             { name: 'Etisalat', desc: 'Etisalat - Emirates Telecom', id: 'Etisalat', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es1.plist', badge: 'GOOD' },
-             { name: 'OLA CITY', desc: 'OLA CITY GLOBAL LIMITED', id: 'ola', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es2.plist' },
-             { name: 'Global Takeoff', desc: 'GLOBAL TAKEOFF, INC', id: 'global', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es2.plist' },
-             { name: 'Zheshang Bank', desc: 'China Zheshang Bank Co.', id: 'zheshang', url: 'https://link4sub.com/JjFO' },
-             { name: 'BMW', desc: 'BMW Brilliance Automotive', id: 'bmw', url: 'https://link4sub.com/jh5D' },
-             { name: 'Beijing', desc: 'Beijing', id: 'beijing', url: 'https://link4sub.com/K8V9' },
-             { name: 'China Railway', desc: 'China Railway', id: 'railway', url: 'https://link4sub.com/9WWn' },
-             { name: 'Dtt Technology', desc: 'Dtt Technology', id: 'dtt', url: 'https://link4sub.com/y6nn' },
-             { name: 'TCL Household', desc: 'TCL Household', id: 'tcl', url: 'https://link4sub.com/Xnjk' },
-             { name: 'Wuling Power', desc: 'Wuling Power', id: 'wuling', url: 'https://link4sub.com/OKaz' },
-             { name: 'VietNamCert', desc: 'VietNamCert.01', id: 'vietnamcert', url: 'https://link4sub.com/bsZQ' },
-             { name: 'Science Library', desc: 'National Science Library', id: 'nsl', url: 'https://link4sub.com/2k3j' },
-        ];
+        // ==========================================
+        // === KHU VỰC QUẢN LÝ DỮ LIỆU (EDIT HERE) ===
+        // ==========================================
+        const DATA_CONFIG = {
+            esign: [
+                { name: 'Etisalat', desc: 'Etisalat - Emirates Telecom', id: 'Etisalat', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es1.plist', badge: 'GOOD' },
+                { name: 'OLA CITY', desc: 'OLA CITY GLOBAL LIMITED', id: 'ola', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es2.plist' },
+                { name: 'Global Takeoff', desc: 'GLOBAL TAKEOFF, INC', id: 'global', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es2.plist' },
+                { name: 'Zheshang Bank', desc: 'China Zheshang Bank Co.', id: 'zheshang', url: 'https://link4sub.com/JjFO' },
+                { name: 'BMW', desc: 'BMW Brilliance Automotive', id: 'bmw', url: 'https://link4sub.com/jh5D' },
+                { name: 'Beijing', desc: 'Beijing', id: 'beijing', url: 'https://link4sub.com/K8V9' },
+                { name: 'China Railway', desc: 'China Railway', id: 'railway', url: 'https://link4sub.com/9WWn' },
+                { name: 'Dtt Technology', desc: 'Dtt Technology', id: 'dtt', url: 'https://link4sub.com/y6nn' },
+                { name: 'TCL Household', desc: 'TCL Household', id: 'tcl', url: 'https://link4sub.com/Xnjk' },
+                { name: 'Wuling Power', desc: 'Wuling Power', id: 'wuling', url: 'https://link4sub.com/OKaz' },
+                { name: 'VietNamCert', desc: 'VietNamCert.01', id: 'vietnamcert', url: 'https://link4sub.com/bsZQ' },
+                { name: 'Science Library', desc: 'National Science Library', id: 'nsl', url: 'https://link4sub.com/2k3j' },
+            ],
+            cert: [
+                { id: 'cert-Etisalat', name: 'Etisalat', desc: 'Etisalat - Emirates Telecom', url: 'https://link4m.com/92x5t' },
+                { id: 'cert-zheshang', name: 'Zheshang', desc: 'China Zheshang Bank Co.', url: 'https://link4m.com/epZLK' },
+                // Add more certs here...
+            ],
+            mods: [
+                { id: 'mods-coin2', name: 'Coin Master V2', desc: 'MOD SPEED | UPDATE 26/08/2025', icon: 'https://i.pinimg.com/736x/0b/3e/4d/0b3e4dc205f9e93a5eac272be03397d5.jpg', url: 'https://link4m.com/TE058', tag: 'fire' },
+                { id: 'mods-locket', name: 'Locket Gold', desc: 'Gold Features 2.9.0', icon: 'https://i.pinimg.com/736x/af/8a/df/af8adf619e7c9c6c3537a75350d17ab3.jpg', url: 'https://link4m.com/Beevd', tag: 'fire' },
+                { id: 'mods-lqm-v2', name: 'Liên Quân Mobile V2', desc: 'MOD MENU V2 | 28/07/2025', icon: 'https://i.pinimg.com/736x/98/c0/13/98c013e3c3e4fbce344108fb7b960d76.jpg', url: 'https://link4m.com/UKWKXe', tag: 'fire' },
+                // Add more mods here...
+            ]
+        };
 
-        // --- RENDER ESIGN LIST ---
+        // --- RENDER FUNCTIONS ---
         function renderEsignList() {
             const container = document.getElementById('esign-list');
-            container.innerHTML = esignData.map(item => `
+            container.innerHTML = DATA_CONFIG.esign.map(item => `
                 <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
                     <div class="relative w-16 h-16 rounded-xl border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm bg-white">
                         <img src="https://i.imgur.com/hPj8ui8.png" alt="ESign Logo" class="w-full h-full object-cover rounded-xl">
@@ -516,6 +395,57 @@
                     </button>
                 </div>
             `).join('');
+        }
+
+        function renderCertList() {
+            const container = document.getElementById('cert-list');
+            container.innerHTML = DATA_CONFIG.cert.map(item => `
+                <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group">
+                    <div class="relative w-16 h-16 rounded-xl border border-purple-100 group-hover:border-purple-300 transition-colors shadow-sm bg-white">
+                        <img src="https://i.imgur.com/nOPmMnk.png" alt="Cert Logo" class="w-full h-full object-cover rounded-xl">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-base truncate text-slate-800">Certificate P12</h3>
+                        <p class="text-xs text-slate-500 mt-1 truncate font-medium">${item.desc}</p>
+                        <div class="flex items-center gap-3 mt-3">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-cloud-download-alt text-purple-500"></i>
+                                <span id="counter-${item.id}">Loading...</span>
+                            </span>
+                        </div>
+                    </div>
+                    <a id="download-${item.id}" href="#" class="download-btn px-4 py-2 rounded-lg bg-purple-100 hover:bg-purple-600 text-purple-600 hover:text-white text-xs font-bold transition-all border border-purple-200" data-id="${item.id}" data-url="${item.url}">Tải Về</a>
+                </div>
+            `).join('');
+        }
+
+        function renderModsList() {
+            const container = document.getElementById('mods-list');
+            // Keep the "no-results" div
+            const noResHtml = `<div id="no-results" class="hidden col-span-full py-12 text-center text-slate-400"><i class="fas fa-search mb-2 text-2xl opacity-50"></i><p data-i18n="no-results">Không tìm thấy ứng dụng</p></div>`;
+            
+            const itemsHtml = DATA_CONFIG.mods.map(item => `
+                <div class="glass-card rounded-2xl p-4 flex items-center gap-4 group app-card-mod">
+                    <div class="relative w-16 h-16 rounded-xl overflow-hidden border border-slate-200 group-hover:border-indigo-300 transition-colors shadow-sm">
+                        <img src="${item.icon}" alt="Icon" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-500">
+                    </div>
+                    <div class="flex-1 min-w-0">
+                        <h3 class="font-bold text-base truncate text-slate-800 app-title">${item.name}</h3>
+                        <p class="text-xs text-indigo-600 mt-1 truncate font-medium">${item.desc}</p>
+                        <div class="flex items-center gap-3 mt-3">
+                             <span class="text-[10px] text-slate-500 flex items-center gap-1 font-semibold bg-slate-100 px-2 py-0.5 rounded-md">
+                                <i class="fas fa-${item.tag} text-orange-500"></i>
+                                <span id="counter-${item.id}">Loading...</span>
+                            </span>
+                        </div>
+                    </div>
+                    <a id="download-${item.id}" href="#" class="download-btn w-10 h-10 rounded-full bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white shadow-lg shadow-indigo-500/30 hover:shadow-indigo-500/50 hover:scale-110 transition-all" data-id="${item.id}" data-url="${item.url}">
+                        <i class="fas fa-download text-xs"></i>
+                    </a>
+                </div>
+            `).join('');
+            
+            container.innerHTML = noResHtml + itemsHtml;
         }
 
         // --- TRANSLATION LOGIC ---
@@ -594,34 +524,19 @@
         let currentUrl = '';
         let currentName = '';
 
-        const certNames = {
-            'Etisalat': 'Etisalat - Emirates Telecom',
-            'ola': 'OLA CITY GLOBAL LIMITED',
-            'global': 'GLOBAL TAKEOFF, INC',
-            'zheshang': 'China Zheshang Bank Co.',
-            'bmw': 'BMW Brilliance Automotive',
-            'beijing': 'Beijing Enterprises',
-            'railway': 'China Railway Corporation',
-            'dtt': 'Dtt Technology Co.',
-            'tcl': 'TCL Household Appliances',
-            'wuling': 'Wuling Power Corporation',
-            'vietnamcert': 'VietNamCert.01 (VN)',
-            'nsl': 'National Science Library'
-        };
-
         function openESignPopup(nameKey, url) {
-            const fullName = certNames[nameKey] || nameKey;
+            // Just use the name passed directly since we have clean data now
+            // or look up from DATA_CONFIG if needed. For now, nameKey is passed as item.name
             currentUrl = url;
-            currentName = fullName;
+            currentName = nameKey;
 
-            popupCertName.textContent = fullName; // Chỉ hiển thị tên cert ở đây
+            popupCertName.textContent = `ESign ${nameKey}`; 
             popupInstallBtn.href = url;
 
             popup.classList.remove('hidden');
             document.body.style.overflow = 'hidden';
 
-            // Countdown 26s (Theo yêu cầu)
-            let time = 26;
+            let time = 30;
             countdownEl.textContent = time;
             clearInterval(countdownTimer);
             countdownTimer = setInterval(() => {
@@ -641,58 +556,43 @@
 
         closePopup.addEventListener('click', closeESignPopup);
         popupOverlay.addEventListener('click', closeESignPopup);
-        
-        popupInstallBtn.addEventListener('click', () => {
-             closeESignPopup();
-        });
+        popupInstallBtn.addEventListener('click', () => closeESignPopup());
 
         // --- INIT ---
         window.addEventListener("load", () => {
             renderEsignList();
+            renderCertList();
+            renderModsList();
 
-            // Setup ESign Buttons (Using class selector)
+            // Setup ESign Buttons
             document.querySelectorAll('.esign-download-btn').forEach(btn => {
-                const id = btn.dataset.id; // e.g. 'esign-Etisalat'
+                const id = btn.dataset.id;
                 updateCounter(id, `counter-${id}`);
                 
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
-                    // ID format: esign-Etisalat -> Key: Etisalat
-                    const key = id.replace('esign-', '');
-                    const url = btn.dataset.url;
+                    openESignPopup(btn.dataset.name, btn.dataset.url);
                     
-                    openESignPopup(key, url);
-
                     const docRef = doc(db, "downloads", id);
                     updateDoc(docRef, { count: increment(1) }).catch(() => {});
                 });
             });
 
-            // Setup Cert & Mod Buttons
-            const certButtons = [
-                { btnId: 'download-cert-Etisalat', linkId: 'cert-Etisalat', url: 'https://link4m.com/92x5t' },
-                { btnId: 'download-cert-zheshang', linkId: 'cert-zheshang', url: 'https://link4m.com/epZLK' },
-                // ... (Add other cert/mod buttons here if they exist in HTML)
-                { btnId: 'download-mods-coin2', linkId: 'mods-coin2', url: 'https://link4m.com/TE058' },
-                { btnId: 'download-mods-locket', linkId: 'mods-locket', url: 'https://link4m.com/Beevd' },
-                { btnId: 'download-mods-lqm-v2', linkId: 'mods-lqm-v2', url: 'https://link4m.com/UKWKXe' }
-            ];
-
-            certButtons.forEach(({btnId, linkId, url}) => {
-                const btn = document.getElementById(btnId);
-                if (btn) {
-                    const counterId = `counter-${linkId}`;
-                    updateCounter(linkId, counterId);
-                    btn.href = url;
+            // Setup Other Download Buttons (Cert + Mods)
+            document.querySelectorAll('.download-btn').forEach(btn => {
+                const id = btn.dataset.id;
+                updateCounter(id, `counter-${id}`);
+                
+                btn.addEventListener('click', async (e) => {
+                    // Direct download for non-esign items
                     btn.setAttribute('target', '_blank');
-                    btn.addEventListener("click", async () => {
-                        try {
-                            const docRef = doc(db, "downloads", linkId);
-                            await updateDoc(docRef, { count: increment(1) });
-                            updateCounter(linkId, counterId);
-                        } catch (e) { console.error(e); }
-                    });
-                }
+                    btn.href = btn.dataset.url;
+                    try {
+                        const docRef = doc(db, "downloads", id);
+                        await updateDoc(docRef, { count: increment(1) });
+                        updateCounter(id, `counter-${id}`);
+                    } catch (e) { console.error(e); }
+                });
             });
 
             setLanguage(localStorage.getItem('language') || 'vi');

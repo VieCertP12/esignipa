@@ -349,32 +349,41 @@
         // === KHU VỰC QUẢN LÝ DỮ LIỆU (EDIT HERE) ===
         // ==========================================
         const DATA_CONFIG = {
-            esign: [
-                { name: 'Etisalat', desc: 'Etisalat - Emirates Telecom', id: 'Etisalat', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es1.plist', badge: 'NEW' },
-                { name: 'China National', desc: 'China National Heavy Duty Truck Group Co., Ltd.', id: 'China National', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es1.plist', badge: 'NEW' },
-                { name: 'Guangzhou Huahan', desc: 'Guangzhou Huahan Educational & Technology Co.,Ltd', id: 'Guangzhou Huahan', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es1.plist', badge: 'NEW' },
-                { name: 'China Telecommunications', desc: 'China Telecommunications Corporation', id: ''China Telecommunications', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es1.plist', badge: 'NEW' },
-                { name: 'BMW', desc: 'BMW Brilliance Automotive', id: 'bmw', url: '#' },
-                { name: 'Beijing', desc: 'Beijing', id: 'beijing', url: '#' },
-                { name: 'China Railway', desc: 'China Railway', id: 'railway', url: '#' },
-                { name: 'Dtt Technology', desc: 'Dtt Technology', id: 'dtt', url: '#' },
-                { name: 'TCL Household', desc: 'TCL Household', id: 'tcl', url: '#' },
-                { name: 'Wuling Power', desc: 'Wuling Power', id: 'wuling', url: '#' },
-                { name: 'VietNamCert', desc: 'VietNamCert.01', id: 'vietnamcert', url: '#' },
-                { name: 'Science Library', desc: 'National Science Library', id: 'nsl', url: '#' },
-            ],
-            cert: [
-                { id: 'cert-Etisalat', name: 'Etisalat', desc: 'Etisalat - Emirates Telecom', url: 'https://link4m.com/92x5t' },
-                { id: 'cert-China National', name: 'China National', desc: 'China National Heavy Duty Truck Group Co., Ltd.', url: 'https://link4m.com/epZLK' },
-                // Add more certs here...
-            ],
-            mods: [
-                { id: 'mods-coin2', name: 'Coin Master V2', desc: 'MOD SPEED | UPDATE 26/08/2025', icon: 'https://i.pinimg.com/736x/0b/3e/4d/0b3e4dc205f9e93a5eac272be03397d5.jpg', url: 'https://link4m.com/TE058', tag: 'fire' },
-                { id: 'mods-locket', name: 'Locket Gold', desc: 'Gold Features 2.9.0', icon: 'https://i.pinimg.com/736x/af/8a/df/af8adf619e7c9c6c3537a75350d17ab3.jpg', url: 'https://link4m.com/Beevd', tag: 'fire' },
-                { id: 'mods-lqm-v2', name: 'Liên Quân Mobile V2', desc: 'MOD MENU V2 | 28/07/2025', icon: 'https://i.pinimg.com/736x/98/c0/13/98c013e3c3e4fbce344108fb7b960d76.jpg', url: 'https://link4m.com/UKWKXe', tag: 'fire' },
-                // Add more mods here...
-            ]
-        };
+    esign: [
+        { name: 'Etisalat', desc: 'Etisalat - Emirates Telecommunications Corporation', id: 'etisalat', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es1.plist', badge: 'GOOD' },
+        { name: 'SINOTRUK', desc: 'China National Heavy Duty Truck Group Co., Ltd.', id: 'sinotruk', url: 'https://link4sub.com/XXXXX', badge: 'VIP' },
+        { name: 'Huahan Edu', desc: 'Guangzhou Huahan Educational & Technology Co.,Ltd', id: 'huahan', url: 'https://link4sub.com/XXXXX', badge: 'VIP' },
+        { name: 'China Telecom', desc: 'China Telecommunications Corporation', id: 'chinatelecom', url: 'https://link4sub.com/XXXXX', badge: 'NEW' },
+        { name: 'Global Takeoff', desc: 'GLOBAL TAKEOFF, INC', id: 'global', url: 'itms-services://?action=download-manifest&url=https://sharechungchi.com/esignplist/es2.plist', badge: 'GOOD' },
+        { name: 'Tianjin Uni', desc: 'Tianjin University of Commerce', id: 'tianjin', url: 'https://link4sub.com/XXXXX' },
+        { name: 'VietinBank', desc: 'VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE', id: 'vietinbank', url: 'https://link4sub.com/XXXXX', badge: 'HOT' },
+        { name: 'Esensoft', desc: 'Beijing Esensoft Co., Ltd', id: 'esensoft', url: 'https://link4sub.com/XXXXX' },
+        { name: 'China Railway', desc: 'China Railway Eryuan Engineering Group Co., Ltd.', id: 'railway', url: 'https://link4sub.com/XXXXX' },
+        { name: 'EEO Education', desc: 'EEO Education ltd', id: 'eeo', url: 'https://link4sub.com/XXXXX' },
+        { name: 'Wuling Power', desc: 'Wuling Power Corporation', id: 'wuling', url: 'https://link4sub.com/XXXXX' },
+        { name: 'HDFC Bank', desc: 'HDFC Bank Limited', id: 'hdfc', url: 'https://link4sub.com/XXXXX' }
+    ],
+    cert: [
+        { id: 'cert-etisalat', name: 'Etisalat', desc: 'Etisalat - Emirates Telecommunications Corporation', url: 'https://link4m.com/92x5t' },
+        { id: 'cert-sinotruk', name: 'SINOTRUK', desc: 'China National Heavy Duty Truck Group Co., Ltd.', url: '#' },
+        { id: 'cert-huahan', name: 'Huahan Edu', desc: 'Guangzhou Huahan Educational & Technology Co.,Ltd', url: '#' },
+        { id: 'cert-chinatelecom', name: 'China Telecom', desc: 'China Telecommunications Corporation', url: '#' },
+        { id: 'cert-global', name: 'Global Takeoff', desc: 'GLOBAL TAKEOFF, INC', url: '#' },
+        { id: 'cert-tianjin', name: 'Tianjin Uni', desc: 'Tianjin University of Commerce', url: '#' },
+        { id: 'cert-vietinbank', name: 'VietinBank', desc: 'VIETNAM JOINT STOCK COMMERCIAL BANK FOR INDUSTRY AND TRADE', url: '#' },
+        { id: 'cert-esensoft', name: 'Esensoft', desc: 'Beijing Esensoft Co., Ltd', url: '#' },
+        { id: 'cert-railway', name: 'China Railway', desc: 'China Railway Eryuan Engineering Group Co., Ltd.', url: '#' },
+        { id: 'cert-eeo', name: 'EEO Education', desc: 'EEO Education ltd', url: '#' },
+        { id: 'cert-wuling', name: 'Wuling Power', desc: 'Wuling Power Corporation', url: '#' },
+        { id: 'cert-hdfc', name: 'HDFC Bank', desc: 'HDFC Bank Limited', url: '#' }
+    ],
+    mods: [
+        { id: 'mods-placeholder1', name: 'Đang cập nhật...', desc: 'Sắp ra mắt', icon: 'https://i.imgur.com/L6HpZa6.png', url: '#', tag: 'fire' },
+        { id: 'mods-placeholder2', name: 'Đang cập nhật...', desc: 'Sắp ra mắt', icon: 'https://i.imgur.com/L6HpZa6.png', url: '#', tag: 'fire' },
+        { id: 'mods-placeholder3', name: 'Đang cập nhật...', desc: 'Sắp ra mắt', icon: 'https://i.imgur.com/L6HpZa6.png', url: '#', tag: 'fire' }
+        // Thêm bao nhiêu tùy ý, toàn bộ url = '#'
+    ]
+};
 
         // --- RENDER FUNCTIONS ---
         function renderEsignList() {

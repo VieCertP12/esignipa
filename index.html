@@ -608,11 +608,7 @@
 
             setLanguage(localStorage.getItem('language') || 'vi');
             
-            // Auto-open popup logic if needed
-            if (DATA_CONFIG.esign.length > 0) {
-                const firstItem = DATA_CONFIG.esign[0];
-                openESignPopup(firstItem.name, firstItem.url);
-            }
+            // Auto-open popup logic if needed (Removed per request)
         });
 
         // --- TAB & SEARCH LOGIC ---

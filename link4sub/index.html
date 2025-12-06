@@ -60,7 +60,7 @@
     <div class="min-h-screen pt-24 pb-10 px-4 flex flex-col items-center">
         
         <!-- CONTAINER CHÍNH (Sẽ thay đổi nội dung bằng JS) -->
-        <div id="mainContainer" class="w-full max-w-3xl">
+        <div id="mainContainer" class="w-full max-w-4xl">
             <!-- Loading ban đầu -->
             <div class="flex flex-col items-center justify-center py-20">
                 <div class="my-loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
@@ -204,10 +204,25 @@
                 if (!currentLinkData) {
                     const snap = await getDoc(doc(db, "links", id));
                     if (!snap.exists()) {
-                        container.innerHTML = `<div class="text-center text-red-500 p-10">Liên kết không tồn tại.</div>`;
+                        container.innerHTML = `<div class="text-center text-red-500 p-10 bg-white rounded-xl shadow">Liên kết không tồn tại.</div>`;
                         return;
                     }
                     currentLinkData = snap.data();
+
+                    // Kiểm tra trạng thái Link (Active/Disabled)
+                    if (currentLinkData.isActive === false) {
+                        container.innerHTML = `
+                            <div class="text-center bg-white p-10 rounded-xl shadow-lg fade-in">
+                                <div class="w-20 h-20 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                                    <i class="fa-solid fa-ban text-4xl text-gray-400"></i>
+                                </div>
+                                <h2 class="text-2xl font-bold text-gray-800 mb-2">Liên kết tạm ngừng</h2>
+                                <p class="text-gray-500">Link này hiện đang bị vô hiệu hoá hoặc bảo trì.</p>
+                            </div>
+                        `;
+                        return;
+                    }
+
                     updateDoc(doc(db, "links", id), { views: increment(1) });
                 }
                 renderUserTasks();
@@ -387,7 +402,7 @@
 
 
         // ==============================================
-        // B. ADMIN MODE LOGIC (UPDATED WITH ACTION SELECTION)
+        // B. ADMIN MODE LOGIC (UPDATED WITH ACTION SELECTION & ENABLE/DISABLE)
         // ==============================================
         function renderAuthCheck() {
             onAuthStateChanged(auth, (user) => {
@@ -424,65 +439,69 @@
 
         function renderBuilder() {
             container.innerHTML = `
-                <div class="w-full bg-white rounded-xl shadow-lg p-6 fade-in h-[85vh] flex flex-col">
+                <div class="w-full bg-white rounded-xl shadow-lg p-6 fade-in flex flex-col h-full max-h-[90vh]">
                     <div class="flex justify-between items-center mb-4 border-b pb-2">
                         <h2 class="text-xl font-bold text-gray-800">Link Builder</h2>
                         <button id="btnLogout" class="text-xs text-gray-500 hover:text-red-500 underline">Thoát</button>
                     </div>
 
-                    <div class="flex-1 overflow-y-auto pr-2 mb-4 custom-scroll">
-                        <div class="space-y-3 mb-6">
-                            <input type="text" id="bTitle" class="w-full p-3 border rounded-lg focus:outline-none focus:border-red-500" placeholder="Tiêu đề Link">
-                            <input type="text" id="bDest" class="w-full p-3 border rounded-lg focus:outline-none focus:border-green-500 border-green-200 bg-green-50" placeholder="Link Đích (Google Drive...)">
+                    <!-- Layout 2 cột cho Desktop: Trái Builder, Phải List -->
+                    <div class="flex flex-col lg:flex-row gap-6 h-full overflow-hidden">
+                        
+                        <!-- CỘT 1: FORM TẠO LINK (Scrollable) -->
+                        <div class="flex-1 overflow-y-auto pr-2 custom-scroll flex flex-col">
+                            <div class="space-y-3 mb-6">
+                                <input type="text" id="bTitle" class="w-full p-3 border rounded-lg focus:outline-none focus:border-red-500" placeholder="Tiêu đề Link">
+                                <input type="text" id="bDest" class="w-full p-3 border rounded-lg focus:outline-none focus:border-green-500 border-green-200 bg-green-50" placeholder="Link Đích (Google Drive...)">
+                            </div>
+
+                            <!-- Platform Selection -->
+                            <div class="mb-4">
+                                <p class="text-xs font-bold text-gray-500 uppercase mb-2">1. Chọn nền tảng</p>
+                                <div class="grid grid-cols-6 gap-2">
+                                    ${Object.keys(platformConfig).map(key => `
+                                        <button onclick="window.selectPlatform('${key}')" class="platform-btn group ${platformConfig[key].color} text-white p-2 rounded hover:opacity-90 transition flex justify-center items-center h-10 w-full" data-platform="${key}">
+                                            <i class="fa-brands ${platformConfig[key].icon} text-lg"></i>
+                                        </button>
+                                    `).join('')}
+                                </div>
+                            </div>
+
+                            <!-- Action Selection (Dynamic) -->
+                            <div id="action-area" class="mb-6 bg-gray-50 p-3 rounded-lg border border-dashed border-gray-300 min-h-[60px]">
+                                <p class="text-center text-gray-400 text-xs italic pt-2">Chọn nền tảng ở trên để hiện các nút chức năng</p>
+                            </div>
+
+                            <!-- Task List -->
+                            <div id="bTaskList" class="space-y-2 mb-4">
+                                <!-- Task items -->
+                            </div>
+
+                            <button id="btnCreate" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-red-700 transition mt-auto">
+                                TẠO LINK
+                            </button>
                         </div>
 
-                        <!-- Platform Selection -->
-                        <div class="mb-4">
-                            <p class="text-xs font-bold text-gray-500 uppercase mb-2">1. Chọn nền tảng</p>
-                            <div class="grid grid-cols-6 gap-2">
-                                ${Object.keys(platformConfig).map(key => `
-                                    <button onclick="window.selectPlatform('${key}')" class="platform-btn group ${platformConfig[key].color} text-white p-2 rounded hover:opacity-90 transition flex justify-center items-center h-10 w-full" data-platform="${key}">
-                                        <i class="fa-brands ${platformConfig[key].icon} text-lg"></i>
-                                    </button>
-                                `).join('')}
+                        <!-- CỘT 2: DANH SÁCH LIÊN KẾT (Hiển thị luôn, không ẩn) -->
+                        <div class="lg:w-96 border-t lg:border-t-0 lg:border-l lg:pl-4 flex flex-col h-full">
+                            <h3 class="font-bold text-gray-700 mb-2">Danh sách liên kết</h3>
+                            <div class="flex-1 overflow-y-auto custom-scroll border rounded-lg bg-gray-50">
+                                <table class="w-full text-sm text-left">
+                                    <thead class="bg-gray-100 text-gray-600 uppercase text-xs sticky top-0 z-10">
+                                        <tr>
+                                            <th class="p-2">Tên / View</th>
+                                            <th class="p-2 text-center">Bật/Tắt</th>
+                                            <th class="p-2 text-right">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="historyBody" class="bg-white">
+                                        <!-- History items -->
+                                        <tr><td colspan="3" class="text-center p-4 text-gray-400">Đang tải...</td></tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
 
-                        <!-- Action Selection (Dynamic) -->
-                        <div id="action-area" class="mb-6 bg-gray-50 p-3 rounded-lg border border-dashed border-gray-300 min-h-[60px]">
-                            <p class="text-center text-gray-400 text-xs italic pt-2">Chọn nền tảng ở trên để hiện các nút chức năng</p>
-                        </div>
-
-                        <!-- Task List -->
-                        <div id="bTaskList" class="space-y-2">
-                            <!-- Task items -->
-                        </div>
-                    </div>
-
-                    <button id="btnCreate" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-red-700 transition">
-                        TẠO LINK
-                    </button>
-                    
-                    <div class="mt-4 pt-2 border-t text-center">
-                         <button id="btnHistory" class="text-sm text-blue-500 hover:underline">Xem danh sách link</button>
-                    </div>
-                </div>
-
-                <!-- Modal History -->
-                <div id="historyModal" class="fixed inset-0 bg-black/50 z-[100] hidden-section flex items-center justify-center p-4">
-                    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] flex flex-col shadow-2xl">
-                        <div class="p-4 border-b flex justify-between items-center">
-                            <h3 class="font-bold">Lịch sử</h3>
-                            <button onclick="document.getElementById('historyModal').classList.add('hidden-section')" class="text-gray-500"><i class="fa-solid fa-times"></i></button>
-                        </div>
-                        <div class="p-4 overflow-y-auto flex-1 custom-scroll">
-                            <table class="w-full text-sm text-left">
-                                <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
-                                    <tr><th class="p-2">Tên</th><th class="p-2 text-center">View</th><th class="p-2 text-right">Action</th></tr>
-                                </thead>
-                                <tbody id="historyBody"></tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
             `;
@@ -526,11 +545,11 @@
             };
 
             document.getElementById('btnCreate').onclick = saveLink;
-            document.getElementById('btnHistory').onclick = loadHistory;
             
-            // Mặc định chọn Youtube
+            // Init
             renderTaskItems();
             window.selectPlatform('youtube');
+            loadHistory(); // Load danh sách ngay khi render
         }
 
         function renderTaskItems() {
@@ -568,23 +587,40 @@
             try {
                 await addDoc(collection(db, "links"), {
                     title, destUrl: dest, tasks: currentTasks, 
-                    createdAt: serverTimestamp(), views: 0
+                    createdAt: serverTimestamp(), views: 0,
+                    isActive: true // Mặc định bật link mới tạo
                 });
                 alert("Tạo thành công!");
                 currentTasks = [];
-                renderBuilder(); // Reset UI
+                document.getElementById('bTitle').value = '';
+                document.getElementById('bDest').value = '';
+                renderTaskItems();
+                loadHistory(); // Reload list
             } catch (e) {
                 alert("Lỗi: " + e.message);
+            } finally {
                 btn.innerText = "TẠO LINK";
                 btn.disabled = false;
             }
         }
 
+        // Thay đổi trạng thái Active/Disable
+        window.toggleStatus = async (id, isChecked) => {
+            try {
+                const ref = doc(db, "links", id);
+                await updateDoc(ref, { isActive: isChecked });
+                console.log(`Link ${id} status: ${isChecked}`);
+            } catch(e) {
+                alert("Lỗi cập nhật trạng thái: " + e.message);
+                loadHistory(); // Revert UI on error
+            }
+        }
+
         async function loadHistory() {
-            const modal = document.getElementById('historyModal');
             const tbody = document.getElementById('historyBody');
-            modal.classList.remove('hidden-section');
-            tbody.innerHTML = '<tr><td colspan="3" class="text-center p-4">Loading...</td></tr>';
+            if(!tbody) return;
+            
+            // tbody.innerHTML = '<tr><td colspan="3" class="text-center p-4">Loading...</td></tr>'; // Không cần loading text liên tục gây giật
 
             const q = query(collection(db, "links"), orderBy("createdAt", "desc"));
             const snap = await getDocs(q);
@@ -593,25 +629,35 @@
             snap.forEach(d => {
                 const data = d.data();
                 const link = `${window.location.origin}${window.location.pathname}?id=${d.id}`;
+                const checked = data.isActive !== false ? 'checked' : ''; // Default true nếu field chưa tồn tại
+                
                 html += `
                     <tr class="border-b hover:bg-gray-50">
-                        <td class="p-2">
-                            <div class="font-medium text-gray-800 truncate w-32" title="${data.title}">${data.title}</div>
-                            <div class="text-[10px] text-gray-400">${new Date(data.createdAt?.seconds * 1000).toLocaleDateString()}</div>
+                        <td class="p-2 align-middle">
+                            <div class="font-bold text-gray-800 truncate w-32" title="${data.title}">${data.title}</div>
+                            <div class="text-[10px] text-gray-400 mt-0.5">
+                                <i class="fa-solid fa-eye mr-1"></i>${data.views || 0} views
+                            </div>
                         </td>
-                        <td class="p-2 text-center text-xs font-bold">${data.views || 0}</td>
-                        <td class="p-2 text-right">
-                            <button onclick="navigator.clipboard.writeText('${link}'); alert('Đã copy!')" class="text-blue-500 p-1 hover:bg-blue-100 rounded"><i class="fa-regular fa-copy"></i></button>
-                            <button onclick="window.delLink('${d.id}')" class="text-red-500 p-1 hover:bg-red-100 rounded"><i class="fa-solid fa-trash"></i></button>
+                        <td class="p-2 text-center align-middle">
+                            <!-- Toggle Switch -->
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only peer" ${checked} onchange="window.toggleStatus('${d.id}', this.checked)">
+                                <div class="w-9 h-5 bg-gray-200 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all peer-checked:bg-green-500"></div>
+                            </label>
+                        </td>
+                        <td class="p-2 text-right align-middle">
+                            <button onclick="navigator.clipboard.writeText('${link}'); alert('Đã copy!')" class="text-blue-500 p-1.5 hover:bg-blue-100 rounded mr-1" title="Copy Link"><i class="fa-regular fa-copy"></i></button>
+                            <button onclick="window.delLink('${d.id}')" class="text-red-500 p-1.5 hover:bg-red-100 rounded" title="Delete"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
             });
-            tbody.innerHTML = html || '<tr><td colspan="3" class="text-center p-4 text-gray-400">Trống</td></tr>';
+            tbody.innerHTML = html || '<tr><td colspan="3" class="text-center p-4 text-gray-400 italic">Chưa có liên kết nào.</td></tr>';
         }
 
         window.delLink = async (id) => {
-            if(confirm("Xoá?")) {
+            if(confirm("Xoá vĩnh viễn link này?")) {
                 await deleteDoc(doc(db, "links", id));
                 loadHistory(); 
             }

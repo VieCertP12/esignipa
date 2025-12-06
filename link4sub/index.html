@@ -3,385 +3,339 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Unlocker - Chuyên Nghiệp</title>
-
-    <!-- TailwindCSS -->
+    <title>Link Unlocker - Nhận Link Miễn Phí</title>
+    <!-- Tailwind CSS để làm đẹp nhanh -->
     <script src="https://cdn.tailwindcss.com"></script>
-
-    <!-- FontAwesome -->
+    <!-- Font Awesome cho icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
     <style>
-        /* LOADER */
-        .loader { border-top-color: #3498db; animation: spin 1.5s linear infinite; }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-
-        /* COMPONENT UI */
-        .card {
-            background: white;
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,.08);
-        }
-
-        /* BUTTON STYLE */
-        .btn-primary {
-            background: linear-gradient(135deg, #2563eb, #1d4ed8);
-            color: white;
-            padding: 12px;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: .25s;
-        }
-        .btn-primary:hover { transform: translateY(-2px); }
-
-        .btn-danger {
-            background: #dc2626;
-            color: white;
-            padding: 10px 14px;
-            border-radius: 8px;
-            transition: .25s;
-        }
-        .btn-danger:hover { background: #b91c1c; }
-
-        .task-btn {
-            background: linear-gradient(135deg, #ff0000, #b30000);
-            color: white;
-            padding: 15px;
-            font-size: 17px;
-            border-radius: 12px;
-            font-weight: bold;
-            transition: .25s;
-            width: 100%;
-        }
-        .task-btn:hover { transform: scale(1.03); }
-
-        .btn-success {
-            background: linear-gradient(135deg, #16a34a, #15803d);
-            color: white;
-            padding: 15px;
-            border-radius: 12px;
-            text-align: center;
-            font-weight: bold;
-            display: block;
-            transition: .25s;
-        }
-        .btn-success:hover { transform: scale(1.05); }
-
-        /* ADMIN SIDEBAR */
-        .sidebar {
-            width: 230px;
-            background: #111827;
-            color: white;
-            height: 100vh;
-            padding: 20px;
-            position: fixed;
-            left: 0;
-            top: 0;
-        }
-        .content-area { margin-left: 260px; }
+        /* Hiệu ứng loading */
+        .loader { border-top-color: #3498db; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
+        @-webkit-keyframes spinner { 0% { -webkit-transform: rotate(0deg); } 100% { -webkit-transform: rotate(360deg); } }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        
+        .hidden-section { display: none; }
     </style>
 </head>
+<body class="bg-gray-100 min-h-screen text-gray-800 font-sans">
 
-<body class="bg-gray-100 text-gray-800">
-
-    <!-- USER VIEW -->
+    <!-- PHẦN 1: GIAO DIỆN NGƯỜI DÙNG (USER VIEW) -->
     <div id="userView" class="container mx-auto px-4 py-10 max-w-md hidden-section">
+        <div class="bg-white rounded-xl shadow-lg p-6 text-center">
+            <h1 class="text-2xl font-bold mb-2 text-blue-600">Mở Khoá Link</h1>
+            <p class="text-gray-500 text-sm mb-6">Hoàn thành các bước dưới đây để truy cập link gốc.</p>
 
-        <div class="card text-center">
-
-            <h1 class="text-3xl font-bold text-blue-600 mb-2">Mở Khoá Liên Kết</h1>
-            <p class="text-gray-500 mb-6">Hoàn thành nhiệm vụ để truy cập link gốc.</p>
-
-            <!-- LOADING -->
+            <!-- Trạng thái Loading -->
             <div id="loadingData" class="py-10">
-                <div class="loader rounded-full border-4 border-t-blue-500 border-gray-300 h-12 w-12 mx-auto mb-4"></div>
+                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4 mx-auto"></div>
                 <p>Đang tải dữ liệu...</p>
             </div>
 
-            <!-- TASK AREA -->
+            <!-- Khu vực nhiệm vụ -->
             <div id="taskArea" class="hidden-section space-y-4">
-
-                <div class="bg-blue-50 border border-blue-200 rounded-xl p-4 shadow-sm">
-                    <p id="linkTitle" class="text-blue-800 font-semibold text-lg"></p>
+                <div class="bg-blue-50 border border-blue-200 rounded p-4 mb-4">
+                    <p class="font-semibold text-blue-800" id="linkTitle">Tiêu đề Link</p>
                 </div>
 
-                <!-- STEP 1 -->
+                <!-- Bước 1: Subscribe -->
                 <div id="step1">
-                    <button onclick="doTask()" class="task-btn flex items-center justify-center gap-3">
-                        <i class="fa-brands fa-youtube text-xl"></i>
-                        Đăng Ký Kênh Để Tiếp Tục
+                    <button onclick="doTask()" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-3 px-4 rounded transition duration-300 flex items-center justify-center gap-2">
+                        <i class="fa-brands fa-youtube"></i> Đăng Ký Kênh (Subscribe)
                     </button>
-                    <p class="text-xs text-gray-400 mt-2">Hãy bấm đăng ký và chờ <span id="timerCount">5</span>s</p>
+                    <p class="text-xs text-gray-400 mt-2">Bấm đăng ký và quay lại đây sau <span id="timerCount">5</span>s</p>
                 </div>
 
-                <!-- STEP WAIT -->
+                <!-- Trạng thái chờ -->
                 <div id="stepWait" class="hidden-section">
-                    <button disabled class="w-full bg-gray-300 text-white py-3 rounded flex items-center justify-center gap-3">
-                        <i class="fa-solid fa-spinner fa-spin"></i>
-                        Xác minh... <span id="countDown">5</span>s
+                    <button disabled class="w-full bg-gray-400 text-white font-bold py-3 px-4 rounded cursor-not-allowed flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-spinner fa-spin"></i> Đang xác minh... <span id="countDown">5</span>s
                     </button>
                 </div>
 
-                <!-- STEP SUCCESS -->
+                <!-- Bước 2: Nhận Link -->
                 <div id="step2" class="hidden-section">
-                    <div class="bg-green-100 border border-green-400 text-green-700 p-3 rounded-lg mb-4">
-                        <strong>Thành công!</strong> Link của bạn đã sẵn sàng.
+                    <div class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded relative mb-4" role="alert">
+                        <strong class="font-bold">Thành công!</strong>
+                        <span class="block sm:inline">Link của bạn đã sẵn sàng.</span>
                     </div>
-                    <a id="finalLink" target="_blank" class="btn-success">
-                        <i class="fa-solid fa-unlock"></i> TRUY CẬP LINK
+                    <a id="finalLink" href="#" target="_blank" class="block w-full bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-4 rounded transition duration-300 text-center shadow-lg transform hover:scale-105">
+                        <i class="fa-solid fa-unlock"></i> TRUY CẬP LINK GỐC
                     </a>
                 </div>
             </div>
 
-            <p id="errorArea" class="hidden-section text-red-500 mt-4 font-semibold"></p>
+            <!-- Lỗi -->
+            <div id="errorArea" class="hidden-section text-red-500 mt-4">
+                Link không tồn tại hoặc đã bị xoá.
+            </div>
         </div>
-
-        <div class="text-center mt-5 text-xs text-gray-400">
-            <a href="?admin=true" class="underline">Đăng nhập Admin</a>
+        <div class="text-center mt-6 text-xs text-gray-400">
+            <a href="?admin=true" class="hover:underline">Admin Login</a>
         </div>
-
     </div>
 
-    <!-- ADMIN VIEW -->
-    <div id="adminView" class="hidden-section">
-
-        <!-- SIDEBAR -->
-        <div id="adminSidebar" class="sidebar hidden-section">
-            <h2 class="font-bold text-xl mb-6">Admin Panel</h2>
-            <p class="opacity-70 mb-6">Quản lý hệ thống</p>
-            <button onclick="logout()" class="btn-danger w-full">Đăng xuất</button>
+    <!-- PHẦN 2: GIAO DIỆN ADMIN (QUẢN LÝ) -->
+    <div id="adminView" class="container mx-auto px-4 py-10 max-w-4xl hidden-section">
+        <!-- Đăng nhập -->
+        <div id="loginForm" class="max-w-sm mx-auto bg-white p-8 rounded-lg shadow-md">
+            <h2 class="text-2xl font-bold text-center mb-6">Admin Đăng Nhập</h2>
+            <input type="email" id="email" placeholder="Email" class="w-full p-3 border rounded mb-3 focus:outline-none focus:border-blue-500">
+            <input type="password" id="password" placeholder="Mật khẩu" class="w-full p-3 border rounded mb-3 focus:outline-none focus:border-blue-500">
+            <button onclick="login()" class="w-full bg-blue-600 text-white p-3 rounded hover:bg-blue-700">Đăng Nhập</button>
+            <p id="loginError" class="text-red-500 text-sm mt-2 hidden-section"></p>
         </div>
 
-        <!-- MAIN CONTENT -->
-        <div class="content-area">
-
-            <!-- LOGIN FORM -->
-            <div id="loginForm" class="max-w-sm mx-auto mt-24 card">
-                <h2 class="text-2xl font-bold text-center mb-5">Admin Đăng Nhập</h2>
-
-                <input id="email" class="p-3 border w-full rounded mb-3" placeholder="Email">
-                <input id="password" type="password" class="p-3 border w-full rounded mb-3" placeholder="Mật khẩu">
-
-                <button onclick="login()" class="btn-primary w-full">Đăng nhập</button>
-
-                <p id="loginError" class="hidden-section text-red-500 mt-3"></p>
+        <!-- Dashboard -->
+        <div id="dashboard" class="hidden-section bg-white p-6 rounded-lg shadow-md">
+            <div class="flex justify-between items-center mb-6 border-b pb-4">
+                <h2 class="text-xl font-bold">Quản Lý Link</h2>
+                <button onclick="logout()" class="text-red-500 hover:underline">Đăng xuất</button>
             </div>
 
-            <!-- DASHBOARD -->
-            <div id="dashboard" class="hidden-section p-6">
+            <!-- Form tạo link mới -->
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8 bg-gray-50 p-4 rounded">
+                <input type="text" id="newTitle" placeholder="Tên Link (VD: Tài liệu học)" class="md:col-span-1 p-2 border rounded">
+                <input type="text" id="newTaskUrl" placeholder="Link Nhiệm vụ (Youtube Channel)" class="md:col-span-1 p-2 border rounded">
+                <input type="text" id="newDestUrl" placeholder="Link Đích (Google Drive...)" class="md:col-span-1 p-2 border rounded">
+                <button onclick="createLink()" class="bg-green-500 text-white p-2 rounded hover:bg-green-600">Tạo Link Mới</button>
+            </div>
 
-                <h2 class="text-3xl font-bold mb-6">Quản Lý Link</h2>
-
-                <!-- CREATE NEW LINK -->
-                <div class="card mb-6">
-                    <h3 class="font-semibold mb-3">Tạo Link Mới</h3>
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-4">
-                        <input id="newTitle" class="p-2 border rounded" placeholder="Tên link">
-                        <input id="newTaskUrl" class="p-2 border rounded" placeholder="Link nhiệm vụ">
-                        <input id="newDestUrl" class="p-2 border rounded" placeholder="Link đích">
-                        <button onclick="createLink()" class="btn-primary">Tạo</button>
-                    </div>
-                </div>
-
-                <!-- TABLE -->
-                <div class="card overflow-x-auto">
-                    <table class="w-full border-collapse">
-                        <thead class="bg-gray-100">
-                            <tr>
-                                <th class="p-3">Short link</th>
-                                <th class="p-3">Tiêu đề</th>
-                                <th class="p-3">Nhiệm vụ</th>
-                                <th class="p-3 text-center">Lượt xem</th>
-                                <th class="p-3 text-center">Hành động</th>
-                            </tr>
-                        </thead>
-                        <tbody id="linkTableBody"></tbody>
-                    </table>
-                </div>
-
+            <!-- Danh sách link -->
+            <div class="overflow-x-auto">
+                <table class="w-full text-left border-collapse">
+                    <thead>
+                        <tr class="bg-gray-200">
+                            <th class="p-3">ID / Short Link</th>
+                            <th class="p-3">Tiêu đề</th>
+                            <th class="p-3">Nhiệm vụ</th>
+                            <th class="p-3">Lượt xem</th>
+                            <th class="p-3">Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody id="linkTableBody">
+                        <!-- Dữ liệu sẽ được tải vào đây -->
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
 
-
-    <!-- FIREBASE SCRIPT -->
-    <!-- (Toàn bộ JS của bạn giữ nguyên, chỉ dán lại) -->
+    <!-- SCRIPT LOGIC -->
     <script type="module">
-    /* ---- GIỮ NGUYÊN TOÀN BỘ FIREBASE LOGIC CỦA BẠN ---- */
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, doc, getDoc, deleteDoc, updateDoc, increment, serverTimestamp } 
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
+            from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getFirestore, collection, addDoc, getDocs, doc, getDoc, deleteDoc, updateDoc, increment, serverTimestamp } 
-        from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-    import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
-        from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        // --- CẤU HÌNH TỰ ĐỘNG TỪ ẢNH CỦA BẠN ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyCMYvnDTyzfBIAFTuB9VLPYN-YiFtNov6c",  // <-- QUAN TRỌNG: COPY DÒNG apiKey TỪ MÀN HÌNH CỦA BẠN DÁN VÀO ĐÂY (Trong ngoặc kép)
+            authDomain: "linksubproject.firebaseapp.com",
+            projectId: "linksubproject",
+            storageBucket: "linksubproject.firebasestorage.app",
+            messagingSenderId: "899237330148",
+            appId: "1:899237330148:web:13bf3cf081f1cb9dc808f1"
+        };
 
-    const firebaseConfig = {
-        apiKey: "AIzaSyCMYvnDTyzfBIAFTuB9VLPYN-YiFtNov6c",
-        authDomain: "linksubproject.firebaseapp.com",
-        projectId: "linksubproject",
-        storageBucket: "linksubproject.firebasestorage.app",
-        messagingSenderId: "899237330148",
-        appId: "1:899237330148:web:13bf3cf081f1cb9dc808f1"
-    };
-
-    let app = initializeApp(firebaseConfig);
-    let db = getFirestore(app);
-    let auth = getAuth(app);
-
-    /* ---------------- ROUTING ---------------- */
-    const params = new URLSearchParams(location.search);
-    const linkId = params.get("id");
-    const isAdmin = params.get("admin");
-
-    const userView = document.getElementById("userView");
-    const adminView = document.getElementById("adminView");
-
-    if (isAdmin) {
-        userView.classList.add("hidden-section");
-        adminView.classList.remove("hidden-section");
-        setupAdminAuth();
-    } else if (linkId) {
-        userView.classList.remove("hidden-section");
-        loadLinkData(linkId);
-    } else {
-        userView.classList.remove("hidden-section");
-        document.querySelector("#loadingData").classList.add("hidden-section");
-        document.querySelector("#errorArea").classList.remove("hidden-section");
-        document.querySelector("#errorArea").innerHTML = 
-            'Không có ID link.<br>Hãy vào <a href="?admin=true" class="underline text-blue-500">Admin</a>.';
-    }
-
-    /* ---------------- LOAD USER LINK ---------------- */
-    let currentLinkData = null;
-    async function loadLinkData(id) {
+        // Khởi tạo Firebase
+        let app, db, auth;
         try {
-            const ref = doc(db, "links", id);
-            const snap = await getDoc(ref);
-
-            document.getElementById("loadingData").classList.add("hidden-section");
-
-            if (snap.exists()) {
-                currentLinkData = snap.data();
-                document.getElementById("linkTitle").innerText = currentLinkData.title;
-                document.getElementById("taskArea").classList.remove("hidden-section");
-                updateDoc(ref, { views: increment(1) });
-            } else {
-                document.getElementById("errorArea").classList.remove("hidden-section");
-            }
-
+            app = initializeApp(firebaseConfig);
+            db = getFirestore(app);
+            auth = getAuth(app);
         } catch (e) {
-            console.error(e);
-            document.getElementById("errorArea").innerText = "Lỗi tải dữ liệu.";
-            document.getElementById("errorArea").classList.remove("hidden-section");
+            console.error("Lỗi khởi tạo Firebase. Bạn đã thay config chưa?", e);
+            alert("Lỗi kết nối CSDL. Vui lòng kiểm tra Console (F12) hoặc cấu hình Firebase trong code.");
         }
-    }
 
-    /* ---------------- USER TASK ---------------- */
-    window.doTask = function() {
-        window.open(currentLinkData.taskUrl, "_blank");
+        // --- 2. LOGIC CHUYỂN TRANG (ROUTING) ---
+        const urlParams = new URLSearchParams(window.location.search);
+        const linkId = urlParams.get('id');
+        const isAdmin = urlParams.get('admin');
 
-        document.getElementById("step1").classList.add("hidden-section");
-        document.getElementById("stepWait").classList.remove("hidden-section");
+        // Các biến DOM
+        const userView = document.getElementById('userView');
+        const adminView = document.getElementById('adminView');
+        const loadingData = document.getElementById('loadingData');
+        const taskArea = document.getElementById('taskArea');
+        const errorArea = document.getElementById('errorArea');
 
-        let x = 5;
-        const el = document.getElementById("countDown");
+        // Logic chính khi tải trang
+        if (isAdmin) {
+            userView.classList.add('hidden-section');
+            adminView.classList.remove('hidden-section');
+            setupAdminAuth();
+        } else if (linkId) {
+            userView.classList.remove('hidden-section');
+            loadLinkData(linkId);
+        } else {
+            // Trang chủ mặc định (hoặc chuyển hướng sang admin nếu muốn)
+            userView.classList.remove('hidden-section');
+            loadingData.classList.add('hidden-section');
+            document.querySelector('.text-gray-500').innerHTML = 
+                'Chưa có ID Link. <br><a href="?admin=true" class="text-blue-500 underline">Vào trang Admin</a> để tạo.';
+        }
 
-        const timer = setInterval(() => {
-            x--; el.innerText = x;
-            if (x <= 0) {
-                clearInterval(timer);
-                document.getElementById("stepWait").classList.add("hidden-section");
-                document.getElementById("step2").classList.remove("hidden-section");
-                document.getElementById("finalLink").href = currentLinkData.destUrl;
+        // --- 3. LOGIC NGƯỜI DÙNG (USER) ---
+        let currentLinkData = null;
+
+        async function loadLinkData(id) {
+            try {
+                const docRef = doc(db, "links", id);
+                const docSnap = await getDoc(docRef);
+
+                loadingData.classList.add('hidden-section');
+
+                if (docSnap.exists()) {
+                    currentLinkData = docSnap.data();
+                    taskArea.classList.remove('hidden-section');
+                    document.getElementById('linkTitle').innerText = currentLinkData.title;
+                    
+                    // Tăng view counter (tuỳ chọn)
+                    updateDoc(docRef, { views: increment(1) });
+                } else {
+                    errorArea.classList.remove('hidden-section');
+                }
+            } catch (error) {
+                console.error("Lỗi tải link:", error);
+                loadingData.classList.add('hidden-section');
+                errorArea.innerText = "Lỗi kết nối server. Có thể bạn chưa bật Firestore Database?";
+                errorArea.classList.remove('hidden-section');
             }
-        }, 1000);
-    };
+        }
 
-    /* ---------------- ADMIN AUTH ---------------- */
-    function setupAdminAuth() {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                document.getElementById("loginForm").classList.add("hidden-section");
-                document.getElementById("adminSidebar").classList.remove("hidden-section");
-                document.getElementById("dashboard").classList.remove("hidden-section");
+        // Global functions cho HTML gọi
+        window.doTask = function() {
+            if (!currentLinkData) return;
+            
+            // 1. Mở link nhiệm vụ (Youtube) tab mới
+            window.open(currentLinkData.taskUrl, '_blank');
+            
+            // 2. Chuyển giao diện sang chờ đợi
+            document.getElementById('step1').classList.add('hidden-section');
+            document.getElementById('stepWait').classList.remove('hidden-section');
+            
+            // 3. Đếm ngược
+            let timeLeft = 5; // Thời gian chờ giả lập
+            const timerEl = document.getElementById('countDown');
+            
+            const interval = setInterval(() => {
+                timeLeft--;
+                timerEl.innerText = timeLeft;
+                if (timeLeft <= 0) {
+                    clearInterval(interval);
+                    // Mở khoá
+                    document.getElementById('stepWait').classList.add('hidden-section');
+                    document.getElementById('step2').classList.remove('hidden-section');
+                    document.getElementById('finalLink').href = currentLinkData.destUrl;
+                }
+            }, 1000);
+        }
+
+        // --- 4. LOGIC ADMIN ---
+        function setupAdminAuth() {
+            onAuthStateChanged(auth, (user) => {
+                if (user) {
+                    document.getElementById('loginForm').classList.add('hidden-section');
+                    document.getElementById('dashboard').classList.remove('hidden-section');
+                    loadDashboardLinks();
+                } else {
+                    document.getElementById('loginForm').classList.remove('hidden-section');
+                    document.getElementById('dashboard').classList.add('hidden-section');
+                }
+            });
+        }
+
+        window.login = async function() {
+            const email = document.getElementById('email').value;
+            const pass = document.getElementById('password').value;
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+            } catch (error) {
+                document.getElementById('loginError').classList.remove('hidden-section');
+                // Hiển thị lỗi rõ hơn
+                let msg = "Lỗi đăng nhập: " + error.code;
+                if(error.code === 'auth/invalid-credential') msg = "Sai email hoặc mật khẩu.";
+                if(error.code === 'auth/user-not-found') msg = "Tài khoản không tồn tại. Bạn đã tạo user trong Authentication chưa?";
+                document.getElementById('loginError').innerText = msg;
+            }
+        }
+
+        window.logout = function() {
+            signOut(auth);
+        }
+
+        async function loadDashboardLinks() {
+            const tbody = document.getElementById('linkTableBody');
+            tbody.innerHTML = '<tr><td colspan="5" class="text-center p-4">Đang tải...</td></tr>';
+            
+            try {
+                const querySnapshot = await getDocs(collection(db, "links"));
+                tbody.innerHTML = ''; // Xoá loading
+                
+                let html = '';
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const shortLink = `${window.location.origin}${window.location.pathname}?id=${doc.id}`;
+                    html += `
+                        <tr class="border-b hover:bg-gray-50">
+                            <td class="p-3 font-mono text-sm text-blue-600 truncate max-w-xs cursor-pointer" onclick="navigator.clipboard.writeText('${shortLink}'); alert('Đã copy link!')">
+                                <i class="fa-regular fa-copy"></i> Copy Link
+                            </td>
+                            <td class="p-3">${data.title || 'Không tiêu đề'}</td>
+                            <td class="p-3 truncate max-w-xs text-gray-500">${data.taskUrl}</td>
+                            <td class="p-3 text-center">${data.views || 0}</td>
+                            <td class="p-3">
+                                <button onclick="deleteLink('${doc.id}')" class="text-red-500 hover:text-red-700">
+                                    <i class="fa-solid fa-trash"></i> Xoá
+                                </button>
+                            </td>
+                        </tr>
+                    `;
+                });
+                if (!html) html = '<tr><td colspan="5" class="text-center p-4 text-gray-400">Chưa có link nào. Hãy tạo mới!</td></tr>';
+                tbody.innerHTML = html;
+            } catch (e) {
+                console.error(e);
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center p-4 text-red-500">Lỗi tải dữ liệu: ${e.message}<br>Bạn đã bật Firestore Database ở chế độ "Test mode" chưa?</td></tr>`;
+            }
+        }
+
+        window.createLink = async function() {
+            const title = document.getElementById('newTitle').value;
+            const taskUrl = document.getElementById('newTaskUrl').value;
+            const destUrl = document.getElementById('newDestUrl').value;
+
+            if (!title || !taskUrl || !destUrl) return alert("Vui lòng nhập đủ thông tin!");
+
+            try {
+                // Tạo link với ID tự động ngắn gọn (tuỳ chọn, ở đây dùng mặc định Firebase cho đơn giản)
+                await addDoc(collection(db, "links"), {
+                    title: title,
+                    taskUrl: taskUrl,
+                    destUrl: destUrl,
+                    views: 0,
+                    createdAt: serverTimestamp()
+                });
+                alert("Tạo link thành công!");
+                // Reset form
+                document.getElementById('newTitle').value = '';
+                document.getElementById('newTaskUrl').value = '';
+                document.getElementById('newDestUrl').value = '';
+                loadDashboardLinks(); // Tải lại bảng
+            } catch (e) {
+                console.error(e);
+                alert("Lỗi khi tạo link: " + e.message + "\n(Kiểm tra xem đã bật Firestore Database chưa?)");
+            }
+        }
+
+        window.deleteLink = async function(id) {
+            if (confirm("Bạn chắc chắn muốn xoá link này?")) {
+                await deleteDoc(doc(db, "links", id));
                 loadDashboardLinks();
-            } else {
-                document.getElementById("adminSidebar").classList.add("hidden-section");
-                document.getElementById("dashboard").classList.add("hidden-section");
-                document.getElementById("loginForm").classList.remove("hidden-section");
             }
-        });
-    }
-
-    window.login = async function() {
-        try {
-            await signInWithEmailAndPassword(auth, email.value, password.value);
-        } catch (e) {
-            loginError.innerText = "Sai email hoặc mật khẩu";
-            loginError.classList.remove("hidden-section");
         }
-    };
-
-    window.logout = function() { signOut(auth); };
-
-    /* ---------------- LOAD ADMIN TABLE ---------------- */
-    async function loadDashboardLinks() {
-        const tbody = document.getElementById("linkTableBody");
-        tbody.innerHTML = '<tr><td colspan="5" class="p-4 text-center">Đang tải...</td></tr>';
-
-        const snap = await getDocs(collection(db, "links"));
-
-        let html = "";
-        snap.forEach(docu => {
-            const d = docu.data();
-            const short = `${location.origin}${location.pathname}?id=${docu.id}`;
-
-            html += `
-            <tr class="border-b">
-                <td class="p-3 text-blue-600 cursor-pointer" onclick="navigator.clipboard.writeText('${short}')">
-                    <i class="fa-regular fa-copy"></i> Copy
-                </td>
-                <td class="p-3">${d.title}</td>
-                <td class="p-3 text-gray-500">${d.taskUrl}</td>
-                <td class="p-3 text-center">${d.views || 0}</td>
-                <td class="p-3 text-center">
-                    <button onclick="deleteLink('${docu.id}')" class="btn-danger">Xoá</button>
-                </td>
-            </tr>`;
-        });
-
-        tbody.innerHTML = html || '<tr><td colspan="5" class="p-4 text-center text-gray-500">Chưa có link nào</td></tr>';
-    }
-
-    /* ---------------- CREATE LINK ---------------- */
-    window.createLink = async function() {
-        if (!newTitle.value || !newTaskUrl.value || !newDestUrl.value)
-            return alert("Vui lòng nhập đầy đủ");
-
-        await addDoc(collection(db, "links"), {
-            title: newTitle.value,
-            taskUrl: newTaskUrl.value,
-            destUrl: newDestUrl.value,
-            views: 0,
-            createdAt: serverTimestamp()
-        });
-
-        alert("Tạo thành công!");
-        newTitle.value = "";
-        newTaskUrl.value = "";
-        newDestUrl.value = "";
-
-        loadDashboardLinks();
-    };
-
-    /* ---------------- DELETE LINK ---------------- */
-    window.deleteLink = async function(id) {
-        if (!confirm("Xoá link này?")) return;
-        await deleteDoc(doc(db, "links", id));
-        loadDashboardLinks();
-    };
     </script>
-
 </body>
 </html>

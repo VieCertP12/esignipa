@@ -19,6 +19,15 @@
 </head>
 <body class="bg-gray-100 min-h-screen text-gray-800 font-sans">
 
+    <!-- PHẦN 0: TRANG GIẢ LẬP LỖI 404 (BẢO MẬT) -->
+    <div id="fake404" class="hidden-section flex flex-col items-center justify-center min-h-screen bg-white">
+        <h1 class="text-6xl font-bold text-gray-800">404</h1>
+        <p class="text-xl text-gray-500 mt-2">Not Found</p>
+        <p class="text-gray-400 mt-4">The requested URL was not found on this server.</p>
+        <hr class="w-1/2 my-6 border-gray-300">
+        <p class="text-xs text-gray-400">Apache/2.4.41 (Ubuntu) Server at sharechungchi.com Port 443</p>
+    </div>
+
     <!-- PHẦN 1: GIAO DIỆN NGƯỜI DÙNG (USER VIEW) -->
     <div id="userView" class="container mx-auto px-4 py-10 max-w-md hidden-section">
         <div class="bg-white rounded-xl shadow-lg p-6 text-center">
@@ -69,15 +78,13 @@
                 Link không tồn tại hoặc đã bị xoá.
             </div>
         </div>
-        <div class="text-center mt-6 text-xs text-gray-400">
-            <a href="?admin=true" class="hover:underline">Admin Login</a>
-        </div>
+        <!-- Đã xoá link Admin Login ở đây để bảo mật -->
     </div>
 
     <!-- PHẦN 2: GIAO DIỆN ADMIN (QUẢN LÝ) -->
     <div id="adminView" class="container mx-auto px-4 py-10 max-w-4xl hidden-section">
         <!-- Đăng nhập -->
-        <div id="loginForm" class="max-w-sm mx-auto bg-white p-8 rounded-lg shadow-md">
+        <div id="loginForm" class="max-w-sm mx-auto bg-white p-8 rounded-lg shadow-md hidden-section">
             <h2 class="text-2xl font-bold text-center mb-6">Admin Đăng Nhập</h2>
             <input type="email" id="email" placeholder="Email" class="w-full p-3 border rounded mb-3 focus:outline-none focus:border-blue-500">
             <input type="password" id="password" placeholder="Mật khẩu" class="w-full p-3 border rounded mb-3 focus:outline-none focus:border-blue-500">
@@ -149,32 +156,54 @@
             alert("Lỗi kết nối CSDL. Vui lòng kiểm tra Console (F12) hoặc cấu hình Firebase trong code.");
         }
 
-        // --- 2. LOGIC CHUYỂN TRANG (ROUTING) ---
+        // --- 2. LOGIC CHUYỂN TRANG (ROUTING) - ĐÃ NÂNG CẤP BẢO MẬT ---
         const urlParams = new URLSearchParams(window.location.search);
         const linkId = urlParams.get('id');
         const isAdmin = urlParams.get('admin');
+        const isSecretLogin = urlParams.get('secret_login'); // Link bí mật để hiện form đăng nhập
 
         // Các biến DOM
         const userView = document.getElementById('userView');
         const adminView = document.getElementById('adminView');
+        const fake404 = document.getElementById('fake404');
+        const loginForm = document.getElementById('loginForm');
+        const dashboard = document.getElementById('dashboard');
+        
         const loadingData = document.getElementById('loadingData');
         const taskArea = document.getElementById('taskArea');
         const errorArea = document.getElementById('errorArea');
 
-        // Logic chính khi tải trang
-        if (isAdmin) {
+        // Logic routing mới
+        if (isSecretLogin) {
+            // Trường hợp 1: Vào link bí mật (?secret_login=true) -> Hiện form login
             userView.classList.add('hidden-section');
             adminView.classList.remove('hidden-section');
-            setupAdminAuth();
-        } else if (linkId) {
+            loginForm.classList.remove('hidden-section');
+            dashboard.classList.add('hidden-section');
+        } 
+        else if (isAdmin) {
+            // Trường hợp 2: Vào ?admin=true
+            // Logic: Kiểm tra xem đã đăng nhập chưa.
+            // Nếu RỒI -> Vào Dashboard.
+            // Nếu CHƯA -> Hiện 404 (Không cho thấy form login)
+            userView.classList.add('hidden-section');
+            adminView.classList.remove('hidden-section');
+            // Mặc định ẩn hết để check auth
+            loginForm.classList.add('hidden-section');
+            dashboard.classList.add('hidden-section');
+            
+            checkAdminAccess();
+        } 
+        else if (linkId) {
+            // Trường hợp 3: Khách nhận quà
             userView.classList.remove('hidden-section');
+            fake404.classList.add('hidden-section');
             loadLinkData(linkId);
-        } else {
-            // Trang chủ mặc định (hoặc chuyển hướng sang admin nếu muốn)
-            userView.classList.remove('hidden-section');
-            loadingData.classList.add('hidden-section');
-            document.querySelector('.text-gray-500').innerHTML = 
-                'Chưa có ID Link. <br><a href="?admin=true" class="text-blue-500 underline">Vào trang Admin</a> để tạo.';
+        } 
+        else {
+            // Trường hợp 4: Vào trang chủ không có ID -> Cũng hiện 404 cho an toàn
+            userView.classList.add('hidden-section');
+            fake404.classList.remove('hidden-section');
         }
 
         // --- 3. LOGIC NGƯỜI DÙNG (USER) ---
@@ -200,7 +229,7 @@
             } catch (error) {
                 console.error("Lỗi tải link:", error);
                 loadingData.classList.add('hidden-section');
-                errorArea.innerText = "Lỗi kết nối server. Có thể bạn chưa bật Firestore Database?";
+                errorArea.innerText = "Lỗi kết nối server.";
                 errorArea.classList.remove('hidden-section');
             }
         }
@@ -208,24 +237,17 @@
         // Global functions cho HTML gọi
         window.doTask = function() {
             if (!currentLinkData) return;
-            
-            // 1. Mở link nhiệm vụ (Youtube) tab mới
             window.open(currentLinkData.taskUrl, '_blank');
-            
-            // 2. Chuyển giao diện sang chờ đợi
             document.getElementById('step1').classList.add('hidden-section');
             document.getElementById('stepWait').classList.remove('hidden-section');
             
-            // 3. Đếm ngược
-            let timeLeft = 5; // Thời gian chờ giả lập
+            let timeLeft = 5;
             const timerEl = document.getElementById('countDown');
-            
             const interval = setInterval(() => {
                 timeLeft--;
                 timerEl.innerText = timeLeft;
                 if (timeLeft <= 0) {
                     clearInterval(interval);
-                    // Mở khoá
                     document.getElementById('stepWait').classList.add('hidden-section');
                     document.getElementById('step2').classList.remove('hidden-section');
                     document.getElementById('finalLink').href = currentLinkData.destUrl;
@@ -233,16 +255,18 @@
             }, 1000);
         }
 
-        // --- 4. LOGIC ADMIN ---
-        function setupAdminAuth() {
+        // --- 4. LOGIC ADMIN (BẢO MẬT) ---
+        function checkAdminAccess() {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    document.getElementById('loginForm').classList.add('hidden-section');
-                    document.getElementById('dashboard').classList.remove('hidden-section');
+                    // Đã đăng nhập -> Hiện Dashboard
+                    dashboard.classList.remove('hidden-section');
+                    fake404.classList.add('hidden-section');
                     loadDashboardLinks();
                 } else {
-                    document.getElementById('loginForm').classList.remove('hidden-section');
-                    document.getElementById('dashboard').classList.add('hidden-section');
+                    // Chưa đăng nhập mà mò vào ?admin=true -> Hiện 404 giả
+                    adminView.classList.add('hidden-section'); // Ẩn khung admin
+                    fake404.classList.remove('hidden-section');
                 }
             });
         }
@@ -252,18 +276,20 @@
             const pass = document.getElementById('password').value;
             try {
                 await signInWithEmailAndPassword(auth, email, pass);
+                // Đăng nhập thành công -> Chuyển hướng sang trang Dashboard bảo mật
+                window.location.href = '?admin=true';
             } catch (error) {
                 document.getElementById('loginError').classList.remove('hidden-section');
-                // Hiển thị lỗi rõ hơn
                 let msg = "Lỗi đăng nhập: " + error.code;
                 if(error.code === 'auth/invalid-credential') msg = "Sai email hoặc mật khẩu.";
-                if(error.code === 'auth/user-not-found') msg = "Tài khoản không tồn tại. Bạn đã tạo user trong Authentication chưa?";
                 document.getElementById('loginError').innerText = msg;
             }
         }
 
         window.logout = function() {
-            signOut(auth);
+            signOut(auth).then(() => {
+                window.location.href = window.location.pathname; // Reload về trang 404
+            });
         }
 
         async function loadDashboardLinks() {
@@ -272,7 +298,7 @@
             
             try {
                 const querySnapshot = await getDocs(collection(db, "links"));
-                tbody.innerHTML = ''; // Xoá loading
+                tbody.innerHTML = ''; 
                 
                 let html = '';
                 querySnapshot.forEach((doc) => {
@@ -298,7 +324,7 @@
                 tbody.innerHTML = html;
             } catch (e) {
                 console.error(e);
-                tbody.innerHTML = `<tr><td colspan="5" class="text-center p-4 text-red-500">Lỗi tải dữ liệu: ${e.message}<br>Bạn đã bật Firestore Database ở chế độ "Test mode" chưa?</td></tr>`;
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center p-4 text-red-500">Lỗi: ${e.message}</td></tr>`;
             }
         }
 
@@ -310,7 +336,6 @@
             if (!title || !taskUrl || !destUrl) return alert("Vui lòng nhập đủ thông tin!");
 
             try {
-                // Tạo link với ID tự động ngắn gọn (tuỳ chọn, ở đây dùng mặc định Firebase cho đơn giản)
                 await addDoc(collection(db, "links"), {
                     title: title,
                     taskUrl: taskUrl,
@@ -319,14 +344,13 @@
                     createdAt: serverTimestamp()
                 });
                 alert("Tạo link thành công!");
-                // Reset form
                 document.getElementById('newTitle').value = '';
                 document.getElementById('newTaskUrl').value = '';
                 document.getElementById('newDestUrl').value = '';
-                loadDashboardLinks(); // Tải lại bảng
+                loadDashboardLinks(); 
             } catch (e) {
                 console.error(e);
-                alert("Lỗi khi tạo link: " + e.message + "\n(Kiểm tra xem đã bật Firestore Database chưa?)");
+                alert("Lỗi: " + e.message);
             }
         }
 

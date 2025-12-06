@@ -1,209 +1,145 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html dir="ltr" lang="vi" class="">
+<!--[ <head> Open ]-->
 <head>
+    <!--[ Homepage title ]-->
+    <title>Link4Sub - Link Unlocker Premium</title>
+    <meta name="csrf-token" content="xI86UdLoSyqRVPYARNVaGezjL6CI5tD8wH0VNnny">
+    <!--[ Meta for browser ]-->
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Unlocker Premium</title>
-    <!-- Tailwind CSS -->
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="max-image-preview:large" name="robots">
+    
+    <!-- Tailwind CSS (Để hỗ trợ các thành phần chức năng) -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     
-    <style>
-        body { font-family: 'Inter', sans-serif; }
-        .loader { border-top-color: #3b82f6; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
-        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .hidden-section { display: none !important; }
-        
-        /* Custom scrollbar for task list */
-        .task-scroll::-webkit-scrollbar { width: 6px; }
-        .task-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
-        .task-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+    <!-- CSS Gốc của giao diện -->
+    <link rel="stylesheet" href="https://link4sub.com/home/css/style.css?v=22025">
+    <link rel="stylesheet" href="https://link4sub.com/css/stu.css">
+    <link rel="stylesheet" href="https://link4sub.com/css/notyf.css">
 
-        /* Animations */
+    <style>
+        /* Custom Styles để hòa hợp Logic cũ vào Giao diện mới */
+        .stu_lv { display: none !important; }
+        
+        /* Đè style cho khung chứa chính để hiển thị nội dung của chúng ta */
+        #stuCnt {
+            min-height: 400px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            /* background: rgba(255, 255, 255, 0.95) !important; */
+        }
+
+        /* Ẩn các phần thừa của giao diện gốc nếu cần */
+        .landing-page { background: #f7f7fc; }
+        
+        /* Hiệu ứng loading riêng */
+        .my-loader { border-top-color: #ed143d; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Utility classes */
+        .hidden-section { display: none !important; }
         .fade-in { animation: fadeIn 0.3s ease-in; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* Scrollbar cho list task */
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
     </style>
 </head>
-<body class="bg-gray-50 min-h-screen text-gray-800">
 
-    <!-- ========================================== -->
-    <!-- PHẦN 1: GIAO DIỆN NGƯỜI DÙNG (USER VIEW) -->
-    <!-- ========================================== -->
-    <div id="userView" class="container mx-auto px-4 py-8 max-w-lg hidden-section fade-in">
-        <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
-            <!-- Header -->
-            <div class="bg-gradient-to-r from-blue-600 to-indigo-700 p-6 text-center text-white">
-                <h1 id="userTitle" class="text-2xl font-bold mb-2">Đang tải...</h1>
-                <p id="userSubtitle" class="text-blue-100 text-sm opacity-90">Hoàn thành các bước để mở khóa</p>
-            </div>
-
-            <!-- Loading State -->
-            <div id="loadingData" class="py-12 text-center">
-                <div class="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-10 w-10 mb-4 mx-auto"></div>
-                <p class="text-gray-500">Đang khởi tạo...</p>
-            </div>
-
-            <!-- Error State -->
-            <div id="errorArea" class="hidden-section p-8 text-center text-red-500">
-                <i class="fa-solid fa-triangle-exclamation text-4xl mb-3"></i>
-                <p>Link không tồn tại hoặc đã bị xoá.</p>
-            </div>
-
-            <!-- Task List Area -->
-            <div id="taskArea" class="hidden-section p-6 space-y-4">
-                <div id="tasksContainer" class="space-y-3">
-                    <!-- Tasks will be injected here by JS -->
-                </div>
-
-                <!-- Progress Bar -->
-                <div class="mt-4">
-                    <div class="flex justify-between text-xs text-gray-500 mb-1">
-                        <span>Tiến độ</span>
-                        <span id="progressText">0%</span>
-                    </div>
-                    <div class="w-full bg-gray-200 rounded-full h-2.5">
-                        <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-500" style="width: 0%"></div>
-                    </div>
-                </div>
-
-                <!-- Final Unlock Section -->
-                <div id="unlockSection" class="mt-6 pt-4 border-t border-gray-100 opacity-50 pointer-events-none transition-all duration-300">
-                    <div class="bg-green-50 border border-green-200 text-green-700 px-4 py-3 rounded-lg mb-3 text-center hidden-section" id="successMsg">
-                        <i class="fa-solid fa-check-circle mr-1"></i> Link đã sẵn sàng!
-                    </div>
-                    <a id="finalLinkBtn" href="#" target="_blank" class="block w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 px-4 rounded-xl shadow-lg transform transition hover:-translate-y-1 text-center">
-                        <i class="fa-solid fa-lock text-white/50 mr-2" id="lockIcon"></i> 
-                        <span id="unlockText">Hoàn thành nhiệm vụ trước</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-        
-        <div class="text-center mt-6 text-xs text-gray-400">
-            Powered by LinkUnlocker &copy; 2024 <br>
-            <a href="?admin=true" class="hover:text-gray-600 transition">Admin Login</a>
-        </div>
-    </div>
-
-    <!-- ========================================== -->
-    <!-- PHẦN 2: GIAO DIỆN ADMIN (BUILDER VIEW) -->
-    <!-- ========================================== -->
-    <div id="adminView" class="container mx-auto px-4 py-6 hidden-section fade-in">
-        
-        <!-- Login Screen -->
-        <div id="loginForm" class="max-w-md mx-auto bg-white p-8 rounded-2xl shadow-lg mt-10">
-            <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Admin Panel</h2>
-            <div class="space-y-4">
-                <input type="email" id="email" placeholder="Email quản trị" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-                <input type="password" id="password" placeholder="Mật khẩu" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
-                <button onclick="login()" class="w-full bg-blue-600 text-white p-3 rounded-lg font-semibold hover:bg-blue-700 transition">Đăng Nhập</button>
-            </div>
-            <p id="loginError" class="text-red-500 text-sm mt-4 text-center hidden-section"></p>
-        </div>
-
-        <!-- Dashboard / Builder -->
-        <div id="dashboard" class="hidden-section max-w-5xl mx-auto">
-            <!-- Header Nav -->
-            <div class="flex justify-between items-center mb-6 bg-white p-4 rounded-xl shadow-sm">
-                <div class="flex items-center gap-3">
-                    <div class="bg-blue-100 p-2 rounded-lg text-blue-600"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
-                    <h2 class="text-xl font-bold">Trình Tạo Link</h2>
-                </div>
-                <div class="flex gap-3">
-                    <button onclick="showLinkList()" class="text-gray-600 hover:bg-gray-100 px-4 py-2 rounded-lg text-sm font-medium transition">Danh sách Link</button>
-                    <button onclick="logout()" class="text-red-500 hover:bg-red-50 px-4 py-2 rounded-lg text-sm font-medium transition">Đăng xuất</button>
-                </div>
-            </div>
-
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
-                <!-- Cột trái: Cấu hình (Builder) -->
-                <div class="lg:col-span-7 space-y-6">
-                    <!-- 1. Cài đặt chung -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 class="font-semibold text-gray-700 mb-4 border-b pb-2">1. Thông tin cơ bản</h3>
-                        <div class="space-y-3">
-                            <div>
-                                <label class="text-xs font-bold text-gray-500 uppercase">Tiêu đề chính</label>
-                                <div class="flex items-center border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
-                                    <span class="bg-gray-50 px-3 py-2 text-gray-500 border-r"><i class="fa-solid fa-heading"></i></span>
-                                    <input type="text" id="builderTitle" class="w-full p-2 outline-none" placeholder="VD: Nhận Key Game Blox Fruit">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="text-xs font-bold text-gray-500 uppercase">Mô tả phụ (Subtitle)</label>
-                                <div class="flex items-center border rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-blue-500">
-                                    <span class="bg-gray-50 px-3 py-2 text-gray-500 border-r"><i class="fa-solid fa-quote-left"></i></span>
-                                    <input type="text" id="builderSubtitle" class="w-full p-2 outline-none" placeholder="VD: Hoàn thành nhiệm vụ để mở khoá">
-                                </div>
-                            </div>
-                            <div>
-                                <label class="text-xs font-bold text-green-600 uppercase">Link Đích (Destination)</label>
-                                <div class="flex items-center border border-green-200 rounded-lg overflow-hidden focus-within:ring-2 focus-within:ring-green-500">
-                                    <span class="bg-green-50 px-3 py-2 text-green-600 border-r border-green-200"><i class="fa-solid fa-link"></i></span>
-                                    <input type="text" id="builderDestUrl" class="w-full p-2 outline-none" placeholder="https://drive.google.com/...">
+<body class="oGrd bD onId onHm" id="mainCont" style="padding-right: 0px;">
+    
+    <div class="mainWrp">
+        <!--[ Header section ]-->
+        <header class="header stick" id="header">
+            <div class="headCn">
+                <div class="headIn secIn">
+                    <div class="headD headL">
+                        <div class="headN section" id="header-title">
+                            <div class="widget Header" id="Header1">
+                                <div class="headInnr">
+                                    <h1 class="headH hasSub">
+                                        <span class="headTtl">
+                                            <span style="font-weight: 700">Link4Sub</span>
+                                        </span>
+                                        <span class="headSub" data-text=""></span>
+                                    </h1>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
+        </header>
 
-                    <!-- 2. Thêm nhiệm vụ -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 class="font-semibold text-gray-700 mb-4 border-b pb-2">2. Thêm Nhiệm vụ (Tasks)</h3>
+        <!--[ Landing Page Content ]-->
+        <div class="landing-page">
+            <div class="section" id="lPage-Top">
+                <div class="page-1">
+                    <div class="bg"></div>
+                    <div class="hero">
+                        <div class="anim-elements">
+                            <div class="anim-element"></div>
+                            <div class="anim-element"></div>
+                            <div class="anim-element"></div>
+                            <div class="anim-element"></div>
+                            <div class="anim-element"></div>
+                        </div>
                         
-                        <!-- Tabs chọn nền tảng -->
-                        <div class="flex flex-wrap gap-2 mb-4" id="platformTabs">
-                            <button onclick="switchTab('youtube')" class="flex-1 bg-red-600 text-white px-3 py-2 rounded shadow hover:bg-red-700 text-sm font-medium"><i class="fa-brands fa-youtube mr-1"></i> YouTube</button>
-                            <button onclick="switchTab('telegram')" class="flex-1 bg-blue-500 text-white px-3 py-2 rounded shadow hover:bg-blue-600 text-sm font-medium"><i class="fa-brands fa-telegram mr-1"></i> Telegram</button>
-                            <button onclick="switchTab('tiktok')" class="flex-1 bg-black text-white px-3 py-2 rounded shadow hover:bg-gray-800 text-sm font-medium"><i class="fa-brands fa-tiktok mr-1"></i> TikTok</button>
-                            <button onclick="switchTab('facebook')" class="flex-1 bg-blue-700 text-white px-3 py-2 rounded shadow hover:bg-blue-800 text-sm font-medium"><i class="fa-brands fa-facebook mr-1"></i> Facebook</button>
-                            <button onclick="switchTab('discord')" class="flex-1 bg-indigo-500 text-white px-3 py-2 rounded shadow hover:bg-indigo-600 text-sm font-medium"><i class="fa-brands fa-discord mr-1"></i> Discord</button>
+                        <!-- KHUNG CHÍNH (Nơi Logic của chúng ta sẽ hiển thị) -->
+                        <div class="landing-absolute" id="gStu">
+                            <div class="stu_cnt" id="stuCnt">
+                                <!-- Nội dung sẽ được Javascript inject vào đây -->
+                                <div class="flex flex-col items-center justify-center h-full py-10">
+                                    <div class="my-loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-10 w-10 mb-4"></div>
+                                    <p class="text-gray-500 font-semibold">Đang tải hệ thống...</p>
+                                </div>
+                            </div>
                         </div>
 
-                        <!-- Khu vực nút hành động (Dynamic) -->
-                        <div id="actionButtons" class="bg-gray-50 p-4 rounded-lg border border-dashed border-gray-300 grid grid-cols-2 md:grid-cols-3 gap-2">
-                            <!-- JS sẽ render nút ở đây -->
-                        </div>
                     </div>
-
-                    <!-- 3. Danh sách nhiệm vụ đã thêm -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h3 class="font-semibold text-gray-700 mb-2 border-b pb-2 flex justify-between">
-                            <span>3. Danh sách tác vụ đang kích hoạt</span>
-                            <span id="taskCountBadge" class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">0</span>
-                        </h3>
-                        <div id="taskListBuilder" class="space-y-3 min-h-[100px]">
-                            <p class="text-gray-400 text-sm text-center py-4 italic">Chưa có nhiệm vụ nào. Hãy chọn ở trên.</p>
-                        </div>
-                    </div>
-                    
-                    <button onclick="saveCampaign()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white font-bold py-4 rounded-xl shadow-lg transition transform active:scale-95">
-                        <i class="fa-solid fa-floppy-disk mr-2"></i> TẠO LINK NGAY
-                    </button>
                 </div>
+            </div>
 
-                <!-- Cột phải: Danh sách Link đã tạo -->
-                <div class="lg:col-span-5 hidden lg:block">
-                    <div class="bg-white rounded-xl shadow-sm border border-gray-100 h-full flex flex-col">
-                        <div class="p-4 border-b bg-gray-50 rounded-t-xl">
-                            <h3 class="font-bold text-gray-700">Lịch sử tạo link</h3>
+            <!-- Các phần phụ (Features, FAQ...) giữ nguyên để trang web trông đầy đủ -->
+            <div class="section" id="lPage-Center">
+                <div class="page-3" id="Featured">
+                    <div class="landing-content">
+                        <div class="titlex">
+                            <h2>Tại sao nên sử dụng Link4Sub?</h2>
+                            <span>Hệ thống mở khóa link chuyên nghiệp</span>
                         </div>
-                        <div class="flex-1 overflow-y-auto p-4 task-scroll" style="max-h: 800px;">
-                            <table class="w-full text-left text-sm">
-                                <tbody id="miniLinkTable">
-                                    <!-- List links -->
-                                </tbody>
-                            </table>
-                        </div>
+                        <ul class="featured">
+                            <li><div class="featuredSc-content"><div class="featuredSc-title">An toàn</div><div class="content">100% không virus.</div></div></li>
+                            <li><div class="featuredSc-content"><div class="featuredSc-title">Nhanh chóng</div><div class="content">Server Google mạnh mẽ.</div></div></li>
+                            <li><div class="featuredSc-content"><div class="featuredSc-title">Miễn phí</div><div class="content">Sử dụng trọn đời.</div></div></li>
+                        </ul>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="secIn">
+                <div class="cdtIn section" id="credit-widget">
+                    <div class="widget HTML" id="HTML88">
+                        <div class="fotCd">
+                            <span class="credit">© <span id="getYear">2025</span><bdi> ‧ <a href="#">LINK4SUB.COM</a></bdi></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
     </div>
 
-    <!-- Script Logic -->
+    <!-- SCRIPT LOGIC (Firebase + App) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, doc, getDoc, deleteDoc, updateDoc, increment, serverTimestamp, query, orderBy } 
@@ -211,7 +147,7 @@
         import { getAuth, signInWithEmailAndPassword, onAuthStateChanged, signOut } 
             from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-        // --- CẤU HÌNH ---
+        // --- CẤU HÌNH FIREBASE ---
         const firebaseConfig = {
             apiKey: "AIzaSyCMYvnDTyzfBIAFTuB9VLPYN-YiFtNov6c", 
             authDomain: "linksubproject.firebaseapp.com",
@@ -226,386 +162,368 @@
         const auth = getAuth(app);
 
         // --- GLOBAL STATE ---
-        let currentTasks = []; // Chứa danh sách task đang tạo trong admin
+        let currentTasks = []; 
         const urlParams = new URLSearchParams(window.location.search);
         const linkId = urlParams.get('id');
-        const isAdmin = urlParams.get('admin');
+        const container = document.getElementById('stuCnt');
 
-        // --- CẤU HÌNH NỀN TẢNG VÀ HÀNH ĐỘNG ---
+        // --- PLATFORM CONFIG ---
         const platformConfig = {
-            youtube: {
-                color: 'bg-red-600', hover: 'hover:bg-red-700', icon: 'fa-youtube',
-                actions: [
-                    { type: 'subscribe', label: 'Đăng ký (Subscribe)' },
-                    { type: 'subscribe_2', label: 'Đăng ký Kênh Phụ' },
-                    { type: 'like', label: 'Like Video' },
-                    { type: 'comment', label: 'Bình luận Video' }
-                ]
-            },
-            telegram: {
-                color: 'bg-blue-500', hover: 'hover:bg-blue-600', icon: 'fa-telegram',
-                actions: [
-                    { type: 'join_group', label: 'Tham gia Group' },
-                    { type: 'join_channel', label: 'Tham gia Channel' }
-                ]
-            },
-            tiktok: {
-                color: 'bg-black', hover: 'hover:bg-gray-800', icon: 'fa-tiktok',
-                actions: [
-                    { type: 'follow', label: 'Follow TikTok' },
-                    { type: 'like_video', label: 'Thả tim Video' }
-                ]
-            },
-            facebook: {
-                color: 'bg-blue-700', hover: 'hover:bg-blue-800', icon: 'fa-facebook',
-                actions: [
-                    { type: 'follow_page', label: 'Follow Fanpage' },
-                    { type: 'share', label: 'Chia sẻ bài viết' }
-                ]
-            },
-            discord: {
-                color: 'bg-indigo-500', hover: 'hover:bg-indigo-600', icon: 'fa-discord',
-                actions: [
-                    { type: 'join_server', label: 'Tham gia Discord' }
-                ]
-            }
+            youtube: { color: 'bg-red-600', hover: 'hover:bg-red-700', icon: 'fa-youtube', actions: [{ type: 'sub', label: 'Đăng ký (Subscribe)' }, { type: 'like', label: 'Like Video' }] },
+            facebook: { color: 'bg-blue-700', hover: 'hover:bg-blue-800', icon: 'fa-facebook', actions: [{ type: 'follow', label: 'Follow Page' }] },
+            tiktok: { color: 'bg-black', hover: 'hover:bg-gray-800', icon: 'fa-tiktok', actions: [{ type: 'follow', label: 'Follow TikTok' }] },
+            discord: { color: 'bg-indigo-500', hover: 'hover:bg-indigo-600', icon: 'fa-discord', actions: [{ type: 'join', label: 'Join Discord' }] },
+            telegram: { color: 'bg-sky-500', hover: 'hover:bg-sky-600', icon: 'fa-telegram', actions: [{ type: 'join', label: 'Join Channel' }] }
         };
 
         // ==============================================
-        // LOGIC USER (NGƯỜI DÙNG)
+        // MAIN ROUTER
         // ==============================================
-        async function loadUserLink(id) {
-            try {
-                const docRef = doc(db, "links", id);
-                const docSnap = await getDoc(docRef);
-
-                document.getElementById('loadingData').classList.add('hidden-section');
-
-                if (docSnap.exists()) {
-                    const data = docSnap.data();
-                    
-                    // Render Header
-                    document.getElementById('userTitle').innerText = data.title || "Link Unlocker";
-                    if(data.subtitle) document.getElementById('userSubtitle').innerText = data.subtitle;
-
-                    // Render Tasks
-                    const tasksContainer = document.getElementById('tasksContainer');
-                    document.getElementById('taskArea').classList.remove('hidden-section');
-                    
-                    // Xử lý dữ liệu cũ (chỉ có taskUrl) chuyển sang dạng mới
-                    let tasks = data.tasks || [];
-                    if (tasks.length === 0 && data.taskUrl) {
-                        tasks.push({ 
-                            platform: 'youtube', 
-                            label: 'Đăng ký kênh', 
-                            url: data.taskUrl,
-                            id: 'legacy_task'
-                        });
-                    }
-
-                    tasks.forEach((task, index) => {
-                        const icon = platformConfig[task.platform]?.icon || 'fa-link';
-                        const colorClass = platformConfig[task.platform]?.color || 'bg-gray-600';
-                        
-                        const html = `
-                            <div class="task-item bg-white border border-gray-200 p-4 rounded-xl shadow-sm flex items-center justify-between transition hover:shadow-md" id="task-card-${index}">
-                                <div class="flex items-center gap-3 overflow-hidden">
-                                    <div class="w-10 h-10 rounded-full ${colorClass} text-white flex items-center justify-center shrink-0">
-                                        <i class="fa-brands ${icon}"></i>
-                                    </div>
-                                    <div class="truncate">
-                                        <p class="font-semibold text-gray-700 truncate text-sm sm:text-base">${task.label}</p>
-                                        <p class="text-xs text-gray-400">Yêu cầu xác minh</p>
-                                    </div>
-                                </div>
-                                <button onclick="performTask(${index}, '${task.url}')" id="btn-task-${index}" class="ml-2 bg-blue-100 text-blue-600 hover:bg-blue-200 px-4 py-2 rounded-lg text-sm font-bold transition whitespace-nowrap">
-                                    THỰC HIỆN
-                                </button>
-                            </div>
-                        `;
-                        tasksContainer.insertAdjacentHTML('beforeend', html);
-                    });
-
-                    // Store global link data for verification logic
-                    window.currentLinkData = { ...data, tasks };
-                    updateDoc(docRef, { views: increment(1) }); // Tăng view
-
-                } else {
-                    document.getElementById('errorArea').classList.remove('hidden-section');
-                }
-            } catch (error) {
-                console.error(error);
-                alert("Lỗi tải dữ liệu. Kiểm tra Console.");
+        async function init() {
+            if (linkId) {
+                // --> USER MODE (Khách làm nhiệm vụ)
+                await renderUserMode(linkId);
+            } else {
+                // --> ADMIN/BUILDER MODE (Tạo link)
+                renderAuthCheck();
             }
         }
-
-        // Trạng thái task của user hiện tại
-        let completedTasks = new Set();
-
-        window.performTask = function(index, url) {
-            if (completedTasks.has(index)) return;
-
-            // 1. Mở link
-            window.open(url, '_blank');
-
-            // 2. Chuyển nút sang trạng thái chờ
-            const btn = document.getElementById(`btn-task-${index}`);
-            let timeLeft = 5; // Fake verify time 5s
-            
-            btn.disabled = true;
-            btn.className = "ml-2 bg-gray-100 text-gray-500 px-4 py-2 rounded-lg text-sm font-bold cursor-wait whitespace-nowrap";
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> ${timeLeft}s`;
-
-            const timer = setInterval(() => {
-                timeLeft--;
-                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> ${timeLeft}s`;
-                
-                if (timeLeft <= 0) {
-                    clearInterval(timer);
-                    // 3. Mark as Done
-                    completedTasks.add(index);
-                    btn.className = "ml-2 bg-green-500 text-white px-3 py-2 rounded-lg text-sm font-bold cursor-default whitespace-nowrap";
-                    btn.innerHTML = `<i class="fa-solid fa-check"></i> Xong`;
-                    
-                    // Hiệu ứng visual
-                    document.getElementById(`task-card-${index}`).classList.add('border-green-500', 'bg-green-50');
-                    
-                    checkAllDone();
-                }
-            }, 1000);
-        }
-
-        function checkAllDone() {
-            const total = window.currentLinkData.tasks.length;
-            const done = completedTasks.size;
-            
-            // Cập nhật thanh tiến độ
-            const percent = Math.floor((done / total) * 100);
-            document.getElementById('progressBar').style.width = `${percent}%`;
-            document.getElementById('progressText').innerText = `${percent}%`;
-
-            if (done >= total) {
-                // Unlock
-                const unlockSec = document.getElementById('unlockSection');
-                unlockSec.classList.remove('opacity-50', 'pointer-events-none');
-                
-                document.getElementById('successMsg').classList.remove('hidden-section');
-                document.getElementById('lockIcon').className = "fa-solid fa-unlock text-white mr-2";
-                document.getElementById('unlockText').innerText = "TRUY CẬP LINK GỐC";
-                document.getElementById('finalLinkBtn').href = window.currentLinkData.destUrl;
-            }
-        }
+        init();
 
         // ==============================================
-        // LOGIC ADMIN (BUILDER)
+        // 1. LOGIC AUTH & BUILDER (ADMIN)
         // ==============================================
-        
-        // --- AUTH ---
-        function setupAdminAuth() {
+        function renderAuthCheck() {
             onAuthStateChanged(auth, (user) => {
                 if (user) {
-                    document.getElementById('loginForm').classList.add('hidden-section');
-                    document.getElementById('dashboard').classList.remove('hidden-section');
-                    loadLinkHistory();
+                    renderBuilder();
                 } else {
-                    document.getElementById('loginForm').classList.remove('hidden-section');
-                    document.getElementById('dashboard').classList.add('hidden-section');
+                    renderLogin();
                 }
             });
         }
-        window.login = async () => {
-            const e = document.getElementById('email').value;
-            const p = document.getElementById('password').value;
-            try { await signInWithEmailAndPassword(auth, e, p); } 
-            catch(err) { 
-                document.getElementById('loginError').innerText = "Sai email/pass hoặc lỗi: " + err.code; 
-                document.getElementById('loginError').classList.remove('hidden-section');
-            }
-        };
-        window.logout = () => signOut(auth);
 
-        // --- BUILDER LOGIC ---
-        
-        // 1. Chuyển tab platform
-        window.switchTab = function(platformKey) {
-            const config = platformConfig[platformKey];
-            const container = document.getElementById('actionButtons');
-            container.innerHTML = '';
-
-            // Render các nút actions (Like, Sub, etc)
-            config.actions.forEach(action => {
-                const btn = document.createElement('button');
-                btn.className = `${config.color} text-white px-3 py-3 rounded-lg text-sm font-semibold shadow hover:opacity-90 transition flex items-center justify-center gap-2`;
-                btn.innerHTML = `<i class="fa-solid fa-plus bg-white/20 rounded-full w-5 h-5 flex items-center justify-center text-[10px]"></i> ${action.label}`;
-                btn.onclick = () => addToBuilder(platformKey, action);
-                container.appendChild(btn);
-            });
-        }
-
-        // 2. Thêm task vào danh sách builder
-        function addToBuilder(platform, action) {
-            const task = {
-                id: Date.now(),
-                platform: platform,
-                type: action.type,
-                label: action.label,
-                url: ''
-            };
-            currentTasks.push(task);
-            renderBuilderTasks();
-        }
-
-        // 3. Render danh sách tasks (có input để nhập link)
-        function renderBuilderTasks() {
-            const list = document.getElementById('taskListBuilder');
-            const badge = document.getElementById('taskCountBadge');
+        function renderLogin() {
+            container.innerHTML = `
+                <div class="w-full max-w-sm mx-auto animate-fade-in">
+                    <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Admin Login</h2>
+                    <div class="space-y-4">
+                        <input type="email" id="email" placeholder="Email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none">
+                        <input type="password" id="password" placeholder="Mật khẩu" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none">
+                        <button id="btnLogin" class="w-full bg-red-600 text-white p-3 rounded-lg font-bold hover:bg-red-700 transition shadow-lg">ĐĂNG NHẬP</button>
+                    </div>
+                    <p id="loginError" class="text-red-500 text-sm mt-4 text-center hidden-section"></p>
+                </div>
+            `;
             
-            badge.innerText = currentTasks.length;
+            document.getElementById('btnLogin').onclick = async () => {
+                const e = document.getElementById('email').value;
+                const p = document.getElementById('password').value;
+                try {
+                    await signInWithEmailAndPassword(auth, e, p);
+                    // Auth state change will trigger renderBuilder
+                } catch (err) {
+                    const errEl = document.getElementById('loginError');
+                    errEl.innerText = "Lỗi: " + err.code;
+                    errEl.classList.remove('hidden-section');
+                }
+            };
+        }
 
+        function renderBuilder() {
+            // Giao diện tạo link (Builder)
+            container.innerHTML = `
+                <div class="w-full h-full flex flex-col animate-fade-in">
+                    <div class="flex justify-between items-center mb-4 border-b pb-2">
+                        <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-wand-magic-sparkles text-red-500"></i> Tạo Link Mới</h2>
+                        <button id="btnLogout" class="text-xs text-gray-500 hover:text-red-500 underline">Đăng xuất</button>
+                    </div>
+
+                    <div class="flex-1 overflow-y-auto custom-scroll pr-2 mb-4" style="max-height: 60vh;">
+                        <!-- Input Info -->
+                        <div class="space-y-3 mb-6">
+                            <input type="text" id="bTitle" class="w-full p-3 border rounded-lg focus:outline-none focus:border-red-500" placeholder="Tiêu đề (VD: Key Hack Blox Fruit)">
+                            <input type="text" id="bDest" class="w-full p-3 border rounded-lg focus:outline-none focus:border-green-500 border-green-200 bg-green-50" placeholder="Link Đích (Google Drive...)">
+                        </div>
+
+                        <!-- Platform Tabs -->
+                        <div class="grid grid-cols-5 gap-1 mb-4">
+                            ${Object.keys(platformConfig).map(key => `
+                                <button onclick="window.setPlatform('${key}')" class="p-2 rounded bg-gray-100 hover:bg-gray-200 text-gray-600 transition flex justify-center items-center">
+                                    <i class="fa-brands ${platformConfig[key].icon} text-lg"></i>
+                                </button>
+                            `).join('')}
+                        </div>
+
+                        <!-- Action Buttons Dynamic -->
+                        <div id="actionArea" class="grid grid-cols-2 gap-2 mb-4 p-3 bg-gray-50 rounded-lg border border-dashed border-gray-300">
+                            <p class="col-span-2 text-center text-xs text-gray-400">Chọn nền tảng ở trên để hiện nút</p>
+                        </div>
+
+                        <!-- Task List -->
+                        <div id="bTaskList" class="space-y-2">
+                            <!-- Tasks added appear here -->
+                        </div>
+                    </div>
+
+                    <button id="btnCreate" class="w-full bg-gradient-to-r from-red-500 to-pink-600 text-white font-bold py-3 rounded-xl shadow-lg hover:opacity-90 transition">
+                        TẠO LINK NGAY
+                    </button>
+                    
+                    <div class="mt-4 pt-2 border-t text-center">
+                         <button id="btnHistory" class="text-sm text-blue-500 hover:underline">Xem lịch sử link đã tạo</button>
+                    </div>
+                </div>
+
+                <!-- Modal History (Hidden by default) -->
+                <div id="historyModal" class="fixed inset-0 bg-black/50 z-50 hidden-section flex items-center justify-center p-4">
+                    <div class="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] flex flex-col shadow-2xl">
+                        <div class="p-4 border-b flex justify-between items-center">
+                            <h3 class="font-bold">Lịch sử Link</h3>
+                            <button onclick="document.getElementById('historyModal').classList.add('hidden-section')" class="text-gray-500 hover:text-black"><i class="fa-solid fa-times"></i></button>
+                        </div>
+                        <div class="p-4 overflow-y-auto flex-1 custom-scroll">
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-gray-100 text-gray-600 uppercase text-xs">
+                                    <tr><th class="p-2">Tên</th><th class="p-2 text-center">View</th><th class="p-2 text-right">Action</th></tr>
+                                </thead>
+                                <tbody id="historyBody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            `;
+
+            // Event Listeners
+            document.getElementById('btnLogout').onclick = () => signOut(auth);
+            
+            window.setPlatform = (key) => {
+                const conf = platformConfig[key];
+                const area = document.getElementById('actionArea');
+                area.innerHTML = conf.actions.map(act => `
+                    <button onclick="window.addTask('${key}', '${act.type}', '${act.label}')" class="${conf.color} text-white py-2 px-3 rounded text-xs font-bold hover:opacity-90 truncate">
+                        + ${act.label}
+                    </button>
+                `).join('');
+            };
+
+            window.addTask = (platform, type, label) => {
+                currentTasks.push({ id: Date.now(), platform, type, label, url: '' });
+                renderTaskItems();
+            };
+
+            window.removeTask = (idx) => {
+                currentTasks.splice(idx, 1);
+                renderTaskItems();
+            };
+
+            window.updateTaskUrl = (idx, val) => {
+                currentTasks[idx].url = val;
+            };
+
+            document.getElementById('btnCreate').onclick = saveLink;
+            document.getElementById('btnHistory').onclick = loadHistory;
+
+            // Default platform
+            window.setPlatform('youtube');
+        }
+
+        function renderTaskItems() {
+            const list = document.getElementById('bTaskList');
             if (currentTasks.length === 0) {
-                list.innerHTML = '<p class="text-gray-400 text-sm text-center py-4 italic">Chưa có nhiệm vụ nào. Hãy chọn ở trên.</p>';
+                list.innerHTML = `<p class="text-center text-gray-400 text-xs italic py-2">Chưa có nhiệm vụ nào.</p>`;
                 return;
             }
-
-            list.innerHTML = '';
-            currentTasks.forEach((task, index) => {
-                const pConfig = platformConfig[task.platform];
-                const div = document.createElement('div');
-                div.className = "bg-gray-50 border border-gray-200 rounded-lg p-3 animate-fade-in";
-                div.innerHTML = `
-                    <div class="flex items-center justify-between mb-2">
-                        <div class="flex items-center gap-2">
-                            <span class="${pConfig.color} text-white text-xs px-2 py-1 rounded">${task.platform}</span>
-                            <span class="font-semibold text-sm text-gray-700">${task.label}</span>
+            list.innerHTML = currentTasks.map((t, i) => `
+                <div class="bg-white border rounded p-2 flex items-center gap-2 shadow-sm animate-fade-in">
+                    <span class="${platformConfig[t.platform].color} text-white w-6 h-6 rounded-full flex items-center justify-center text-xs shrink-0">
+                        <i class="fa-brands ${platformConfig[t.platform].icon}"></i>
+                    </span>
+                    <div class="flex-1">
+                        <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
+                            <span>${t.label}</span>
+                            <button onclick="window.removeTask(${i})" class="text-red-400 hover:text-red-600"><i class="fa-solid fa-times"></i></button>
                         </div>
-                        <button onclick="removeTask(${index})" class="text-gray-400 hover:text-red-500"><i class="fa-solid fa-times"></i></button>
+                        <input type="text" onchange="window.updateTaskUrl(${i}, this.value)" value="${t.url}" placeholder="Dán link nhiệm vụ vào đây..." class="w-full text-xs p-1.5 border rounded bg-gray-50 focus:bg-white outline-none">
                     </div>
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2">
-                        <input type="text" value="${task.label}" onchange="updateTask(${index}, 'label', this.value)" 
-                            class="text-sm p-2 border rounded focus:ring-1 focus:ring-blue-500 outline-none" placeholder="Tên nút hiển thị">
-                        <input type="text" value="${task.url}" onchange="updateTask(${index}, 'url', this.value)" 
-                            class="text-sm p-2 border rounded focus:ring-1 focus:ring-blue-500 outline-none" placeholder="Dán Link cần làm (Youtube/Tiktok...)">
-                    </div>
-                `;
-                list.appendChild(div);
-            });
+                </div>
+            `).join('');
         }
 
-        window.removeTask = (index) => {
-            currentTasks.splice(index, 1);
-            renderBuilderTasks();
-        }
-
-        window.updateTask = (index, field, value) => {
-            currentTasks[index][field] = value;
-        }
-
-        // 4. Lưu Campaign vào Firestore
-        window.saveCampaign = async () => {
-            const title = document.getElementById('builderTitle').value;
-            const subtitle = document.getElementById('builderSubtitle').value;
-            const destUrl = document.getElementById('builderDestUrl').value;
-
-            if (!title || !destUrl) return alert("Vui lòng nhập Tiêu đề và Link Đích!");
-            if (currentTasks.length === 0) return alert("Vui lòng thêm ít nhất 1 nhiệm vụ!");
+        async function saveLink() {
+            const title = document.getElementById('bTitle').value;
+            const dest = document.getElementById('bDest').value;
             
-            // Check link rỗng
-            const emptyLink = currentTasks.find(t => !t.url);
-            if (emptyLink) return alert(`Nhiệm vụ "${emptyLink.label}" chưa có đường link!`);
+            if (!title || !dest) return alert("Thiếu tiêu đề hoặc link đích!");
+            if (currentTasks.length === 0) return alert("Thêm ít nhất 1 nhiệm vụ!");
+            if (currentTasks.some(t => !t.url)) return alert("Điền đủ link cho các nhiệm vụ!");
 
-            const btn = document.querySelector('button[onclick="saveCampaign()"]');
-            const oldText = btn.innerHTML;
-            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Đang lưu...';
+            const btn = document.getElementById('btnCreate');
+            btn.innerText = "Đang lưu...";
             btn.disabled = true;
 
             try {
                 await addDoc(collection(db, "links"), {
-                    title, subtitle, destUrl,
-                    tasks: currentTasks,
-                    createdAt: serverTimestamp(),
-                    views: 0
+                    title, destUrl: dest, tasks: currentTasks, 
+                    createdAt: serverTimestamp(), views: 0
                 });
                 alert("Tạo thành công!");
-                // Reset form
                 currentTasks = [];
-                document.getElementById('builderTitle').value = '';
-                document.getElementById('builderDestUrl').value = '';
-                renderBuilderTasks();
-                loadLinkHistory(); // Reload list
+                renderBuilder(); // Reset UI
             } catch (e) {
-                console.error(e);
                 alert("Lỗi: " + e.message);
-            } finally {
-                btn.innerHTML = oldText;
+                btn.innerText = "TẠO LINK NGAY";
                 btn.disabled = false;
             }
         }
 
-        // 5. Load lịch sử (Mini list bên phải)
-        async function loadLinkHistory() {
-            const tbody = document.getElementById('miniLinkTable');
+        async function loadHistory() {
+            const modal = document.getElementById('historyModal');
+            const tbody = document.getElementById('historyBody');
+            modal.classList.remove('hidden-section');
+            tbody.innerHTML = '<tr><td colspan="3" class="text-center p-4">Loading...</td></tr>';
+
             const q = query(collection(db, "links"), orderBy("createdAt", "desc"));
-            const snapshot = await getDocs(q);
+            const snap = await getDocs(q);
             
             let html = '';
-            snapshot.forEach(doc => {
-                const d = doc.data();
-                const shareLink = `${window.location.origin}${window.location.pathname}?id=${doc.id}`;
+            snap.forEach(d => {
+                const data = d.data();
+                const link = `${window.location.origin}${window.location.pathname}?id=${d.id}`;
                 html += `
-                    <tr class="border-b hover:bg-gray-50 group">
-                        <td class="py-3 px-2">
-                            <p class="font-medium text-gray-800 truncate w-40" title="${d.title}">${d.title}</p>
-                            <div class="flex gap-2 text-xs text-gray-400 mt-1">
-                                <span><i class="fa-solid fa-eye"></i> ${d.views || 0}</span>
-                                <span><i class="fa-solid fa-list-check"></i> ${d.tasks ? d.tasks.length : 1} bước</span>
-                            </div>
+                    <tr class="border-b hover:bg-gray-50">
+                        <td class="p-2">
+                            <div class="font-medium text-gray-800 truncate w-32">${data.title}</div>
+                            <div class="text-[10px] text-gray-400">${new Date(data.createdAt?.seconds * 1000).toLocaleDateString()}</div>
                         </td>
-                        <td class="text-right px-2">
-                            <button onclick="navigator.clipboard.writeText('${shareLink}'); alert('Copied!')" class="text-blue-500 hover:bg-blue-100 p-2 rounded"><i class="fa-regular fa-copy"></i></button>
-                            <a href="${shareLink}" target="_blank" class="text-gray-500 hover:bg-gray-100 p-2 rounded"><i class="fa-solid fa-external-link-alt"></i></a>
-                            <button onclick="deleteLink('${doc.id}')" class="text-red-400 hover:bg-red-100 p-2 rounded"><i class="fa-solid fa-trash"></i></button>
+                        <td class="p-2 text-center text-xs font-bold">${data.views || 0}</td>
+                        <td class="p-2 text-right">
+                            <button onclick="navigator.clipboard.writeText('${link}'); alert('Đã copy!')" class="text-blue-500 p-1 hover:bg-blue-100 rounded"><i class="fa-regular fa-copy"></i></button>
+                            <button onclick="window.delLink('${d.id}')" class="text-red-500 p-1 hover:bg-red-100 rounded"><i class="fa-solid fa-trash"></i></button>
                         </td>
                     </tr>
                 `;
             });
-            tbody.innerHTML = html;
+            tbody.innerHTML = html || '<tr><td colspan="3" class="text-center p-4 text-gray-400">Trống</td></tr>';
         }
 
-        window.deleteLink = async (id) => {
-            if(confirm("Xoá vĩnh viễn link này?")) {
+        window.delLink = async (id) => {
+            if(confirm("Xoá?")) {
                 await deleteDoc(doc(db, "links", id));
-                loadLinkHistory();
+                loadHistory(); // Reload table
             }
         }
 
-        window.showLinkList = () => {
-             // Trên mobile sẽ cuộn xuống list, desktop thì đã hiện rồi
-             const list = document.querySelector('.lg\\:col-span-5');
-             list.scrollIntoView({behavior: "smooth"});
+        // ==============================================
+        // 2. LOGIC USER (GUEST VIEW)
+        // ==============================================
+        let completedSet = new Set();
+        let currentLinkData = null;
+
+        async function renderUserMode(id) {
+            try {
+                const snap = await getDoc(doc(db, "links", id));
+                if (!snap.exists()) {
+                    container.innerHTML = `<div class="text-center text-red-500 py-10"><i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i><br>Link không tồn tại.</div>`;
+                    return;
+                }
+                
+                const data = snap.data();
+                currentLinkData = data;
+                updateDoc(doc(db, "links", id), { views: increment(1) }); // Count view
+
+                // Render UI
+                container.innerHTML = `
+                    <div class="w-full animate-fade-in flex flex-col h-full">
+                        <div class="text-center mb-6">
+                            <h1 class="text-xl font-bold text-gray-800 uppercase tracking-wide border-b-2 border-red-500 inline-block pb-1">${data.title}</h1>
+                            <p class="text-xs text-gray-500 mt-2">Hoàn thành các bước để mở khóa nội dung</p>
+                        </div>
+
+                        <div id="uTaskList" class="space-y-3 mb-6">
+                            ${(data.tasks || []).map((t, i) => {
+                                const p = platformConfig[t.platform] || { color: 'bg-gray-500', icon: 'fa-link' };
+                                return `
+                                    <div id="task-row-${i}" class="relative bg-white border border-gray-200 rounded-lg p-3 shadow-sm transition hover:shadow-md flex items-center justify-between group overflow-hidden">
+                                        <div class="absolute left-0 top-0 bottom-0 w-1 ${p.color}"></div>
+                                        <div class="flex items-center gap-3 pl-2 overflow-hidden">
+                                            <div class="w-8 h-8 rounded-full ${p.color} text-white flex items-center justify-center shrink-0 shadow-sm">
+                                                <i class="fa-brands ${p.icon}"></i>
+                                            </div>
+                                            <div class="truncate">
+                                                <div class="text-sm font-bold text-gray-700 truncate">${t.label}</div>
+                                                <div class="text-[10px] text-gray-400">Nhấn để thực hiện</div>
+                                            </div>
+                                        </div>
+                                        <button id="btn-do-${i}" onclick="window.doTask(${i}, '${t.url}')" class="ml-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2 px-3 rounded-full transition whitespace-nowrap">
+                                            THỰC HIỆN
+                                        </button>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+
+                        <div class="mt-auto">
+                            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
+                                <div id="uProgress" class="bg-green-500 h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+                            <a id="uUnlockBtn" href="#" onclick="return false;" class="block w-full bg-gray-300 text-gray-500 font-bold py-4 rounded-lg text-center cursor-not-allowed transition-all transform duration-300 shadow-none">
+                                <i class="fa-solid fa-lock mr-2"></i> Đang bị khóa
+                            </a>
+                        </div>
+                    </div>
+                `;
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<div class="text-center text-red-500">Lỗi kết nối.</div>`;
+            }
         }
 
-        // ==============================================
-        // LOGIC KHỞI TẠO (ROUTER) - MOVED TO BOTTOM
-        // ==============================================
-        if (isAdmin) {
-            document.getElementById('adminView').classList.remove('hidden-section');
-            setupAdminAuth();
-            window.switchTab('youtube'); // Mặc định tab Youtube
-        } else if (linkId) {
-            document.getElementById('userView').classList.remove('hidden-section');
-            loadUserLink(linkId);
-        } else {
-            // Không có ID, mặc định vào Admin Panel
-            document.getElementById('adminView').classList.remove('hidden-section');
-            setupAdminAuth();
-            window.switchTab('youtube');
+        window.doTask = (idx, url) => {
+            if (completedSet.has(idx)) return;
             
-            // Cập nhật URL cho đẹp (không reload)
-            try {
-                const newUrl = new URL(window.location);
-                newUrl.searchParams.set('admin', 'true');
-                window.history.replaceState({}, '', newUrl);
-            } catch (e) { console.log("Không thể cập nhật URL:", e); }
+            // 1. Open Link
+            window.open(url, '_blank');
+            
+            // 2. UI Wait state
+            const btn = document.getElementById(`btn-do-${idx}`);
+            let sec = 5; // Fake timer
+            btn.disabled = true;
+            btn.className = "ml-2 bg-yellow-100 text-yellow-600 text-xs font-bold py-2 px-3 rounded-full transition whitespace-nowrap";
+            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${sec}s`;
+
+            const tmr = setInterval(() => {
+                sec--;
+                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${sec}s`;
+                if (sec <= 0) {
+                    clearInterval(tmr);
+                    completedSet.add(idx);
+                    
+                    // Done State
+                    btn.className = "ml-2 bg-green-100 text-green-600 text-xs font-bold py-2 px-3 rounded-full transition whitespace-nowrap cursor-default";
+                    btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
+                    document.getElementById(`task-row-${idx}`).classList.add('border-green-500', 'bg-green-50');
+                    
+                    checkUnlock();
+                }
+            }, 1000);
+        };
+
+        function checkUnlock() {
+            const total = currentLinkData.tasks.length;
+            const done = completedSet.size;
+            const pct = (done / total) * 100;
+            
+            document.getElementById('uProgress').style.width = `${pct}%`;
+
+            if (done >= total) {
+                const mainBtn = document.getElementById('uUnlockBtn');
+                mainBtn.className = "block w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 text-white font-bold py-4 rounded-lg text-center shadow-lg transform hover:-translate-y-1 transition-all duration-300 animate-pulse";
+                mainBtn.innerHTML = `<i class="fa-solid fa-unlock mr-2"></i> TRUY CẬP LINK GỐC`;
+                mainBtn.href = currentLinkData.destUrl;
+                mainBtn.target = "_blank";
+                mainBtn.onclick = null; // Remove preventDefault
+            }
         }
 
     </script>

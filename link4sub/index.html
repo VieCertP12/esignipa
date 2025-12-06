@@ -1,142 +1,78 @@
 <!DOCTYPE html>
 <html dir="ltr" lang="vi" class="">
-<!--[ <head> Open ]-->
 <head>
-    <!--[ Homepage title ]-->
-    <title>Link4Sub - Link Unlocker Premium</title>
-    <meta name="csrf-token" content="xI86UdLoSyqRVPYARNVaGezjL6CI5tD8wH0VNnny">
-    <!--[ Meta for browser ]-->
+    <title>Link Unlocker Premium</title>
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
-    <meta content="IE=edge" http-equiv="X-UA-Compatible">
-    <meta content="max-image-preview:large" name="robots">
     
-    <!-- Tailwind CSS (Để hỗ trợ các thành phần chức năng) -->
+    <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
-    <!-- CSS Gốc của giao diện -->
+    <!-- CSS Gốc (Giữ lại để làm nền) -->
     <link rel="stylesheet" href="https://link4sub.com/home/css/style.css?v=22025">
-    <link rel="stylesheet" href="https://link4sub.com/css/stu.css">
-    <link rel="stylesheet" href="https://link4sub.com/css/notyf.css">
-
+    
     <style>
-        /* Custom Styles để hòa hợp Logic cũ vào Giao diện mới */
-        .stu_lv { display: none !important; }
+        body { font-family: 'Inter', sans-serif !important; }
         
-        /* Đè style cho khung chứa chính để hiển thị nội dung của chúng ta */
-        #stuCnt {
-            min-height: 400px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            /* background: rgba(255, 255, 255, 0.95) !important; */
-        }
-
-        /* Ẩn các phần thừa của giao diện gốc nếu cần */
-        .landing-page { background: #f7f7fc; }
+        /* Ghi đè CSS của theme gốc để hiển thị đúng nội dung của mình */
+        .landing-page .landing-absolute { max-width: 900px !important; width: 100% !important; padding: 0 !important; }
+        .hero .stu_cnt { background: transparent !important; box-shadow: none !important; }
+        .stu_cnt::before { display: none !important; }
         
-        /* Hiệu ứng loading riêng */
-        .my-loader { border-top-color: #ed143d; -webkit-animation: spinner 1.5s linear infinite; animation: spinner 1.5s linear infinite; }
-        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-
-        /* Utility classes */
-        .hidden-section { display: none !important; }
-        .fade-in { animation: fadeIn 0.3s ease-in; }
+        /* Custom UI Classes */
+        .card-shadow { box-shadow: 0 4px 20px rgba(0,0,0,0.05); }
+        .btn-hover-up { transition: all 0.2s; }
+        .btn-hover-up:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(237, 20, 61, 0.3); }
+        
+        /* Animations */
+        .fade-in { animation: fadeIn 0.4s ease-out; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* Scrollbar cho list task */
+        .hidden-section { display: none !important; }
+        
+        /* Loader */
+        .my-loader { border-top-color: #ed143d; -webkit-animation: spinner 1s linear infinite; animation: spinner 1s linear infinite; }
+        @keyframes spinner { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+
+        /* Custom Scrollbar for builder */
         .custom-scroll::-webkit-scrollbar { width: 6px; }
         .custom-scroll::-webkit-scrollbar-track { background: #f1f1f1; }
-        .custom-scroll::-webkit-scrollbar-thumb { background: #ccc; border-radius: 3px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
     </style>
 </head>
 
-<body class="oGrd bD onId onHm" id="mainCont" style="padding-right: 0px;">
+<body class="bg-[#f7f7fc]">
     
-    <div class="mainWrp">
-        <!--[ Header section ]-->
-        <header class="header stick" id="header">
-            <div class="headCn">
-                <div class="headIn secIn">
-                    <div class="headD headL">
-                        <div class="headN section" id="header-title">
-                            <div class="widget Header" id="Header1">
-                                <div class="headInnr">
-                                    <h1 class="headH hasSub">
-                                        <span class="headTtl">
-                                            <span style="font-weight: 700">Link4Sub</span>
-                                        </span>
-                                        <span class="headSub" data-text=""></span>
-                                    </h1>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </header>
+    <!-- Header Minimal -->
+    <div class="fixed top-0 left-0 w-full bg-white shadow-sm z-50 h-16 flex items-center justify-between px-6">
+        <div class="flex items-center gap-2">
+            <div class="bg-red-600 text-white w-8 h-8 rounded-lg flex items-center justify-center font-bold"><i class="fa-solid fa-link"></i></div>
+            <span class="font-bold text-gray-800 text-lg">Link4Sub</span>
+        </div>
+        <button class="text-gray-400 hover:text-gray-600"><i class="fa-solid fa-moon"></i></button>
+    </div>
 
-        <!--[ Landing Page Content ]-->
-        <div class="landing-page">
-            <div class="section" id="lPage-Top">
-                <div class="page-1">
-                    <div class="bg"></div>
-                    <div class="hero">
-                        <div class="anim-elements">
-                            <div class="anim-element"></div>
-                            <div class="anim-element"></div>
-                            <div class="anim-element"></div>
-                            <div class="anim-element"></div>
-                            <div class="anim-element"></div>
-                        </div>
-                        
-                        <!-- KHUNG CHÍNH (Nơi Logic của chúng ta sẽ hiển thị) -->
-                        <div class="landing-absolute" id="gStu">
-                            <div class="stu_cnt" id="stuCnt">
-                                <!-- Nội dung sẽ được Javascript inject vào đây -->
-                                <div class="flex flex-col items-center justify-center h-full py-10">
-                                    <div class="my-loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-10 w-10 mb-4"></div>
-                                    <p class="text-gray-500 font-semibold">Đang tải hệ thống...</p>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <!-- Các phần phụ (Features, FAQ...) giữ nguyên để trang web trông đầy đủ -->
-            <div class="section" id="lPage-Center">
-                <div class="page-3" id="Featured">
-                    <div class="landing-content">
-                        <div class="titlex">
-                            <h2>Tại sao nên sử dụng Link4Sub?</h2>
-                            <span>Hệ thống mở khóa link chuyên nghiệp</span>
-                        </div>
-                        <ul class="featured">
-                            <li><div class="featuredSc-content"><div class="featuredSc-title">An toàn</div><div class="content">100% không virus.</div></div></li>
-                            <li><div class="featuredSc-content"><div class="featuredSc-title">Nhanh chóng</div><div class="content">Server Google mạnh mẽ.</div></div></li>
-                            <li><div class="featuredSc-content"><div class="featuredSc-title">Miễn phí</div><div class="content">Sử dụng trọn đời.</div></div></li>
-                        </ul>
-                    </div>
-                </div>
+    <!-- Main Content Area -->
+    <div class="min-h-screen pt-24 pb-10 px-4 flex flex-col items-center">
+        
+        <!-- CONTAINER CHÍNH (Sẽ thay đổi nội dung bằng JS) -->
+        <div id="mainContainer" class="w-full max-w-3xl">
+            <!-- Loading ban đầu -->
+            <div class="flex flex-col items-center justify-center py-20">
+                <div class="my-loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mb-4"></div>
+                <p class="text-gray-500 font-medium">Đang tải dữ liệu...</p>
             </div>
         </div>
 
-        <!-- Footer -->
-        <footer>
-            <div class="secIn">
-                <div class="cdtIn section" id="credit-widget">
-                    <div class="widget HTML" id="HTML88">
-                        <div class="fotCd">
-                            <span class="credit">© <span id="getYear">2025</span><bdi> ‧ <a href="#">LINK4SUB.COM</a></bdi></span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </footer>
+        <!-- Footer Text -->
+        <div class="mt-8 text-center text-xs text-gray-400">
+            &copy; 2024 - LINK4SUB <br>
+            <a href="?admin=true" class="opacity-0 hover:opacity-100 transition">Admin Panel</a>
+        </div>
     </div>
 
     <!-- SCRIPT LOGIC (Firebase + App) -->
@@ -161,19 +97,64 @@
         const db = getFirestore(app);
         const auth = getAuth(app);
 
-        // --- GLOBAL STATE ---
+        // --- GLOBAL VARIABLES ---
         let currentTasks = []; 
         const urlParams = new URLSearchParams(window.location.search);
         const linkId = urlParams.get('id');
-        const container = document.getElementById('stuCnt');
+        const container = document.getElementById('mainContainer');
 
-        // --- PLATFORM CONFIG ---
+        // --- PLATFORM CONFIG (Đã cập nhật đầy đủ các tùy chọn) ---
         const platformConfig = {
-            youtube: { color: 'bg-red-600', hover: 'hover:bg-red-700', icon: 'fa-youtube', actions: [{ type: 'sub', label: 'Đăng ký (Subscribe)' }, { type: 'like', label: 'Like Video' }] },
-            facebook: { color: 'bg-blue-700', hover: 'hover:bg-blue-800', icon: 'fa-facebook', actions: [{ type: 'follow', label: 'Follow Page' }] },
-            tiktok: { color: 'bg-black', hover: 'hover:bg-gray-800', icon: 'fa-tiktok', actions: [{ type: 'follow', label: 'Follow TikTok' }] },
-            discord: { color: 'bg-indigo-500', hover: 'hover:bg-indigo-600', icon: 'fa-discord', actions: [{ type: 'join', label: 'Join Discord' }] },
-            telegram: { color: 'bg-sky-500', hover: 'hover:bg-sky-600', icon: 'fa-telegram', actions: [{ type: 'join', label: 'Join Channel' }] }
+            youtube: { 
+                color: 'bg-[#ff0000]', icon: 'fa-youtube', 
+                actions: [
+                    { label: 'Subscribe', defaultText: 'Subscribe on YouTube' },
+                    { label: 'Subscribe #2', defaultText: 'Subscribe Channel #2' },
+                    { label: 'Subscribe #3', defaultText: 'Subscribe Channel #3' },
+                    { label: 'Like', defaultText: 'Like Video' },
+                    { label: 'Like #2', defaultText: 'Like Video #2' },
+                    { label: 'Comment', defaultText: 'Comment on Video' },
+                    { label: 'Comment #2', defaultText: 'Comment Video #2' }
+                ]
+            },
+            facebook: { 
+                color: 'bg-[#1877f2]', icon: 'fa-facebook', 
+                actions: [
+                    { label: 'Follow', defaultText: 'Follow on Facebook' },
+                    { label: 'Follow #2', defaultText: 'Follow Page #2' },
+                    { label: 'Like Post', defaultText: 'Like Post' },
+                    { label: 'Share', defaultText: 'Share Post' }
+                ]
+            },
+            tiktok: { 
+                color: 'bg-[#000000]', icon: 'fa-tiktok', 
+                actions: [
+                    { label: 'Follow', defaultText: 'Follow on TikTok' },
+                    { label: 'Follow #2', defaultText: 'Follow TikTok #2' },
+                    { label: 'Like Video', defaultText: 'Like Video' }
+                ]
+            },
+            discord: { 
+                color: 'bg-[#5865f2]', icon: 'fa-discord', 
+                actions: [
+                    { label: 'Join', defaultText: 'Join Discord Server' },
+                    { label: 'Join #2', defaultText: 'Join Server #2' }
+                ]
+            },
+            telegram: { 
+                color: 'bg-[#0088cc]', icon: 'fa-telegram', 
+                actions: [
+                    { label: 'Join Group', defaultText: 'Join Telegram Group' },
+                    { label: 'Join Channel', defaultText: 'Join Telegram Channel' }
+                ]
+            },
+            instagram: {
+                color: 'bg-gradient-to-r from-purple-500 to-pink-500', icon: 'fa-instagram',
+                actions: [
+                    { label: 'Follow', defaultText: 'Follow Instagram' },
+                    { label: 'Like', defaultText: 'Like Photo' }
+                ]
+            }
         };
 
         // ==============================================
@@ -181,31 +162,209 @@
         // ==============================================
         async function init() {
             if (linkId) {
-                // --> USER MODE (Khách làm nhiệm vụ)
-                await renderUserMode(linkId);
+                // --> USER MODE
+                renderIntermediatePage();
             } else {
-                // --> ADMIN/BUILDER MODE (Tạo link)
+                // --> ADMIN MODE
                 renderAuthCheck();
             }
         }
         init();
 
         // ==============================================
-        // 1. LOGIC AUTH & BUILDER (ADMIN)
+        // A. USER MODE LOGIC
+        // ==============================================
+        
+        // STEP 1: Màn hình "Liên kết đã sẵn sàng"
+        function renderIntermediatePage() {
+            container.innerHTML = `
+                <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-10 text-center max-w-lg mx-auto fade-in">
+                    <div class="w-20 h-20 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-6">
+                        <i class="fa-solid fa-link text-3xl text-gray-800"></i>
+                    </div>
+                    
+                    <h2 class="text-3xl font-bold text-gray-900 mb-8">Liên kết đã sẵn sàng!</h2>
+                    
+                    <button onclick="window.goToTasks()" class="bg-[#ed143d] hover:bg-[#c41133] text-white text-lg font-semibold py-3 px-8 rounded-lg transition btn-hover-up w-full sm:w-auto">
+                        Tiếp tục / Continue
+                    </button>
+                </div>
+            `;
+            window.goToTasks = () => renderTaskPage(linkId);
+        }
+
+        // STEP 2: Màn hình Nhiệm vụ
+        let completedSet = new Set();
+        let currentLinkData = null;
+
+        async function renderTaskPage(id) {
+            container.innerHTML = `<div class="flex justify-center py-20"><div class="my-loader rounded-full border-4 h-10 w-10"></div></div>`;
+
+            try {
+                const snap = await getDoc(doc(db, "links", id));
+                if (!snap.exists()) {
+                    container.innerHTML = `
+                        <div class="bg-white p-8 rounded-xl text-center shadow-sm max-w-md mx-auto">
+                            <i class="fa-solid fa-triangle-exclamation text-4xl text-red-500 mb-4"></i>
+                            <h3 class="text-xl font-bold text-gray-800">Liên kết không tồn tại</h3>
+                            <p class="text-gray-500 mt-2">Vui lòng kiểm tra lại URL.</p>
+                        </div>`;
+                    return;
+                }
+                
+                const data = snap.data();
+                currentLinkData = data;
+                updateDoc(doc(db, "links", id), { views: increment(1) });
+
+                const tasks = data.tasks || [];
+                if (tasks.length === 0 && data.taskUrl) {
+                    tasks.push({ platform: 'youtube', label: 'Subscribe on YouTube', url: data.taskUrl });
+                }
+
+                let tasksHtml = tasks.map((t, i) => {
+                    const conf = platformConfig[t.platform] || { color: 'bg-gray-600', icon: 'fa-link' };
+                    const label = t.label || "Visit Link";
+                    
+                    return `
+                        <div id="task-btn-${i}" onclick="window.doTask(${i}, '${t.url}')" 
+                             class="group cursor-pointer ${conf.color} hover:opacity-90 text-white rounded-lg p-4 flex items-center justify-between transition-all shadow-md mb-3 relative overflow-hidden btn-hover-up">
+                            
+                            <!-- Loading overlay -->
+                            <div id="loading-overlay-${i}" class="absolute inset-0 bg-white/20 hidden flex items-center justify-center font-bold">
+                                <i class="fa-solid fa-spinner fa-spin mr-2"></i> Checking...
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <i class="fa-brands ${conf.icon} text-2xl w-8 text-center"></i>
+                                <span class="font-bold text-sm sm:text-base">${label}</span>
+                            </div>
+                            <div id="status-icon-${i}">
+                                <i class="fa-solid fa-angles-right text-white/70 group-hover:translate-x-1 transition-transform"></i>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                container.innerHTML = `
+                    <div class="max-w-3xl mx-auto fade-in">
+                        <!-- Alert Box -->
+                        <div class="bg-white border border-gray-200 rounded-lg p-4 mb-6 shadow-sm flex items-start gap-3">
+                            <i class="fa-solid fa-circle-info text-blue-500 mt-0.5"></i>
+                            <div class="text-sm text-gray-600">
+                                <span class="block text-gray-800 font-semibold mb-1">Muachungchi.com - Nơi bán chứng chỉ iPhone iPad giá rẻ chỉ 150k/năm</span>
+                                <a href="#" class="text-blue-600 hover:underline">(Đăng ký tài khoản)</a>
+                            </div>
+                        </div>
+
+                        <!-- Card Chính -->
+                        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 sm:p-10 text-center">
+                            
+                            <h1 class="text-2xl font-bold text-[#0e2045] mb-2">${data.title}</h1>
+                            <p class="text-gray-500 text-sm uppercase font-semibold mb-8 tracking-wide">
+                                HÃY LÀM THEO CÁC BƯỚI ĐỂ MỞ KHOÁ LINK
+                            </p>
+
+                            <!-- Task List -->
+                            <div class="mb-6">
+                                ${tasksHtml}
+                            </div>
+
+                            <!-- Progress Bar -->
+                            <div class="mb-2 flex justify-between text-xs font-semibold text-gray-500 uppercase">
+                                <span>Unlock Progress</span>
+                                <span id="progress-text">0/${tasks.length}</span>
+                            </div>
+                            <div class="w-full bg-gray-200 rounded-full h-2 mb-6 overflow-hidden">
+                                <div id="progress-bar" class="bg-[#ed143d] h-2 rounded-full transition-all duration-500" style="width: 0%"></div>
+                            </div>
+
+                            <!-- Unlock Button -->
+                            <a id="unlock-btn" href="javascript:void(0)" class="block w-full bg-[#82e882] text-white font-bold py-4 rounded-lg cursor-not-allowed opacity-80 flex items-center justify-between px-6 shadow-sm transition-all duration-300">
+                                <i class="fa-solid fa-lock text-white/80"></i>
+                                <span class="uppercase tracking-wide">Link Locked</span>
+                                <i class="fa-solid fa-link text-white/80"></i>
+                            </a>
+                            
+                            <div class="mt-6 flex items-center justify-center gap-2 text-xs text-gray-400">
+                                <span>Created with</span>
+                                <span class="bg-red-50 text-red-500 px-2 py-0.5 rounded font-bold flex items-center gap-1">
+                                    <i class="fa-solid fa-link"></i> Link4Sub
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } catch (e) {
+                console.error(e);
+                container.innerHTML = `<div class="text-center text-red-500">Lỗi kết nối server.</div>`;
+            }
+        }
+
+        window.doTask = (idx, url) => {
+            if (completedSet.has(idx)) return; 
+            
+            window.open(url, '_blank');
+            
+            const btn = document.getElementById(`task-btn-${idx}`);
+            const loader = document.getElementById(`loading-overlay-${idx}`);
+            const statusIcon = document.getElementById(`status-icon-${idx}`);
+            
+            loader.classList.remove('hidden'); 
+            
+            let timeLeft = 5;
+            const tmr = setInterval(() => {
+                timeLeft--;
+                if (timeLeft <= 0) {
+                    clearInterval(tmr);
+                    completedSet.add(idx);
+                    
+                    loader.classList.add('hidden');
+                    btn.classList.remove('hover:opacity-90', 'btn-hover-up');
+                    btn.classList.add('opacity-50', 'cursor-default');
+                    btn.onclick = null; 
+                    
+                    statusIcon.innerHTML = `<i class="fa-solid fa-check-circle text-white text-xl"></i>`;
+                    
+                    checkUnlockState();
+                }
+            }, 1000);
+        };
+
+        function checkUnlockState() {
+            const total = currentLinkData.tasks.length || 1;
+            const done = completedSet.size;
+            
+            document.getElementById('progress-text').innerText = `${done}/${total}`;
+            document.getElementById('progress-bar').style.width = `${(done/total)*100}%`;
+
+            if (done >= total) {
+                const unlockBtn = document.getElementById('unlock-btn');
+                unlockBtn.className = "block w-full bg-[#4ade80] hover:bg-[#22c55e] text-white font-bold py-4 rounded-lg cursor-pointer flex items-center justify-between px-6 shadow-md transition-all duration-300 animate-pulse";
+                unlockBtn.innerHTML = `
+                    <i class="fa-solid fa-unlock"></i>
+                    <span class="uppercase tracking-wide">Get Link</span>
+                    <i class="fa-solid fa-arrow-right"></i>
+                `;
+                unlockBtn.href = currentLinkData.destUrl;
+                unlockBtn.target = "_blank";
+                unlockBtn.onclick = null;
+            }
+        }
+
+
+        // ==============================================
+        // B. ADMIN MODE LOGIC (UPDATED WITH ACTION SELECTION)
         // ==============================================
         function renderAuthCheck() {
             onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    renderBuilder();
-                } else {
-                    renderLogin();
-                }
+                if (user) renderBuilder();
+                else renderLogin();
             });
         }
 
         function renderLogin() {
             container.innerHTML = `
-                <div class="w-full max-w-sm mx-auto animate-fade-in">
+                <div class="w-full max-w-sm mx-auto bg-white p-8 rounded-xl shadow-lg fade-in">
                     <h2 class="text-2xl font-bold text-center mb-6 text-gray-800">Admin Login</h2>
                     <div class="space-y-4">
                         <input type="email" id="email" placeholder="Email" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 outline-none">
@@ -221,7 +380,6 @@
                 const p = document.getElementById('password').value;
                 try {
                     await signInWithEmailAndPassword(auth, e, p);
-                    // Auth state change will trigger renderBuilder
                 } catch (err) {
                     const errEl = document.getElementById('loginError');
                     errEl.innerText = "Lỗi: " + err.code;
@@ -231,56 +389,57 @@
         }
 
         function renderBuilder() {
-            // Giao diện tạo link (Builder)
             container.innerHTML = `
-                <div class="w-full h-full flex flex-col animate-fade-in">
+                <div class="w-full bg-white rounded-xl shadow-lg p-6 fade-in h-[85vh] flex flex-col">
                     <div class="flex justify-between items-center mb-4 border-b pb-2">
-                        <h2 class="text-xl font-bold text-gray-800"><i class="fa-solid fa-wand-magic-sparkles text-red-500"></i> Tạo Link Mới</h2>
-                        <button id="btnLogout" class="text-xs text-gray-500 hover:text-red-500 underline">Đăng xuất</button>
+                        <h2 class="text-xl font-bold text-gray-800">Link Builder</h2>
+                        <button id="btnLogout" class="text-xs text-gray-500 hover:text-red-500 underline">Thoát</button>
                     </div>
 
-                    <div class="flex-1 overflow-y-auto custom-scroll pr-2 mb-4" style="max-height: 60vh;">
-                        <!-- Input Info -->
+                    <div class="flex-1 overflow-y-auto pr-2 mb-4 custom-scroll">
                         <div class="space-y-3 mb-6">
-                            <input type="text" id="bTitle" class="w-full p-3 border rounded-lg focus:outline-none focus:border-red-500" placeholder="Tiêu đề (VD: Key Hack Blox Fruit)">
+                            <input type="text" id="bTitle" class="w-full p-3 border rounded-lg focus:outline-none focus:border-red-500" placeholder="Tiêu đề Link">
                             <input type="text" id="bDest" class="w-full p-3 border rounded-lg focus:outline-none focus:border-green-500 border-green-200 bg-green-50" placeholder="Link Đích (Google Drive...)">
                         </div>
 
-                        <!-- Platform Tabs -->
-                        <div class="grid grid-cols-5 gap-1 mb-4">
-                            ${Object.keys(platformConfig).map(key => `
-                                <button onclick="window.setPlatform('${key}')" class="p-2 rounded bg-gray-100 hover:bg-gray-200 text-gray-600 transition flex justify-center items-center">
-                                    <i class="fa-brands ${platformConfig[key].icon} text-lg"></i>
-                                </button>
-                            `).join('')}
+                        <!-- Platform Selection -->
+                        <div class="mb-4">
+                            <p class="text-xs font-bold text-gray-500 uppercase mb-2">1. Chọn nền tảng</p>
+                            <div class="grid grid-cols-6 gap-2">
+                                ${Object.keys(platformConfig).map(key => `
+                                    <button onclick="window.selectPlatform('${key}')" class="platform-btn group ${platformConfig[key].color} text-white p-2 rounded hover:opacity-90 transition flex justify-center items-center h-10 w-full" data-platform="${key}">
+                                        <i class="fa-brands ${platformConfig[key].icon} text-lg"></i>
+                                    </button>
+                                `).join('')}
+                            </div>
                         </div>
 
-                        <!-- Action Buttons Dynamic -->
-                        <div id="actionArea" class="grid grid-cols-2 gap-2 mb-4 p-3 bg-gray-50 rounded-lg border border-dashed border-gray-300">
-                            <p class="col-span-2 text-center text-xs text-gray-400">Chọn nền tảng ở trên để hiện nút</p>
+                        <!-- Action Selection (Dynamic) -->
+                        <div id="action-area" class="mb-6 bg-gray-50 p-3 rounded-lg border border-dashed border-gray-300 min-h-[60px]">
+                            <p class="text-center text-gray-400 text-xs italic pt-2">Chọn nền tảng ở trên để hiện các nút chức năng</p>
                         </div>
 
                         <!-- Task List -->
                         <div id="bTaskList" class="space-y-2">
-                            <!-- Tasks added appear here -->
+                            <!-- Task items -->
                         </div>
                     </div>
 
-                    <button id="btnCreate" class="w-full bg-gradient-to-r from-red-500 to-pink-600 text-white font-bold py-3 rounded-xl shadow-lg hover:opacity-90 transition">
-                        TẠO LINK NGAY
+                    <button id="btnCreate" class="w-full bg-red-600 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-red-700 transition">
+                        TẠO LINK
                     </button>
                     
                     <div class="mt-4 pt-2 border-t text-center">
-                         <button id="btnHistory" class="text-sm text-blue-500 hover:underline">Xem lịch sử link đã tạo</button>
+                         <button id="btnHistory" class="text-sm text-blue-500 hover:underline">Xem danh sách link</button>
                     </div>
                 </div>
 
-                <!-- Modal History (Hidden by default) -->
-                <div id="historyModal" class="fixed inset-0 bg-black/50 z-50 hidden-section flex items-center justify-center p-4">
+                <!-- Modal History -->
+                <div id="historyModal" class="fixed inset-0 bg-black/50 z-[100] hidden-section flex items-center justify-center p-4">
                     <div class="bg-white rounded-xl w-full max-w-2xl max-h-[80vh] flex flex-col shadow-2xl">
                         <div class="p-4 border-b flex justify-between items-center">
-                            <h3 class="font-bold">Lịch sử Link</h3>
-                            <button onclick="document.getElementById('historyModal').classList.add('hidden-section')" class="text-gray-500 hover:text-black"><i class="fa-solid fa-times"></i></button>
+                            <h3 class="font-bold">Lịch sử</h3>
+                            <button onclick="document.getElementById('historyModal').classList.add('hidden-section')" class="text-gray-500"><i class="fa-solid fa-times"></i></button>
                         </div>
                         <div class="p-4 overflow-y-auto flex-1 custom-scroll">
                             <table class="w-full text-sm text-left">
@@ -297,18 +456,29 @@
             // Event Listeners
             document.getElementById('btnLogout').onclick = () => signOut(auth);
             
-            window.setPlatform = (key) => {
-                const conf = platformConfig[key];
-                const area = document.getElementById('actionArea');
-                area.innerHTML = conf.actions.map(act => `
-                    <button onclick="window.addTask('${key}', '${act.type}', '${act.label}')" class="${conf.color} text-white py-2 px-3 rounded text-xs font-bold hover:opacity-90 truncate">
-                        + ${act.label}
-                    </button>
-                `).join('');
+            // Hàm chọn nền tảng -> Hiện các nút action tương ứng
+            window.selectPlatform = (platformKey) => {
+                const config = platformConfig[platformKey];
+                const actionArea = document.getElementById('action-area');
+                
+                // Highlight active button
+                document.querySelectorAll('.platform-btn').forEach(b => b.classList.add('opacity-50'));
+                document.querySelector(`.platform-btn[data-platform="${platformKey}"]`).classList.remove('opacity-50');
+
+                actionArea.innerHTML = `
+                    <div class="grid grid-cols-2 md:grid-cols-3 gap-2 animate-fade-in">
+                        ${config.actions.map(action => `
+                            <button onclick="window.addTask('${platformKey}', '${action.defaultText}')" 
+                                class="bg-white border hover:border-red-500 hover:text-red-500 text-gray-600 py-2 px-3 rounded text-xs font-semibold shadow-sm transition truncate flex items-center gap-2">
+                                <i class="fa-solid fa-plus text-[10px]"></i> ${action.label}
+                            </button>
+                        `).join('')}
+                    </div>
+                `;
             };
 
-            window.addTask = (platform, type, label) => {
-                currentTasks.push({ id: Date.now(), platform, type, label, url: '' });
+            window.addTask = (platform, defaultLabel) => {
+                currentTasks.push({ id: Date.now(), platform, label: defaultLabel, url: '' });
                 renderTaskItems();
             };
 
@@ -317,37 +487,36 @@
                 renderTaskItems();
             };
 
-            window.updateTaskUrl = (idx, val) => {
-                currentTasks[idx].url = val;
+            window.updateTaskField = (idx, field, val) => {
+                currentTasks[idx][field] = val;
             };
 
             document.getElementById('btnCreate').onclick = saveLink;
             document.getElementById('btnHistory').onclick = loadHistory;
-
-            // Default platform
-            window.setPlatform('youtube');
+            
+            // Mặc định chọn Youtube
+            renderTaskItems();
+            window.selectPlatform('youtube');
         }
 
         function renderTaskItems() {
             const list = document.getElementById('bTaskList');
             if (currentTasks.length === 0) {
-                list.innerHTML = `<p class="text-center text-gray-400 text-xs italic py-2">Chưa có nhiệm vụ nào.</p>`;
+                list.innerHTML = `<p class="text-center text-gray-400 text-xs italic py-4 bg-gray-50 rounded border border-dashed">Chưa có nhiệm vụ.</p>`;
                 return;
             }
-            list.innerHTML = currentTasks.map((t, i) => `
-                <div class="bg-white border rounded p-2 flex items-center gap-2 shadow-sm animate-fade-in">
-                    <span class="${platformConfig[t.platform].color} text-white w-6 h-6 rounded-full flex items-center justify-center text-xs shrink-0">
-                        <i class="fa-brands ${platformConfig[t.platform].icon}"></i>
-                    </span>
-                    <div class="flex-1">
-                        <div class="flex justify-between text-xs font-bold text-gray-700 mb-1">
-                            <span>${t.label}</span>
-                            <button onclick="window.removeTask(${i})" class="text-red-400 hover:text-red-600"><i class="fa-solid fa-times"></i></button>
-                        </div>
-                        <input type="text" onchange="window.updateTaskUrl(${i}, this.value)" value="${t.url}" placeholder="Dán link nhiệm vụ vào đây..." class="w-full text-xs p-1.5 border rounded bg-gray-50 focus:bg-white outline-none">
+            list.innerHTML = currentTasks.map((t, i) => {
+                const conf = platformConfig[t.platform];
+                return `
+                <div class="bg-white border rounded p-3 shadow-sm animate-fade-in">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="${conf.color} text-white w-6 h-6 rounded flex items-center justify-center text-xs shrink-0"><i class="fa-brands ${conf.icon}"></i></span>
+                        <input type="text" onchange="window.updateTaskField(${i}, 'label', this.value)" value="${t.label}" class="flex-1 text-sm font-bold text-gray-700 border-b border-transparent focus:border-blue-500 outline-none px-1" placeholder="Tên nút hiển thị">
+                        <button onclick="window.removeTask(${i})" class="text-gray-400 hover:text-red-600"><i class="fa-solid fa-times"></i></button>
                     </div>
+                    <input type="text" onchange="window.updateTaskField(${i}, 'url', this.value)" value="${t.url}" placeholder="Dán link nhiệm vụ (Youtube channel...)" class="w-full text-xs p-2 border rounded bg-gray-50 focus:bg-white outline-none focus:ring-1 focus:ring-blue-500">
                 </div>
-            `).join('');
+            `}).join('');
         }
 
         async function saveLink() {
@@ -372,7 +541,7 @@
                 renderBuilder(); // Reset UI
             } catch (e) {
                 alert("Lỗi: " + e.message);
-                btn.innerText = "TẠO LINK NGAY";
+                btn.innerText = "TẠO LINK";
                 btn.disabled = false;
             }
         }
@@ -393,7 +562,7 @@
                 html += `
                     <tr class="border-b hover:bg-gray-50">
                         <td class="p-2">
-                            <div class="font-medium text-gray-800 truncate w-32">${data.title}</div>
+                            <div class="font-medium text-gray-800 truncate w-32" title="${data.title}">${data.title}</div>
                             <div class="text-[10px] text-gray-400">${new Date(data.createdAt?.seconds * 1000).toLocaleDateString()}</div>
                         </td>
                         <td class="p-2 text-center text-xs font-bold">${data.views || 0}</td>
@@ -410,119 +579,7 @@
         window.delLink = async (id) => {
             if(confirm("Xoá?")) {
                 await deleteDoc(doc(db, "links", id));
-                loadHistory(); // Reload table
-            }
-        }
-
-        // ==============================================
-        // 2. LOGIC USER (GUEST VIEW)
-        // ==============================================
-        let completedSet = new Set();
-        let currentLinkData = null;
-
-        async function renderUserMode(id) {
-            try {
-                const snap = await getDoc(doc(db, "links", id));
-                if (!snap.exists()) {
-                    container.innerHTML = `<div class="text-center text-red-500 py-10"><i class="fa-solid fa-triangle-exclamation text-3xl mb-2"></i><br>Link không tồn tại.</div>`;
-                    return;
-                }
-                
-                const data = snap.data();
-                currentLinkData = data;
-                updateDoc(doc(db, "links", id), { views: increment(1) }); // Count view
-
-                // Render UI
-                container.innerHTML = `
-                    <div class="w-full animate-fade-in flex flex-col h-full">
-                        <div class="text-center mb-6">
-                            <h1 class="text-xl font-bold text-gray-800 uppercase tracking-wide border-b-2 border-red-500 inline-block pb-1">${data.title}</h1>
-                            <p class="text-xs text-gray-500 mt-2">Hoàn thành các bước để mở khóa nội dung</p>
-                        </div>
-
-                        <div id="uTaskList" class="space-y-3 mb-6">
-                            ${(data.tasks || []).map((t, i) => {
-                                const p = platformConfig[t.platform] || { color: 'bg-gray-500', icon: 'fa-link' };
-                                return `
-                                    <div id="task-row-${i}" class="relative bg-white border border-gray-200 rounded-lg p-3 shadow-sm transition hover:shadow-md flex items-center justify-between group overflow-hidden">
-                                        <div class="absolute left-0 top-0 bottom-0 w-1 ${p.color}"></div>
-                                        <div class="flex items-center gap-3 pl-2 overflow-hidden">
-                                            <div class="w-8 h-8 rounded-full ${p.color} text-white flex items-center justify-center shrink-0 shadow-sm">
-                                                <i class="fa-brands ${p.icon}"></i>
-                                            </div>
-                                            <div class="truncate">
-                                                <div class="text-sm font-bold text-gray-700 truncate">${t.label}</div>
-                                                <div class="text-[10px] text-gray-400">Nhấn để thực hiện</div>
-                                            </div>
-                                        </div>
-                                        <button id="btn-do-${i}" onclick="window.doTask(${i}, '${t.url}')" class="ml-2 bg-gray-100 hover:bg-gray-200 text-gray-700 text-xs font-bold py-2 px-3 rounded-full transition whitespace-nowrap">
-                                            THỰC HIỆN
-                                        </button>
-                                    </div>
-                                `;
-                            }).join('')}
-                        </div>
-
-                        <div class="mt-auto">
-                            <div class="w-full bg-gray-200 rounded-full h-1.5 mb-2">
-                                <div id="uProgress" class="bg-green-500 h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
-                            </div>
-                            <a id="uUnlockBtn" href="#" onclick="return false;" class="block w-full bg-gray-300 text-gray-500 font-bold py-4 rounded-lg text-center cursor-not-allowed transition-all transform duration-300 shadow-none">
-                                <i class="fa-solid fa-lock mr-2"></i> Đang bị khóa
-                            </a>
-                        </div>
-                    </div>
-                `;
-            } catch (e) {
-                console.error(e);
-                container.innerHTML = `<div class="text-center text-red-500">Lỗi kết nối.</div>`;
-            }
-        }
-
-        window.doTask = (idx, url) => {
-            if (completedSet.has(idx)) return;
-            
-            // 1. Open Link
-            window.open(url, '_blank');
-            
-            // 2. UI Wait state
-            const btn = document.getElementById(`btn-do-${idx}`);
-            let sec = 5; // Fake timer
-            btn.disabled = true;
-            btn.className = "ml-2 bg-yellow-100 text-yellow-600 text-xs font-bold py-2 px-3 rounded-full transition whitespace-nowrap";
-            btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${sec}s`;
-
-            const tmr = setInterval(() => {
-                sec--;
-                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> ${sec}s`;
-                if (sec <= 0) {
-                    clearInterval(tmr);
-                    completedSet.add(idx);
-                    
-                    // Done State
-                    btn.className = "ml-2 bg-green-100 text-green-600 text-xs font-bold py-2 px-3 rounded-full transition whitespace-nowrap cursor-default";
-                    btn.innerHTML = `<i class="fa-solid fa-check"></i>`;
-                    document.getElementById(`task-row-${idx}`).classList.add('border-green-500', 'bg-green-50');
-                    
-                    checkUnlock();
-                }
-            }, 1000);
-        };
-
-        function checkUnlock() {
-            const total = currentLinkData.tasks.length;
-            const done = completedSet.size;
-            const pct = (done / total) * 100;
-            
-            document.getElementById('uProgress').style.width = `${pct}%`;
-
-            if (done >= total) {
-                const mainBtn = document.getElementById('uUnlockBtn');
-                mainBtn.className = "block w-full bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 text-white font-bold py-4 rounded-lg text-center shadow-lg transform hover:-translate-y-1 transition-all duration-300 animate-pulse";
-                mainBtn.innerHTML = `<i class="fa-solid fa-unlock mr-2"></i> TRUY CẬP LINK GỐC`;
-                mainBtn.href = currentLinkData.destUrl;
-                mainBtn.target = "_blank";
-                mainBtn.onclick = null; // Remove preventDefault
+                loadHistory(); 
             }
         }
 
